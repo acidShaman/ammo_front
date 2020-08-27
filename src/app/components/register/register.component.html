@@ -1,0 +1,9 @@
+<form [formGroup]='registerForm'>
+  <div> Email <input type='email' formControlName="username" placeholder="email"></div>
+  <div> Password <input type='password' formControlName="password" placeholder="password"></div>
+  <div> First Name <input type='text' formControlName="first_name" placeholder="first name"></div>
+  <div> Last Name <input type='text' formControlName="last_name" placeholder="last name"></div>
+  <div> Phone <input type='text' formControlName="phone" placeholder="phone"></div>
+  <div> Birthday <input type='date' formControlName="birthday"></div>
+  <button (click)="registerUser()"> Register </button>
+</form>
