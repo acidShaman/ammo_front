@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService) {
     this.loginForm = new FormGroup({
-      email: new FormControl(''),
+      username: new FormControl(''),
       password: new FormControl('')
     });
   }
@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(): void {
-    this.loginService.auth(this.loginForm.value).subscribe(( (value) => localStorage.setItem('access_token', value.access_token)));
+  login(form: FormGroup): void {
+    console.log(form.value);
+    this.loginService.auth(form.value).subscribe(( (value) => {
+      console.log(value);
+      localStorage.setItem('access_token', value.access);
+    }));
   }
 }

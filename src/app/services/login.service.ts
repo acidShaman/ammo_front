@@ -9,10 +9,11 @@ import {IToken} from '../interfaces/token.interface';
 })
 
 export class LoginService {
-  URL = 'http://localhost:8000/token';
+  URL = 'http://127.0.0.1:8000/token/';
   constructor(private  httpClient: HttpClient) { }
 
   auth(user: Partial<IUser>): Observable<IToken> {
+    console.log(user);
     return this.httpClient.post<IToken>(`${this.URL}`, {username: user.username, password: user.password});
   }
 

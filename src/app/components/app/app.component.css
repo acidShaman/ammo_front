@@ -1,0 +1,23 @@
+::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #bababa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+}
+::ng-deep :root {
+  font-size: 16px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 300;
+  --accent-orange: #ff6e4e;
+  --text-primary: #424242;
+  --text-secondary: #2e2e2e;
+  --text-light: #bababa;
+  --bg-primary: #ffffff;
+  --bg-secondary: #dbdbdb;
+  --transition-speed: 0.4s
+}

@@ -1,5 +1,18 @@
-<form formGroup="loginForm">
-  <div>Email <input type="email" formControlName="email"></div>
-  <div>Password <input type="password" formControlName="password"></div>
-  <button (click)="login()">Login</button>
+<div class="main-block">
+  <div class="header">
+      Авторизація
+  </div>
+<form [formGroup]="loginForm" class="form">
+  <div class="input"><label>Email<br>
+    <input type="email" formControlName="username">
+  </label></div>
+  <div class="input"><label> Пароль<br>
+    <input type="password" formControlName="password"><br>
+  </label></div>
+  <div><span>Забули пароль?</span></div>
+  <div class="buttons">
+  <button class="button-login" (click)="login(loginForm)">Увійти</button>
+  <button class="button-register">Зареєструватись</button>
+  </div>
 </form>
+</div>

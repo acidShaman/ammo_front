@@ -1,9 +1,46 @@
-<form [formGroup]='registerForm'>
-  <div> Email <input type='email' formControlName="username" placeholder="email"></div>
-  <div> Password <input type='password' formControlName="password" placeholder="password"></div>
-  <div> First Name <input type='text' formControlName="first_name" placeholder="first name"></div>
-  <div> Last Name <input type='text' formControlName="last_name" placeholder="last name"></div>
-  <div> Phone <input type='text' formControlName="phone" placeholder="phone"></div>
-  <div> Birthday <input type='date' formControlName="birthday"></div>
-  <button (click)="registerUser()"> Register </button>
+<div class="main-block">
+  <div class="header">
+    Реєстрація
+  </div>
+  <form [formGroup]='registerForm' class="form">
+  <div class="input"><label>
+    Email<span>*</span><br>
+    <input type='email' formControlName="username">
+  </label></div>
+  <div class="input"><label>
+    Пароль<span>*</span><br>
+    <input type='password' formControlName="password" >
+  </label></div>
+    <div class="input"><label>
+      Повторіть пароль<span>*</span><br>
+      <input type='password' formControlName="repeat-password" >
+    </label></div>
+  <div class="input"><label>
+    Ім'я<span>*</span><br>
+    <input type='text' formControlName="first_name" >
+  </label></div>
+  <div class="input"><label>
+    Прізвище<span>*</span><br>
+    <input type='text' formControlName="last_name" >
+  </label></div>
+  <div class="input"><label>
+    Номер телефону<span>*</span><br>
+    <input type='text' formControlName="phone" >
+  </label></div>
+    <div class="input"><label>
+      Стать<br>
+      <mat-form-field>
+        <mat-select formControlName="sex">
+          <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </label></div>
+  <div class="input"><label>
+    День народження<br>
+    <input type='date' formControlName="birthday">
+  </label></div>
+    <div class="buttons">
+      <button (click)="registerUser()"> Зареєструватись </button>
+    </div>
 </form>
+</div>
