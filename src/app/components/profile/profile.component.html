@@ -1,0 +1,28 @@
+<div class="container"><div class="nav-bar">
+ <div class="list-wrapper">
+   <ul class="list">
+     <li><a (click)="showFavorites()">Профіль</a></li>
+     <li><a (click)="showAddresses()">Адреси доставки</a></li>
+     <li><a (click)="showFavorites()">Вибране</a></li>
+     <li><a (click)="showHistory()">Історія замовлень</a></li>
+   </ul>
+ </div>
+</div>
+  <div class="content">
+    <div class="profile" *ngIf="showProfile()">
+      <div class="info">
+        <div class="header">
+          Приватні дані:
+        </div>
+        <form [formGroup]="updateForm" class="form">
+
+
+        </form>
+      </div>
+      <div class="password"></div>
+    </div>
+    <div class="addresses" *ngIf="addresses">Addresses </div>
+    <div class="favorites" *ngIf="favorites">Favorites </div>
+    <div class="history" *ngIf="history">History </div>
+  </div>
+</div>

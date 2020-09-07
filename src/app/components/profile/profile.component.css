@@ -1,0 +1,100 @@
+* {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.nav-bar {
+  height: 2rem;
+  border-top: 1px solid var(--text-light);
+  background: var(--bg-primary);
+  display: inline-flex;
+  padding-left: 120px;
+  width: 100%;
+}
+.nav-bar .list-wrapper{
+  display: inline-block;
+  vertical-align: middle;
+}
+.list-wrapper {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+}
+.list {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  align-items: center;
+  height: 100%;
+}
+.list li{
+  color: var(--text-primary);
+  display: inline;
+  clear: both;
+  padding-right: 7rem;
+}
+.list li:hover{
+  color: var(--text-light);
+  transition: 0.3s;
+}
+.content {
+  padding-left: 80px;
+}
+.content div {
+  background: var(--bg-primary);
+}
+
+
+.header {
+  padding: 0 0 30px 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.form {
+  display: table;
+  width: 100%;
+}
+.input {
+  /*height: 50px;*/
+  vertical-align: middle;
+  padding-top: 10px;
+}
+.input:first-child {
+  padding-top: 20px;
+}
+.buttons {
+  padding-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+input {
+  border: 1px solid black;
+}
+button {
+  border-radius: 3px;
+  color: var(--accent-orange);
+  border:1px solid var(--accent-orange);
+  background-color:var(--bg-primary);
+  height: 35px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+button:hover {
+  color: var(--bg-primary);
+  background: var(--accent-orange);
+  transition-duration: 0.4s;
+}
+label {
+  font-size: 12px;
+}
+span {
+  color: var(--accent-orange);
+  font-size: 10px;
+  font-weight: 200;
+}
+mat-option {
+  color: black;
+}
+input.ng-touched.ng-invalid {
+  border-color: red;
+}

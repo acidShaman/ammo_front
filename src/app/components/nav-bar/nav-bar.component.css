@@ -1,6 +1,6 @@
 * {
   font-size: 14px;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 .logo {
   padding: 15px;
@@ -10,10 +10,8 @@
 .img-wrapper {
 display: inline-block;
 }
-.nav-bar{
-  height: 90px;
-}
 .nav-bar {
+  height: 90px;
   display: flex;
   background: var(--bg-primary);
 }

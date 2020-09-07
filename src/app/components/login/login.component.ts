@@ -21,9 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: FormGroup): void {
-    console.log(form.value);
     this.loginService.auth(form.value).subscribe(( (value) => {
-      console.log(value);
       localStorage.setItem('access_token', value.access);
     }));
   }

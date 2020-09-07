@@ -6,4 +6,5 @@ export interface IUser {
   last_name: string;
   phone: string;
   birthday: string;
+  date_joined: string;
 }

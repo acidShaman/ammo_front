@@ -9,8 +9,6 @@ import {RegisterComponent} from '../register/register.component';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  Login: LoginComponent;
-  Register: RegisterComponent;
 
   constructor(private dialog: MatDialog) { }
 

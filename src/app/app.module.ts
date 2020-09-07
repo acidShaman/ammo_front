@@ -11,6 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     RegisterComponent,
     LoginComponent,
     NavBarComponent,
-    SideBarComponent
+    SideBarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
     MatSelectModule,
     MatFormFieldModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
