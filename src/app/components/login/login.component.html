@@ -1,18 +1,63 @@
-<div class="main-block">
-  <div class="header">
-      Авторизація
-  </div>
-<form [formGroup]="loginForm" class="form">
-  <div class="input"><label>Email<br>
-    <input type="email" formControlName="username">
-  </label></div>
-  <div class="input"><label> Пароль<br>
-    <input type="password" formControlName="password"><br>
-  </label></div>
-  <div><span>Забули пароль?</span></div>
-  <div class="buttons">
-  <button class="button-login" (click)="login(loginForm)">Увійти</button>
-  <button class="button-register">Зареєструватись</button>
-  </div>
-</form>
-</div>
+<!--<div class="main-block">-->
+<!--  <div class="header">-->
+<!--      Авторизація-->
+<!--  </div>-->
+<!--<form [formGroup]="loginForm" class="form">-->
+<!--  <div class="input"><label>Email<br>-->
+<!--    <input type="email" formControlName="username">-->
+<!--  </label></div>-->
+<!--  <div class="input"><label> Пароль<br>-->
+<!--    <input type="password" formControlName="password"><br>-->
+<!--  </label></div>-->
+<!--  <div><span>Забули пароль?</span></div>-->
+<!--  <div class="buttons">-->
+<!--  <button class="button-login" (click)="login(loginForm)">Увійти</button>-->
+<!--  <button class="button-register">Зареєструватись</button>-->
+<!--  </div>-->
+<!--</form>-->
+<!--</div>-->
+
+<mat-card id="login-card">
+  <mat-card-header class="content">
+    <mat-card-title>Авторизація</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions class="content">
+    <button mat-raised-button class="social">
+      <img src="../../../assets/facebook.svg" alt="Facebook" width="20px" height="20px">
+    </button>
+    <button mat-raised-button class="social">
+      <img src="../../../assets/google.svg" alt="Facebook" width="20px" height="20px">
+    </button>
+  </mat-card-actions>
+  <mat-card-content class="content">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email:</mat-label>
+        <input matInput type="email" formControlName="username">
+        <mat-error *ngIf="loginForm.get('username').hasError('email') &&  !loginForm.get('username').hasError('required')" >
+          Будь-ласка, введіть дійсну Email адресу
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">
+          Обов'язково введіть ваш Email
+        </mat-error>
+<!--       Error code here -->
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Пароль:</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="loginForm.get('password').hasError('pattern') &&  !loginForm.get('password').hasError('required')" >
+          Пароль має містити мінімум 6 символів: букви обох регістрів та цифри
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+          Обов'язково введіть ваш пароль
+        </mat-error>
+      </mat-form-field>
+      <span>Забули пароль?</span>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="content">
+    <button type="submit" mat-raised-button id="login-btn" [disabled]="loginForm.invalid">Увійти</button>
+    <button mat-stroked-button id="register-btn">Зареєструватись</button>
+  </mat-card-actions>
+</mat-card>

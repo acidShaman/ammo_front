@@ -2,10 +2,13 @@
 // import { CommonModule } from '@angular/common';
 // import {RouterModule, Routes} from '@angular/router';
 // import {AppComponent} from './components/app/app.component';
+// import {LoginComponent} from './components/login/login.component';
 //
 //
 // const routes: Routes = [
-//   {path: '', component: AppComponent}
+//   {path: '', component: AppComponent, children: [
+//       {path: 'login', component: LoginComponent}
+//     ]}
 // ];
 //
 // @NgModule({

@@ -4,6 +4,7 @@ import {IUser} from '../interfaces/user.interface';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {IToken} from '../interfaces/token.interface';
 import {Router, Route} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ import {Router, Route} from '@angular/router';
 export class LoginService {
   URL = 'http://127.0.0.1:8000/token/';
   // private currentUserSubject: BehaviorSubject<IUser>;
-  // public currentUser: Observable<IUser>;
-  constructor(private  httpClient: HttpClient, private router: Router, private route: Route) { }
+  public currentUser: Observable<IUser>;
+
+  constructor(private  httpClient: HttpClient) { }
 
   auth(user: Partial<IUser>): Observable<IToken> {
     return this.httpClient.post<IToken>(`${this.URL}`, {username: user.username, password: user.password});
   }
+
 
 }

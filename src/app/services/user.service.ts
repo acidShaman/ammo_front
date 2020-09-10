@@ -14,7 +14,9 @@ export class UserService {
     return this.httpClient.post(`${this.URL}profile/register/`, userData);
   }
 
-  getUserByEmail(username): Observable<any> {
-    return this.httpClient.get(`${this.URL}profile/`, username);
-  }
+  // getUserByEmail(username): Subscription {
+  //   return this.httpClient.get(`${this.URL}profile/`, username).subscribe(value => {
+  //     localStorage.setItem('user', value);
+  //   });
+  // }
 }

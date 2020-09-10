@@ -6,7 +6,8 @@ import {RegisterComponent} from '../register/register.component';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
+  providers: []
 })
 export class NavBarComponent implements OnInit {
 
@@ -14,6 +15,10 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  // closeDialog(): void {
+  //   this.dialogRef.close();
+  // }
 
   login(): void {
     this.dialog.open(LoginComponent);

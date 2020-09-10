@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {DatePipe} from '@angular/common';
+import {IUser} from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,8 @@ export class ProfileComponent implements OnInit {
   favorites = false;
   history = false;
 
+  currentUser: IUser;
+
   updateForm: FormGroup;
   genders: any[] = [
     {name: 'Не вказувати', value: 'not given'},
@@ -27,8 +30,20 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateForm = new FormGroup({
+      username: new FormControl('', ),
+      first_name: new FormControl('', ),
+      last_name: new FormControl('', ),
+      phone: new FormControl('', ),
+      sex: new FormControl('', ),
+      birthday: new FormControl('', )
+    });
   }
 
+  isControlInvalid(controlName: string): boolean {
+    const control = this.updateForm.controls[controlName];
+    return control.invalid && control.touched;
+  }
 
   showProfile(): void {
     this.profile = true;
@@ -54,5 +69,16 @@ export class ProfileComponent implements OnInit {
     this.addresses = false;
     this.favorites = false;
     this.history = true;
+  }
+
+  isBirthdayValid(): boolean {
+    const value = this.updateForm.get('birthday').value;
+    const date =  this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    const control = this.updateForm.controls.birthday;
+    return (value > date);
+  }
+
+  updateUser(): void {
+
   }
 }
