@@ -1,0 +1,28 @@
+span {
+  color: red;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+mat-form-field {
+  width: 100%;
+}
+#register-btn {
+  background: var(--accent-orange);
+  color: white;
+  transition: ease var(--transition-speed);
+}
+#register-btn:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+#close-btn {
+  color: var(--text-primary);
+}
+

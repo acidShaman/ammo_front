@@ -1,34 +1,39 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
-
-import {AppComponent} from './components/app/app.component';
-import {RegisterComponent} from './components/register/register.component';
-import {LoginComponent} from './components/login/login.component';
-import {NavBarComponent} from './components/nav-bar/nav-bar.component';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import {MatMomentDateModule, MomentDateModule} from '@angular/material-moment-adapter';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/material/core';
 
+import {AppComponent} from './shared/components/app/app.component';
+import {RegisterComponent} from './shared/components/register/register.component';
+import {LoginComponent} from './shared/components/login/login.component';
+import {NavBarComponent} from './shared/components/nav-bar/nav-bar.component';
+import {SideBarComponent} from './shared/components/side-bar/side-bar.component';
+import {ProfileComponent} from './shared/components/profile/profile.component';
+import {MY_DATE_FORMATS} from './directive/date-format/date-format';
+import {TokenInterceptor} from './shared/classes/token.interceptor';
+import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent,
     NavBarComponent,
     SideBarComponent,
     ProfileComponent,
+    MainLayoutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -44,11 +49,20 @@ import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MomentDateModule,
   ],
-  exports: [],
-  providers: [MatNativeDateModule],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor
+    }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [LoginComponent, RegisterComponent]
 })
 export class AppModule {
 }

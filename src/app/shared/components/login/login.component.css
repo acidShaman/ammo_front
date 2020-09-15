@@ -1,0 +1,43 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+mat-card {
+width: 300px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/*.content {*/
+/*  !*margin: 0 50px;*!*/
+/*  width: 18rem;*/
+/*}*/
+mat-card-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#login-btn {
+  background: var(--accent-orange);
+  color: white;
+  transition: ease var(--transition-speed);
+}
+#login-btn:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+#register-btn {
+ color: var(--text-primary);
+}
+.social:hover {
+  transition: ease var(--transition-speed);
+  background: var(--accent-orange);
+}
+span {
+  margin-left: auto;
+  color: var(--accent-orange);
+}
+

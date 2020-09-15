@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="nav-bar">
+    <div class="list-wrapper">
+      <ul class="list">
+        <li><a (click)="showProfile()">Профіль</a></li>
+        <li><a (click)="showAddresses()">Адреси доставки</a></li>
+        <li><a (click)="showFavorites()">Вибране</a></li>
+        <li><a (click)="showHistory()">Історія замовлень</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <div class="profile" *ngIf="profile">
+
+      <mat-card id="register-card">
+        <mat-card-header>
+          <mat-card-title>Реєстрація</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="standard">
+              <mat-label>Email<span>*</span></mat-label>
+              <input matInput type="email" formControlName="username">
+              <mat-error
+                *ngIf="updateForm.get('username').hasError('email') &&  !updateForm.get('username').hasError('required')">
+                Будь-ласка, введіть дійсну Email адресу
+              </mat-error>
+              <mat-error *ngIf="updateForm.get('username').hasError('required') && updateForm.get('username').touched">
+                Обов'язково введіть ваш Email
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Ім'я<span>*</span></mat-label>
+              <input matInput type="text" formControlName="first_name">
+              <mat-error
+                *ngIf="updateForm.get('first_name').hasError('pattern') &&  !updateForm.get('first_name').hasError('required')">
+                Введіть ваше ім'я
+              </mat-error>
+              <mat-error
+                *ngIf="updateForm.get('first_name').hasError('required') && updateForm.get('first_name').touched">
+                Обов'язково введіть ваше ім'я
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Прізвище<span>*</span></mat-label>
+              <input matInput type="text" formControlName="last_name">
+              <mat-error *ngIf="updateForm.get('last_name').hasError('pattern') &&  !updateForm.get('last_name').hasError('required')" >
+                Будь-ласка, введіть ваше прізвище (тільки літери)
+              </mat-error>
+              <mat-error *ngIf="updateForm.get('last_name').hasError('required') && updateForm.get('last_name').touched">
+                Обов'язково введіть ваше прізвище
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Номер телефону<span>*</span></mat-label>
+              <input matInput type="text" formControlName="phone" placeholder="+380665551799">
+              <mat-error *ngIf="updateForm.get('phone').hasError('pattern') &&  !updateForm.get('phone').hasError('required')" >
+                Будь-ласка, введіть дійсний номер телефону
+              </mat-error>
+              <mat-error *ngIf="updateForm.get('phone').hasError('required') && updateForm.get('phone').touched">
+                Обов'язково введіть ваш номер телефону
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Стать</mat-label>
+              <mat-select formControlName="sex">
+                <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Дата народження</mat-label>
+              <input formControl="birthday" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="MM-DD-YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+              <mat-error *ngIf="updateForm.get('birthday').invalid && updateForm.get('birthday').touched"></mat-error>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button type="submit" mat-raised-button id="register-btn" [disabled]="updateForm.invalid"
+                  (click)="onSubmit()">Оновити дані</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="password"></div>
+  </div>
+  <div class="addresses" *ngIf="addresses">Addresses</div>
+  <div class="favorites" *ngIf="favorites">Favorites</div>
+  <div class="history" *ngIf="history">History</div>
+</div>
+
