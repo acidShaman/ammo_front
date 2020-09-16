@@ -3,12 +3,13 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {MainLayoutComponent} from './shared/layouts/main-layout/main-layout.component';
 import {ProfileComponent} from './shared/components/profile/profile.component';
+import {AuthGuard} from './shared/classes/auth.guard';
 
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
-      {path: 'profile', component: ProfileComponent},
+      {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     ]
   },
   {

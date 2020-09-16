@@ -4,6 +4,7 @@ import {LoginComponent} from '../login/login.component';
 import {RegisterComponent} from '../register/register.component';
 import {UserService} from '../../services/user/user.service';
 import {AuthService} from '../../services/user/auth.service';
+import {Router} from '@angular/router';
 
 
 
@@ -20,7 +21,7 @@ import {AuthService} from '../../services/user/auth.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, public authService: AuthService) { }
+  constructor(private dialog: MatDialog, public authService: AuthService, private router: Router) { }
 
   openLoginDialog(): void {
     const dialogConfig = new MatDialogConfig();
@@ -54,5 +55,6 @@ export class NavBarComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['']);
   }
 }

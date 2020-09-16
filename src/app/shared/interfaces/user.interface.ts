@@ -1,3 +1,5 @@
+import {IArrayAddresses} from './address.interface';
+
 export interface IUser {
   id?: number;
   last_login?: string;
@@ -18,6 +20,7 @@ export interface IUserData {
     username: string;
     first_name: string;
     last_name: string;
+    addresses: IArrayAddresses;
   };
   birthday: string;
   phone: string;
