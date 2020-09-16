@@ -15,7 +15,7 @@
         </div>
       </div></li>
       <li><div class="dropdown"><a class="drop-btn">МІЙ КАБІНЕТ</a>
-        <div class="dropdown-content">
+        <div class="dropdown-content" *ngIf="!authService.isAuthenticated()">
           <div class="sign-in">
             <a (click)="openLoginDialog()">Увійти</a>
           </div>
@@ -26,6 +26,19 @@
           <div class="social">
             <a><img src="../../../../assets/facebook.svg" alt="Facebook" width="20px" height="20px"></a>
             <a><img src="../../../../assets/google.svg" alt="Google" width="20px" height="20px"></a>
+          </div>
+        </div>
+        <div class="dropdown-content" *ngIf="authService.isAuthenticated()">
+          <div class="nav-bar fit-content">
+            <div class="list-wrapper fit-content">
+              <ul class="list column fit-content">
+                <li><a routerLink="profile">Профіль</a></li>
+                <li><a>Адреси доставки</a></li>
+                <li><a>Вибране</a></li>
+                <li><a>Історія замовлень</a></li>
+                <li><a (click)="logout()" mat-raised-button id="logout-btn">Вийти</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div></li>

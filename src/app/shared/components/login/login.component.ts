@@ -4,6 +4,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {UserService} from '../../services/user/user.service';
 import {Subscription} from 'rxjs';
 import {MainLayoutComponent} from '../../layouts/main-layout/main-layout.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NavBarComponent} from '../nav-bar/nav-bar.component';
 
 
 
@@ -12,23 +14,16 @@ import {MainLayoutComponent} from '../../layouts/main-layout/main-layout.compone
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   @Input()
   disabled: boolean;
   subscription: Subscription;
 
-  constructor(private userService: UserService, private dialog: MatDialog) {
-    this.openDialog();
+  constructor(private userService: UserService, private dialog: MatDialog, private dialogRef: MatDialogRef<NavBarComponent>) {
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(MainLayoutComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -37,18 +32,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
   login(form: FormGroup): void {
     this.loginForm.disable();
-    this.subscription = this.userService.authUser(form.value).subscribe( (value) => {
-      this.userService.getUserInfoByToken(value.access);
-      localStorage.setItem('access_token', value.access);
+    this.userService.authUser(form.value).subscribe( (value) => {
+        console.log(value);
+        this.userService.getUserInfoByToken(value.access);
+        localStorage.setItem('access_token', value.access);
     },
       (error) => {
         console.log(error);
@@ -58,6 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.login(this.loginForm);
+    this.dialogRef.close();
     console.log('Success');
   }
 

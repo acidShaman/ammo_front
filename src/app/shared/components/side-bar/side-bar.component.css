@@ -9,6 +9,7 @@ img {
 }
 
 .navbar {
+  z-index: 100;
   box-sizing: border-box;
   width: 5rem;
   height: 100vh;
@@ -52,12 +53,11 @@ img {
 }
 
 .nav-item img {
-  min-width: 2rem;
-  margin: 0 1.5rem;
+  margin: 0 0.5rem;
 }
 
 .navbar:hover {
-  width: 16rem;
+  width: 20rem;
 }
 
 .navbar:hover .link-text {

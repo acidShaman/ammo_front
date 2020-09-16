@@ -13,16 +13,24 @@ mat-card-actions {
 mat-form-field {
   width: 100%;
 }
-#register-btn {
+#update-btn {
   background: var(--accent-orange);
   color: white;
   transition: ease var(--transition-speed);
 }
-#register-btn:disabled {
-  background: var(--bg-secondary);
+.container {
+  z-index: -2;
+  padding-left: 120px;
+}
+.flex {
+  display: flex;
+}
+.mat-tab-group {
+  background-color: white;
   color: var(--text-primary);
 }
-#close-btn {
-  color: var(--text-primary);
+::ng-deep .mat-ink-bar {
+  background-color: var(--accent-orange) !important;
 }
+
 

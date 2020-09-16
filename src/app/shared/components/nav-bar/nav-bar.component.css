@@ -28,6 +28,19 @@ display: inline-block;
   align-items: center;
   height: 100%;
 }
+.column {
+  flex-direction: column;
+}
+.fit-content {
+  width: max-content;
+  height: max-content;
+  white-space: nowrap;
+
+}
+.fit-content li {
+  white-space: normal;
+  padding: 1rem;
+}
 .list li{
   color: var(--text-primary);
   display: inline;
@@ -38,6 +51,10 @@ display: inline-block;
 .list li:hover{
   color: var(--text-light);
   transition: 0.3s;
+}
+.dropdown-content li {
+  width: 100%;
+  border-bottom: 1px solid var(--text-light);
 }
 .dropdown {
   position: relative;
@@ -168,4 +185,12 @@ span {
   display: block;
   color: var(--text-light);
   transition: 0.4s;
+}
+.dropdown-content #logout-btn{
+  background-color: var(--accent-orange);
+  color: var(--text-primary);
+  padding: 5px 15px;
+}
+.dropdown-content #logout-btn:hover {
+  justify-content: center;
 }

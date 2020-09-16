@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {LoginComponent} from '../login/login.component';
 import {RegisterComponent} from '../register/register.component';
+import {UserService} from '../../services/user/user.service';
+import {AuthService} from '../../services/user/auth.service';
+
+
+
+
+
+
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,7 +20,7 @@ import {RegisterComponent} from '../register/register.component';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, public authService: AuthService) { }
 
   openLoginDialog(): void {
     const dialogConfig = new MatDialogConfig();
@@ -20,7 +29,7 @@ export class NavBarComponent implements OnInit {
     dialogConfig.autoFocus = false;
     dialogConfig.hasBackdrop = true;
 
-    this.dialog.open(LoginComponent, dialogConfig);
+    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
   }
 
 
@@ -31,10 +40,19 @@ export class NavBarComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.hasBackdrop = true;
 
-    this.dialog.open(RegisterComponent, dialogConfig);
+    const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((response) => {
+      console.log(response);
+      this.openLoginDialog();
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   ngOnInit(): void {
   }
 
+  logout(): void {
+    this.authService.logout();
+  }
 }

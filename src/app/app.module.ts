@@ -24,6 +24,7 @@ import {MY_DATE_FORMATS} from './directive/date-format/date-format';
 import {TokenInterceptor} from './shared/classes/token.interceptor';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import {AppRoutingModule} from './app-routing.module';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import {AppRoutingModule} from './app-routing.module';
     SideBarComponent,
     ProfileComponent,
     MainLayoutComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -52,6 +54,7 @@ import {AppRoutingModule} from './app-routing.module';
     MatNativeDateModule,
     MatMomentDateModule,
     MomentDateModule,
+    MatTabsModule,
   ],
   providers: [
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

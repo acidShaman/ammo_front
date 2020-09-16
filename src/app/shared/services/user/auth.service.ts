@@ -31,25 +31,10 @@ export class AuthService {
   //
   //
   //
-  // logout(): Observable<any> {
-  //   const options = {
-  //     headers: new HttpHeaders({
-  //       Authorization: this.getAccessToken()
-  //     })
-  //   };
-  //
-  //   return this.httpClient
-  //     .post(authApiUrls.logoutUser, null, options)
-  //     .pipe(
-  //       tap(() => {
-  //         this.deleteTokens();
-  //         this.userService.userInfo.next({});
-  //       }),
-  //       catchError((err: any) => {
-  //         return throwError(err);
-  //       })
-  //     );
-  // }
+  logout(): void {
+    this.deleteTokens();
+    console.log('Logged out succesfully!');
+  }
 
   public isAuthenticated(): boolean {
     return !!this.getAccessToken();
