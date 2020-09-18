@@ -25,6 +25,22 @@ export class UserService {
     return this.httpClient.post<ITokens>(`${this.URL}token/`, {username: user.username, password: user.password});
   }
 
+  updateUser(id, user): Observable<IUser> {
+    const formData: FormData = new FormData();
+    const {photo_path, ...body} = user;
+
+    if (photo_path) {
+      formData.append('files', photo_path);
+    }
+
+    const strings = Object.keys(body);
+    strings.forEach(key => {
+      formData.append(key, body[key]);
+    });
+
+    return this.httpClient.patch<IUser>(`${this.URL}profile` + `/${id}/`, formData);
+  }
+
   getUserInfoByToken(accessToken: string): Observable<any> {
     const options = {
       headers: new HttpHeaders({

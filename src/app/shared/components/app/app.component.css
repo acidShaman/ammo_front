@@ -20,5 +20,7 @@
   --text-light: #bababa;
   --bg-primary: #ffffff;
   --bg-secondary: #dbdbdb;
-  --transition-speed: 0.4s
+  --bg-light: #f5f5f5;
+  --transition-speed: 0.4s;
+
 }

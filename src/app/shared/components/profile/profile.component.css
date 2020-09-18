@@ -13,14 +13,54 @@ mat-card-actions {
 mat-form-field {
   width: 100%;
 }
-#update-btn {
+.mat-card-title {
+  color: var(--text-primary);
+}
+.address-card{
+  margin-left: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--bg-light);
+  background: var(--bg-light);
+  width: 25rem;
+  height: max-content;
+}
+.address-card .mat-card-content mat-form-field {
+  margin: 0 0.5rem;
+  font-size: 17px;
+}
+.half-input {
+  width: calc(50% - 1rem);
+}
+.half-input .mat-form-field {
+  margin-right: 1rem;
+}
+.update-btn {
   background: var(--accent-orange);
   color: white;
   transition: ease var(--transition-speed);
 }
+.update-btn:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+#update-card {
+  width: fit-content;
+  height: fit-content;
+  padding-left: 2rem;
+  margin: 1rem 3rem;
+  border: 1px solid var(--bg-light) !important;
+  background: var(--bg-light);
+  border-radius: 8px;
+}
+.mat-card-content {
+  padding-right: 20px;
+  padding-top: 15px;
+
+}
 .container {
   z-index: -2;
-  padding-left: 120px;
+  padding-left: 4rem;
 }
 .flex {
   display: flex;

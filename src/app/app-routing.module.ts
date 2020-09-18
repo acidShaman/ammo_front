@@ -4,12 +4,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {MainLayoutComponent} from './shared/layouts/main-layout/main-layout.component';
 import {ProfileComponent} from './shared/components/profile/profile.component';
 import {AuthGuard} from './shared/classes/auth.guard';
+import {UserResolverService} from './shared/services/user/user-resolver.service';
 
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
-      {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+      {path: 'profile', component: ProfileComponent, resolve: {user: UserResolverService}, canActivate: [AuthGuard]},
     ]
   },
   {

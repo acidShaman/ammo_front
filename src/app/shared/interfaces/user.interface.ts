@@ -28,11 +28,15 @@ export interface IUserData {
 }
 
 export interface IUserEdit {
-  username: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  birthday: string;
+  user?: {
+    username?: string;
+    first_name?: string;
+    last_name?: string;
+  };
+  birthday?: string;
+  phone?: string;
+  sex?: string;
+
 }
 
 export interface IChangePasswords {
