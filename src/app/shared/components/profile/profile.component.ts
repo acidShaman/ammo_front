@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private initAddressForm(): void {
-    if (this.user.user.addresses) {
+    if (this.user.user.addresses[0]) {
       this.addressForm = new FormGroup({
         street: new FormControl(this.user.user.addresses[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё'-,.]{3,50})$/)]),
         // tslint:disable-next-line:max-line-length

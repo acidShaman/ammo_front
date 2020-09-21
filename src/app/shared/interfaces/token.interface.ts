@@ -3,7 +3,7 @@ export interface ITokens {
   refresh: string;
 }
 export interface ResponseAccessToken {
-  data: {access: string};
+  access: string;
 }
 export interface ResponseTokens {
   data: {ITokens};

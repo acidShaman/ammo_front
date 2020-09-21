@@ -47,8 +47,7 @@ export class AuthService {
 
     return this.httpClient.post<ResponseAccessToken>(`${this.URL}token/refresh/`, {refresh: refreshToken})
       .pipe(tap((response: ResponseAccessToken) => {
-        console.log('Response data:', response.data);
-        this.setAccessToken(response.data.access);
+        this.setAccessToken(response.access);
       }));
   }
 
