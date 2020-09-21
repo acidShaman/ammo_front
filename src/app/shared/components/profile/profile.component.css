@@ -17,12 +17,12 @@ mat-form-field {
   color: var(--text-primary);
 }
 .address-card{
-  margin-left: 2rem;
   border-radius: 8px;
   border: 1px solid var(--bg-light);
   background: var(--bg-light);
   width: 25rem;
   height: max-content;
+  margin: 1rem 3rem;
 }
 .address-card .mat-card-content mat-form-field {
   margin: 0 0.5rem;
@@ -43,7 +43,13 @@ mat-form-field {
   background: var(--bg-secondary);
   color: var(--text-primary);
 }
-
+.address-card mat-card-content form{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
 #update-card {
   width: fit-content;
   height: fit-content;

@@ -25,6 +25,7 @@ import {TokenInterceptor} from './shared/classes/token.interceptor';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import {AppRoutingModule} from './app-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import {AuthService} from './shared/services/user/auth.service';
 
 @NgModule({
   declarations: [
@@ -57,12 +58,17 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatTabsModule,
   ],
   providers: [
+    AuthService,
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: TokenInterceptor
-    }
+    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: RefreshTokenInterce
+    // }
   ],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent, RegisterComponent]

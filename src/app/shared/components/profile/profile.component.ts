@@ -8,6 +8,7 @@ import * as _moment from 'moment';
 import {Moment} from 'moment';
 import {MyErrorStateMatcher} from '../register/register.component';
 import {ActivatedRoute} from '@angular/router';
+import {IAddressEdit} from '../../interfaces/address.interface';
 
 const moment = _moment;
 
@@ -56,21 +57,33 @@ export class ProfileComponent implements OnInit {
       username: new FormControl(this.user.user.username, [Validators.email, Validators.minLength(4)]),
       first_name: new FormControl(this.user.user.first_name, [Validators.pattern(/^([a-zA-Zа-яА-ЯЇїєЄІіЁё'-]{1,30})$/)]),
       last_name: new FormControl(this.user.user.last_name, [Validators.pattern(/^([a-zA-Zа-яА-ЯЇїєЄІіЁё'-]{1,30})$/)]),
-      phone: new FormControl(this.user.phone, [Validators.pattern(/^([+])(\d{8,14})$/)] ),
-      sex: new FormControl(this.user.sex, ),
-      birthday: new FormControl(moment(this.user.birthday).format('YYYY-MM-DD'))
+      phone: new FormControl(this.user.phone, [Validators.pattern(/^([+])(\d{8,14})$/)]),
+      sex: new FormControl(this.user.sex),
+      birthday: new FormControl(new Date(this.user.birthday))
     });
   }
 
   private initAddressForm(): void {
-    this.addressForm = new FormGroup({
-      street: new FormControl(this.user.user.addresses[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё'-,.]{3,50})$/) ]),
-      number: new FormControl(this.user.user.addresses[0].number, [Validators.required, Validators.pattern(/^([0-9]+\s*([a-zA-ZА-Яа-я]{,6}))$/)]),
-      entrance: new FormControl(this.user.user.addresses[0].entrance, [Validators.pattern(/^([0-9]+\s*([a-zA-ZА-Яа-я]{,10}))$/)]),
-      housing: new FormControl(this.user.user.addresses[0].housing, [Validators.pattern(/^([0-9]+\s*([a-zA-ZА-Яа-я]{,5}))$/)]),
-      door: new FormControl(this.user.user.addresses[0].door, [Validators.pattern(/^([0-9]+\s*([a-zA-ZА-Яа-я]{,7}))$/)]),
-      floor: new FormControl(this.user.user.addresses[0].floor, [Validators.pattern(/^([0-9]{,10})$/)])
-    });
+    if (this.user.user.addresses) {
+      this.addressForm = new FormGroup({
+        street: new FormControl(this.user.user.addresses[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё'-,.]{3,50})$/)]),
+        // tslint:disable-next-line:max-line-length
+        number: new FormControl(this.user.user.addresses[0].number, [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{1,6})$/)]),
+        entrance: new FormControl(this.user.user.addresses[0].entrance, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,10})$/)]),
+        housing: new FormControl(this.user.user.addresses[0].housing, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,5})$/)]),
+        door: new FormControl(this.user.user.addresses[0].door, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,7})$/)]),
+        floor: new FormControl(this.user.user.addresses[0].floor, [Validators.pattern(/^([0-9]{0,10})$/)])
+      });
+    } else {
+      this.addressForm = new FormGroup({
+        street: new FormControl('', [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё'-,.]{3,50})$/)]),
+        number: new FormControl('', [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{1,6})$/)]),
+        entrance: new FormControl('', [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,10})$/)]),
+        housing: new FormControl('', [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,5})$/)]),
+        door: new FormControl('', [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,7})$/)]),
+        floor: new FormControl('', [Validators.pattern(/^([0-9]{0,10})$/)])
+      });
+    }
   }
 
   editUser(): void {
@@ -85,7 +98,7 @@ export class ProfileComponent implements OnInit {
     this.updateUser(id, data);
   }
 
-  updateUser(id: number, user: IUserEdit): void {
+  private updateUser(id: number, user: IUserEdit): void {
     this.userService.updateUser(id, user).subscribe(() => {
         console.log('Редагування пройшло успішно', 'success');
       },
@@ -93,8 +106,24 @@ export class ProfileComponent implements OnInit {
   }
 
   editAddress(): void {
-    console.log('lol');
+    const data: IAddressEdit = this.addressForm.value;
+    const userId: number = this.user.user.id;
+    const fields = Object.keys(data);
+    fields.forEach(key => {
+      if (!data[key]) {
+        delete data[key];
+      }
+    });
+    this.updateAddress(userId, data);
+    console.log(this.addressForm.value);
   }
 
 
+  private updateAddress(userId: number, data: IAddressEdit): void {
+    this.userService.updateAddress(userId, data).subscribe(() => {
+      console.log('Address successfully updated!');
+    },
+      () => console.log('Address update failed!!!')
+    );
+  }
 }

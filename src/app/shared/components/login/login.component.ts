@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {MainLayoutComponent} from '../../layouts/main-layout/main-layout.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavBarComponent} from '../nav-bar/nav-bar.component';
+import {AuthService} from '../../services/user/auth.service';
 
 
 
@@ -18,9 +19,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   @Input()
   disabled: boolean;
-  subscription: Subscription;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private dialogRef: MatDialogRef<NavBarComponent>) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private dialogRef: MatDialogRef<NavBarComponent>) {
   }
 
 
@@ -34,10 +34,7 @@ export class LoginComponent implements OnInit {
 
   login(form: FormGroup): void {
     this.loginForm.disable();
-    this.userService.authUser(form.value).subscribe( (value) => {
-        console.log(value);
-        this.userService.getUserInfoByToken(value.access);
-        localStorage.setItem('access_token', value.access);
+    this.authService.authUser(form.value).subscribe( (value) => {
     },
       (error) => {
         console.log(error);

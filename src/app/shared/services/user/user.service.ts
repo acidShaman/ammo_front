@@ -5,6 +5,7 @@ import {IUser, IUserData} from '../../interfaces/user.interface';
 import {AbstractControl} from '@angular/forms';
 import {ITokens} from '../../interfaces/token.interface';
 import {catchError, tap} from 'rxjs/operators';
+import {IAddress} from '../../interfaces/address.interface';
 
 
 @Injectable({
@@ -21,17 +22,13 @@ export class UserService {
   }
 
 
-  authUser(user: Partial<IUser>): Observable<ITokens> {
-    return this.httpClient.post<ITokens>(`${this.URL}token/`, {username: user.username, password: user.password});
-  }
+  // authUser(user: Partial<IUser>): Observable<ITokens> {
+  //   return this.httpClient.post<ITokens>(`${this.URL}token/`, {username: user.username, password: user.password});
+  // }
 
   updateUser(id, user): Observable<IUser> {
     const formData: FormData = new FormData();
-    const {photo_path, ...body} = user;
-
-    if (photo_path) {
-      formData.append('files', photo_path);
-    }
+    const {...body} = user;
 
     const strings = Object.keys(body);
     strings.forEach(key => {
@@ -39,6 +36,18 @@ export class UserService {
     });
 
     return this.httpClient.patch<IUser>(`${this.URL}profile` + `/${id}/`, formData);
+  }
+
+  updateAddress(userId, address): Observable<IAddress> {
+    const formData: FormData = new FormData();
+    const {...body} = address;
+
+    const strings = Object.keys(body);
+    strings.forEach(key => {
+      formData.append(key, body[key]);
+    });
+
+    return this.httpClient.post<IAddress>(`${this.URL}profile/${userId}/address/`, formData);
   }
 
   getUserInfoByToken(accessToken: string): Observable<any> {
