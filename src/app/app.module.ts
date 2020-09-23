@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import {AppComponent} from './shared/components/app/app.component';
 import {RegisterComponent} from './shared/components/register/register.component';
@@ -24,8 +25,8 @@ import {MY_DATE_FORMATS} from './directive/date-format/date-format';
 import {TokenInterceptor} from './shared/classes/token.interceptor';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import {AppRoutingModule} from './app-routing.module';
-import {MatTabsModule} from '@angular/material/tabs';
 import {AuthService} from './shared/services/user/auth.service';
+import { MenuComponent } from './shared/components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {AuthService} from './shared/services/user/auth.service';
     ProfileComponent,
     MainLayoutComponent,
     LoginComponent,
+    MenuComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -64,11 +66,7 @@ import {AuthService} from './shared/services/user/auth.service';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: TokenInterceptor
-    },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: RefreshTokenInterce
-    // }
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent, RegisterComponent]

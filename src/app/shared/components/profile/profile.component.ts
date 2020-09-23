@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
 
   updateForm: FormGroup;
   addressForm: FormGroup;
-  private userBirthday: Array<string>;
 
 
   constructor(private userService: UserService,
@@ -45,7 +44,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data.user;
-    console.log(this.user);
     this.maxDate = moment();
     this.initProfileForm();
     this.initAddressForm();
@@ -64,15 +62,15 @@ export class ProfileComponent implements OnInit {
   }
 
   private initAddressForm(): void {
-    if (this.user.user.addresses[0]) {
+    if (this.user.user.address[0]) {
       this.addressForm = new FormGroup({
-        street: new FormControl(this.user.user.addresses[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё'-,.]{3,50})$/)]),
+        street: new FormControl(this.user.user.address[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё',. -]{3,50})$/)]),
         // tslint:disable-next-line:max-line-length
-        number: new FormControl(this.user.user.addresses[0].number, [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{1,6})$/)]),
-        entrance: new FormControl(this.user.user.addresses[0].entrance, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,10})$/)]),
-        housing: new FormControl(this.user.user.addresses[0].housing, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,5})$/)]),
-        door: new FormControl(this.user.user.addresses[0].door, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,7})$/)]),
-        floor: new FormControl(this.user.user.addresses[0].floor, [Validators.pattern(/^([0-9]{0,10})$/)])
+        number: new FormControl(this.user.user.address[0].number, [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{1,6})$/)]),
+        entrance: new FormControl(this.user.user.address[0].entrance, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,10})$/)]),
+        housing: new FormControl(this.user.user.address[0].housing, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,5})$/)]),
+        door: new FormControl(this.user.user.address[0].door, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я]{0,7})$/)]),
+        floor: new FormControl(this.user.user.address[0].floor, [Validators.pattern(/^([0-9]{0,10})$/)])
       });
     } else {
       this.addressForm = new FormGroup({

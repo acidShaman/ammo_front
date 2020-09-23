@@ -2,6 +2,9 @@
   font-size: 14px;
   letter-spacing: 1px;
 }
+a {
+  text-decoration: none;
+}
 .logo {
   padding: 15px;
   height: auto;

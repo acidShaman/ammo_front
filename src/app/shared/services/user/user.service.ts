@@ -60,6 +60,7 @@ export class UserService {
     return this.httpClient.get<IUserData>(`${this.URL}profile/`, options)
       .pipe(
         tap((response: IUserData) => {
+          console.log(response);
           this.currentUser.next(response);
         }),
         catchError((err: any) => {
@@ -68,9 +69,4 @@ export class UserService {
       );
   }
 
-  // getUserByEmail(username): Subscription {
-  //   return this.httpClient.get(`${this.URL}profile/`, username).subscribe(value => {
-  //     localStorage.setItem('user', value);
-  //   });
-  // }
 }

@@ -20,7 +20,7 @@ export interface IUserData {
     username: string;
     first_name: string;
     last_name: string;
-    addresses: IArrayAddresses;
+    address: IArrayAddresses;
   };
   birthday: string;
   phone: string;

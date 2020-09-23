@@ -215,9 +215,9 @@
           </mat-card-content>
           <mat-card-actions>
 
-            <button *ngIf="user.user.addresses[0]" type="submit" mat-raised-button class="update-btn" [disabled]="addressForm.invalid" (click)="editAddress()">Оновити адресу</button>
+            <button *ngIf="user.user.address[0]" type="submit" mat-raised-button class="update-btn" [disabled]="addressForm.invalid" (click)="editAddress()">Оновити адресу</button>
 
-            <button *ngIf="!user.user.addresses[0]" type="submit" mat-raised-button class="update-btn" [disabled]="addressForm.invalid" (click)="editAddress()">Додати адресу</button>
+            <button *ngIf="!user.user.address[0]" type="submit" mat-raised-button class="update-btn" [disabled]="addressForm.invalid" (click)="editAddress()">Додати адресу</button>
           </mat-card-actions>
         </mat-card>
 <!--      </div>-->

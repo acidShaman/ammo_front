@@ -5,12 +5,15 @@ import {MainLayoutComponent} from './shared/layouts/main-layout/main-layout.comp
 import {ProfileComponent} from './shared/components/profile/profile.component';
 import {AuthGuard} from './shared/classes/auth.guard';
 import {UserResolverService} from './shared/services/user/user-resolver.service';
+import {MenuComponent} from './shared/components/menu/menu.component';
+import {MenuResolverService} from './shared/services/menu/menu-resolver.service';
 
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: 'profile', component: ProfileComponent, resolve: {user: UserResolverService}, canActivate: [AuthGuard]},
+      {path: 'menu', component: MenuComponent, resolve: {menu: MenuResolverService}}
     ]
   },
   {
