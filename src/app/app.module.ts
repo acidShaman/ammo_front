@@ -27,6 +27,8 @@ import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.co
 import {AppRoutingModule} from './app-routing.module';
 import {AuthService} from './shared/services/user/auth.service';
 import { MenuComponent } from './shared/components/menu/menu.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     MainLayoutComponent,
     LoginComponent,
     MenuComponent,
+    LoaderComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -58,6 +61,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     MatMomentDateModule,
     MomentDateModule,
     MatTabsModule,
+    MatToolbarModule,
   ],
   providers: [
     AuthService,

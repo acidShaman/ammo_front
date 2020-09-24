@@ -64,10 +64,8 @@ mat-form-field {
   padding-top: 15px;
 
 }
-.container {
-  z-index: -2;
-  padding-left: 4rem;
-}
+
+
 .flex {
   display: flex;
 }

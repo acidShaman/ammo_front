@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user/user.service';
 import {DatePipe} from '@angular/common';
-import {IUser, IUserData, IUserEdit} from '../../interfaces/user.interface';
+import {IUserData, IUserEdit} from '../../interfaces/user.interface';
 import {AuthService} from '../../services/user/auth.service';
 import * as _moment from 'moment';
 import {Moment} from 'moment';
@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
   minDate = moment([1900, 1, 1]);
 
   user: Partial<IUserData>;
-  token = this.authService.getAccessToken();
   currentUser = this.userService.currentUser;
 
   updateForm: FormGroup;

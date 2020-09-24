@@ -1,1 +1,17 @@
-<p>menu works!</p>
+<ul>
+  <li *ngFor="let category of menu">
+    <p>{{category.category | json }}</p>
+    <ul>
+      <li *ngFor="let dish of category.dishes">
+        {{dish | json}}
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<!--<p *ngFor="">-->
+<!--  <mat-toolbar>-->
+<!--    <span>My Application</span>-->
+<!--  </mat-toolbar>-->
+<!--</p>-->
+
