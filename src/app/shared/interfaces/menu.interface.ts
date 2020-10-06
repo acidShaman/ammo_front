@@ -1,6 +1,8 @@
 export interface ICategoryData{
   category: string;
-  dishes: IDishArray;
+  name: string;
+  image: string;
+  dishes?: IDishArray;
 }
 
 export interface IDishData{
@@ -9,9 +11,11 @@ export interface IDishData{
   ingredients: string;
   name: string;
   price: number;
+  image?: string;
+  favorite?: boolean;
 }
 
 export interface IDishArray extends Array<IDishData> {}
 
-export interface IMenuData extends Array<ICategoryData> {}
+export interface ICategories extends Array<ICategoryData> {}
 

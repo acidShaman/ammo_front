@@ -9,6 +9,8 @@ import {Moment} from 'moment';
 import {MyErrorStateMatcher} from '../register/register.component';
 import {ActivatedRoute} from '@angular/router';
 import {IAddressEdit} from '../../interfaces/address.interface';
+import {faHeart} from '@fortawesome/free-regular-svg-icons';
+import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 
 const moment = _moment;
 
@@ -19,6 +21,9 @@ const moment = _moment;
   providers: [UserService, DatePipe]
 })
 export class ProfileComponent implements OnInit {
+  HeartIcon = faHeart;
+  HeartIconSolid = faHeartSolid;
+  URL = 'http://localhost:8000';
   matcher = new MyErrorStateMatcher();
   genders: any[] = [
     {name: 'Не вказувати', value: 'not given'},
@@ -43,6 +48,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data.user;
+    this.user.fav_dishes.forEach((dish) => {
+      dish.favorite = true;
+    });
     this.maxDate = moment();
     this.initProfileForm();
     this.initAddressForm();
@@ -117,10 +125,33 @@ export class ProfileComponent implements OnInit {
 
 
   private updateAddress(userId: number, data: IAddressEdit): void {
-    this.userService.updateAddress(userId, data).subscribe(() => {
-      console.log('Address successfully updated!');
-    },
-      () => console.log('Address update failed!!!')
+    this.userService.updateAddress(userId, data).subscribe((response) => {
+        console.log(response);
+      },
+      (error) => console.log(error)
     );
+  }
+
+  deleteFromFav(userId, dishId): void {
+    this.user.fav_dishes.forEach((value) => {
+      if (value.id === dishId) {
+        this.user.fav_dishes.splice(this.user.fav_dishes.indexOf(value), 1);
+        console.log('Deleted dish with id', value.id, '!');
+      }
+    });
+    this.userService.deleteFavDish(userId, dishId).subscribe((response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      });
+    console.log('deleted!');
+  }
+
+  toggleFavorite(dish): void {
+    dish.favorite = !dish.favorite;
+    if (!dish.favorite) {
+      this.deleteFromFav(this.user.user.id, dish.id);
+    }
   }
 }

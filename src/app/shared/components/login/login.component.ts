@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   @Input()
   disabled: boolean;
 
-  constructor(private authService: AuthService, private dialog: MatDialog, private dialogRef: MatDialogRef<NavBarComponent>) {
+  constructor(private authService: AuthService, private dialog: MatDialog, private dialogRef: MatDialogRef<NavBarComponent>, private userService: UserService) {
   }
 
 
@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
   login(form: FormGroup): void {
     this.loginForm.disable();
     this.authService.authUser(form.value).subscribe( (value) => {
+      console.log(value);
     },
       (error) => {
         console.log(error);

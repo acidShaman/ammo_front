@@ -43,7 +43,7 @@ export class NavBarComponent implements OnInit {
 
     const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((response) => {
-      console.log(response);
+      console.log(response.data);
       this.openLoginDialog();
     }, (error) => {
       console.log(error);

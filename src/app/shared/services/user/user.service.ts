@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {IUser, IUserData} from '../../interfaces/user.interface';
@@ -13,12 +13,22 @@ import {IAddress} from '../../interfaces/address.interface';
 })
 export class UserService {
   URL = 'http://localhost:8000/';
-  constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   currentUser: BehaviorSubject<Partial<IUserData>> = new BehaviorSubject({});
 
   registerNewUser(userData: Partial<IUser>): Observable<any> {
     return this.httpClient.post(`${this.URL}profile/register/`, userData);
+  }
+
+  deleteFavDish(userId, dishId): Observable<any> {
+    return this.httpClient.delete(`${this.URL}profile/${userId}/favorites/${dishId}`);
+  }
+
+  addFavDish(userId, dishId): Observable<any> {
+    return this.httpClient.get(`${this.URL}profile/${userId}/favorites/${dishId}`);
   }
 
 
@@ -60,8 +70,9 @@ export class UserService {
     return this.httpClient.get<IUserData>(`${this.URL}profile/`, options)
       .pipe(
         tap((response: IUserData) => {
-          console.log(response);
+          // console.log('aaaaaa', response);
           this.currentUser.next(response);
+          // console.log(this.currentUser.getValue());
         }),
         catchError((err: any) => {
           return throwError(err);

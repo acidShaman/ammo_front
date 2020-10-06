@@ -1,0 +1,18 @@
+<div class="flex row wrap evenly">
+  <mat-card *ngFor="let category of categories" class="card card__one flex column" routerLink='/menu/{{category.category}}'>
+    <mat-card-header class="flex column-reverse">
+      <img mat-card-lg-image src="{{URL}}{{category.image}}">
+      <mat-card-title class="self-center">{{category.name}}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
+
+
+<div class="self-center" *ngIf="categories.length === 0">
+  Поки що немає жодних категорій(
+</div>
+
+
+
+
+

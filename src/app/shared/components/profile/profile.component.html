@@ -126,6 +126,30 @@
         </mat-card>
 <!--      </div>-->
     </mat-tab>
-    <mat-tab label="Улюблене"> Content 3</mat-tab>
+    <mat-tab label="Улюблене">
+      <div class="flex row wrap">
+        <mat-card *ngFor="let dish of user.fav_dishes" class="card card__one flex column">
+          <mat-card-header class="flex column-reverse">
+            <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon" (click)="toggleFavorite(dish)">
+              <fa-icon [icon]="HeartIcon" size="3x" *ngIf="!dish.favorite"></fa-icon>
+              <fa-icon [icon]="HeartIconSolid" size="3x" *ngIf="dish.favorite"></fa-icon>
+            </button>
+            <img mat-card-lg-image src="{{URL}}{{dish.image}}">
+            <mat-card-title class=" self-center">{{dish.name}}</mat-card-title>
+            <mat-card-subtitle class="self-center">{{dish.ingredients}}</mat-card-subtitle>
+            <mat-card-subtitle class="price self-center">{{dish.price}} грн.</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions class="flex row evenly wrap">
+
+            <button mat-raised-button class="add-to-cart-btn">До кошика</button>
+            <button mat-stroked-button class="about-btn">Докладніше</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <div class="self-center" *ngIf="user.fav_dishes.length === 0">
+        У цій категорії немає жодних позицій!
+      </div>
+    </mat-tab>
     <mat-tab label="Історія замовлень"> Content 1</mat-tab>
   </mat-tab-group>

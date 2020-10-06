@@ -29,6 +29,12 @@ import {AuthService} from './shared/services/user/auth.service';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { PositionsComponent } from './shared/components/menu/positions/positions.component';
+import { CategoriesComponent } from './shared/components/menu/categories/categories.component';
+import { CartComponent } from './shared/components/cart/cart.component';
+import { MainPageComponent } from './shared/components/main-page/main-page.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -41,8 +47,13 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     LoginComponent,
     MenuComponent,
     LoaderComponent,
+    PositionsComponent,
+    CategoriesComponent,
+    CartComponent,
+    MainPageComponent,
   ],
   imports: [
+    FontAwesomeModule,
     AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
@@ -62,6 +73,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     MomentDateModule,
     MatTabsModule,
     MatToolbarModule,
+    FontAwesomeModule,
   ],
   providers: [
     AuthService,

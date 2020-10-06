@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuService} from '../../services/menu/menu.service';
-import {ActivatedRoute} from '@angular/router';
-import {IMenuData} from '../../interfaces/menu.interface';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ICategories} from '../../interfaces/menu.interface';
 
 @Component({
   selector: 'app-menu',
@@ -9,23 +9,41 @@ import {IMenuData} from '../../interfaces/menu.interface';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  menu: IMenuData;
-  menuSubtitles = [
-    'Тицяй тут - їж удома ;)',
-    'Вони ще смачніші, спробуй! ;)',
-    'Довго не думай, мі підібрали за тебе :)',
-    'Аммо це  тільки суші, а ще й',
-    'Ранкова сила, хмм, най буде на цілий день!',
-    'Можливо, бажаеш ще напій?',
-  ];
-  loading = false;
-  constructor(private menuService: MenuService, private activatedRoute: ActivatedRoute) { }
+
+  isRoot: boolean;
+  route: string;
+  routes = [
+    {category: 'rolls', name: 'Роли'},
+    {category: 'hot-rolls', name: 'Гарячі роли'},
+    {category: 'sets', name: 'Сети'},
+    {category: 'bowls', name: 'Боули'},
+    {category: 'breakfasts', name: 'Сніданки'},
+    {category: 'drinks', name: 'Напої'},
+    {category: 'salads', name: 'Салати'}
+    ];
+  categoryName: string;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.loading = true;
-    this.menu = this.activatedRoute.snapshot.data.menu;
-    console.log(this.menu);
+    this.route = this.router.url.split('/')[2];
+    for (const category of this.routes) {
+      if (category.category === this.route) {
+        this.categoryName = category.name;
+      }
+    }
+    this.isRoot = this.router.url === '/menu';
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.route = this.router.url.split('/')[2];
+        for (const category of this.routes) {
+          if (category.category === this.route) {
+            this.categoryName = category.name;
+          }
+        }
+        this.isRoot = this.router.url === '/menu';
+      }
+    });
   }
 
 }

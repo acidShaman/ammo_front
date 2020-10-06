@@ -18,7 +18,6 @@ display: inline-block;
   height: 90px;
   display: flex;
   background: var(--bg-primary);
-  border-bottom: 1px solid var(--text-light);
 }
 .list-wrapper {
   display: inline-block;

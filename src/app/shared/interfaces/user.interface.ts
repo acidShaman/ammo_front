@@ -1,4 +1,5 @@
 import {IArrayAddresses} from './address.interface';
+import {IDishData} from './menu.interface';
 
 export interface IUser {
   id?: number;
@@ -22,6 +23,7 @@ export interface IUserData {
     last_name: string;
     address: IArrayAddresses;
   };
+  fav_dishes?: Array<IDishData>;
   birthday: string;
   phone: string;
   sex: string;

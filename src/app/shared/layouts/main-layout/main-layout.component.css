@@ -1,4 +1,19 @@
-.container {
-  z-index: -2;
-  padding-left: 5rem;
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 2px solid var(--bg-light);
+  display: block;
+  z-index: 100;
 }
+.container {
+  background: red;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  margin-left: 5rem;
+  margin-top: 6rem;
+  transition: var(--transition-speed);
+}
+
+

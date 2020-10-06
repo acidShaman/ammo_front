@@ -1,4 +1,8 @@
 <!--<div>-->
 <!--  <router-outlet name="main"></router-outlet>-->
 <!--</div>-->
+
+<div class="loader" *ngIf="showLoadingScreen">
+  <app-loader></app-loader>
+</div>
 <router-outlet></router-outlet>

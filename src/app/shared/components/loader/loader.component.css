@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, a, p, span {
+  padding-bottom: 0.714em !important;
+  padding-top: 0.714em !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  color: #E9E0D6;
+  font-weight: bold;
+  text-align: center;
+}
+
+body {
+  background: #E9E0D6;
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+}
+
+.noselect {
+  user-select: none;
+}
+
+.artboard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+}
+
+.domino > div {
+  border-radius: 8px;
+  display: inline-flex;
+  transform: rotate(45deg);
+  width: 50px;
+  height: 50px;
+  animation: domino-effect 2.4s infinite ease-in-out;
+}
+
+.domino > div:nth-child(1) {
+  background: #000000;
+}
+
+.domino > div:nth-child(1):after {
+  background: #000000;
+  animation-delay: 0.6s;
+}
+
+.domino > div:nth-child(2) {
+  background: #fd886c;
+}
+
+.domino > div:nth-child(2):after {
+  background: #fd886c;
+  animation-delay: 1.2s;
+}
+
+.domino > div:nth-child(3) {
+  background: #ffffff;
+}
+
+.domino > div:nth-child(3):after {
+  background: #ffffff;
+  animation-delay: 1.8s;
+}
+
+.domino > div:nth-child(1) {
+  margin: 23px;
+  animation-delay: 0.6s;
+}
+
+.domino > div:nth-child(2) {
+  margin: 23px;
+  animation-delay: 1.2s;
+}
+
+.domino > div:nth-child(3) {
+  margin: 23px;
+  animation-delay: 1.8s;
+}
+
+.domino > div:after {
+  content: "";
+  position: relative;
+  top: 0px;
+  left: -70px;
+  opacity: 0;
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  animation: illusion 2.4s infinite ease-in-out;
+}
+
+@keyframes beat {
+  to {
+    transform: scale(1.4);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(140deg);
+  }
+}
+
+@keyframes domino-effect {
+  20%, 100% {
+    transform: rotate(135deg);
+  }
+}
+
+@keyframes illusion {
+  0%, 25% {
+    opacity: 1;
+  }
+  26.10%, 33.33%, 100% {
+    opacity: 0;
+  }
+}
