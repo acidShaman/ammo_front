@@ -7,6 +7,7 @@ a {
   color: var(--text-primary);
 }
 .logo {
+  cursor: pointer;
   padding: 15px;
   height: auto;
   max-width: 200px;
@@ -71,6 +72,7 @@ display: inline-block;
   height: auto;
 }
 .dropdown-content {
+  z-index: 110;
   display: flex;
   visibility: hidden;
   /*display: none;*/
@@ -82,7 +84,6 @@ display: inline-block;
   background: var(--bg-primary);
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   transform: translateY(-2em);
-  z-index: 1;
   transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
 .drop-btn {
@@ -192,9 +193,10 @@ span {
 }
 .dropdown-content #logout-btn{
   background-color: var(--accent-orange);
-  color: var(--text-primary);
+  color: var(--bg-primary);
   padding: 5px 15px;
 }
 .dropdown-content #logout-btn:hover {
   justify-content: center;
 }
+

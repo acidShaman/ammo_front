@@ -18,6 +18,7 @@ import {BreakfastsResolverService} from './shared/services/menu/breakfasts-resol
 import {BowlsResolverService} from './shared/services/menu/bowls-resolver.service';
 import {CategoriesComponent} from './shared/components/menu/categories/categories.component';
 import {MainPageComponent} from './shared/components/main-page/main-page.component';
+import {LoaderComponent} from './shared/components/loader/loader.component';
 // import {CategoryResolverService} from './shared/services/menu/positions-resolver.service';
 
 

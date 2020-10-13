@@ -1,9 +1,21 @@
-<div class="root-container">
-  <div class="nav-wrapper">
-    <app-nav-bar class="nav-bar"></app-nav-bar>
-    <app-side-bar class="side-bar"></app-side-bar>
+<div class="nav-wrapper">
+  <app-nav-bar class="nav-bar"></app-nav-bar>
+  <app-side-bar class="side-bar"></app-side-bar>
+  <div class="fader"></div>
+</div>
+<div class="cart-container" *ngIf="orderService.getOrderList().length >= 2">
+  <div class="cart-price"></div>
+  <button class="cart-icon-wrapper card__one card" mat-fab (click)="openCartDialog()">
+    <img src="assets/shopping-bag.svg" alt="cart">
+  </button>
+  <div class="cart-counter">
+    {{orderService.getOrderList().length - 1}}
   </div>
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+</div>
+<div class="container">
+
+
+
+
+  <router-outlet></router-outlet>
 </div>

@@ -13,7 +13,7 @@
       <mat-card-subtitle class="price self-center">{{dish.price}} грн.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions class="flex row evenly">
-      <button mat-raised-button class="add-to-cart-btn">До кошика</button>
+      <button mat-raised-button class="add-to-cart-btn" (click)="addToCart(dish)">До кошика</button>
       <button mat-stroked-button class="about-btn">Докладніше</button>
 
 

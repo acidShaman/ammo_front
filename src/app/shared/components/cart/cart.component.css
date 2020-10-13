@@ -1,0 +1,230 @@
+/*.order-container {*/
+/*  background-color: var(--bg-primary);*/
+/*  color: var(--text-primary);*/
+/*}*/
+.img-container img {
+  width: 70px;
+  height: 70px;
+}
+.img-container {
+  align-self: flex-start;
+}
+.block {
+  padding-top: 15px;
+  margin: 20px 0;
+  border-top: 2px solid var(--bg-light);
+  border-bottom: 2px solid var(--bg-light);
+}
+.order-items {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+
+  width: 700px;
+  height: max-content;
+  padding: 30px 0;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep .app-cart mat-dialog-content {
+  width: 700px;
+}
+
+.item {
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right-block{
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+.item-remove {
+  margin-left: 15px;
+}
+span {
+  cursor: pointer;
+}
+
+.number {
+  margin: 100px;
+}
+
+.minus, .plus {
+  width: 20px;
+  height: 20px;
+  background: #f2f2f2;
+  border-radius: 4px;
+  padding: 8px 5px 8px 5px;
+  border: 1px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+.item-quantity {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+/* Chrome, Safari, Edge, Opera */
+.item-quantity input::-webkit-outer-spin-button,
+.item-quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.item-quantity input[type=number] {
+  -moz-appearance: textfield;
+}
+.item-quantity input {
+  box-sizing: border-box;
+  border: none;
+  height: 34px;
+  width: 50px;
+  text-align: center;
+  font-size: 26px;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.item-quantity input:hover, .item-quantity input:focus {
+  border: 1px solid #ddd;
+}
+.item-quantity button {
+  /*border-radius: 50%;*/
+  border: none;
+  background: var(--bg-primary);
+  width: 30px;
+  height: 30px;
+}
+.item-remove mat-mini-fab {
+  cursor: pointer;
+}
+.alert {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  color: red;
+  cursor: default;
+}
+.item-price {
+  width: 105px;
+}
+.minus, .plus{
+  line-height: 1px;
+  margin: 0 3px;
+}
+.address-container mat-card-content form{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.address-container{
+  width: available;
+  height: max-content;
+}
+form {
+  width: available;
+  display: flex;
+  flex-direction: column;
+}
+mat-form-field {
+  margin-top: 20px;
+  align-self: center;
+  width: 80%;
+}
+mat-label span {
+  color: red;
+}
+.container mat-card-content{
+  max-width: 700px;
+}
+.half-input {
+  width: calc(50% - 1rem);
+}
+.payment-container mat-radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+::ng-deep .payment-container .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color:var(--accent-orange);
+}
+
+::ng-deep .payment-container .mat-radio-button.mat-accent .mat-radio-inner-circle{
+  color:var(--accent-orange);
+  background-color:var(--accent-orange);
+}
+
+::ng-deep .payment-container .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color:var(--accent-orange);
+}
+.payment-container section {
+  margin-bottom: 20px;
+}
+.payment-container span {
+  color: red;
+}
+.commentary-container {
+  width: available;
+}
+textarea {
+  height: 100px;
+  margin: 0 30px;
+  width: 100%;
+}
+.flex {
+  display: flex;
+}
+.row {
+  flex-direction: row;
+}
+.column {
+  flex-direction: column;
+}
+.evenly {
+  justify-content: space-evenly;
+}
+.self-center {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+.marginbot20 {
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.commentary-container mat-form-field {
+  margin: 20px 20px;
+  width: 90%;
+}
+.commentary-container .item-quantity {
+  margin: 15px 0;
+}
+.mat-dialog-container mat-dialog-container {
+  width: 700px;
+}
+
+::ng-deep :root mat-dialog-container {
+  max-width: 750px;
+}
+.order-btn {
+  align-self: center;
+  width: 80%;
+  height: 50px;
+  background: var(--accent-orange);
+  color: var(--bg-primary);
+  border-radius: 5px;
+}

@@ -1,1 +1,223 @@
-<p>cart works!</p>
+<mat-dialog-content class="container" xmlns="http://www.w3.org/1999/html">
+  <div class="order-container">
+    <mat-card-title>Ваше замовлення</mat-card-title>
+
+    <div *ngIf="orderList.length >= 1">
+      <div class="order-items block">
+        <div *ngFor="let item of orderList">
+          <div *ngIf="item.name !== 'extra_adds'" class="item">
+            <div class="img-container">
+              <img src="{{URL}}{{item.image}}" alt="{{item.id}}">
+            </div>
+            <div class="item-title">
+              <mat-card-title>{{item.name}}</mat-card-title>
+            </div>
+
+
+            <div class="right-block">
+              <div class="item-quantity">
+                <button class="minus material-icons" (click)="decrementQuantity(item)"
+                        [disabled]="isMinimum(item.quantity)">remove
+                </button>
+                <input type="number" [(ngModel)]="item.quantity" min="1" oninput="validity.valid||(value=1);"/>
+                <button class="plus material-icons" (click)="incrementQuantity(item)">add</button>
+              </div>
+              <div class="item-price">
+                <mat-card-title>{{item.price * item.quantity}} грн.</mat-card-title>
+              </div>
+              <div class="item-remove">
+                <mat-mini-fab (click)="removeItem(item)">
+                  <mat-icon>delete</mat-icon>
+                </mat-mini-fab>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="orderList.length <= 1" style="height: 100px; text-align: center; margin: 0 auto;padding-top: 30px;">
+          У вас поки що немає позицій у замовленні(
+        </div>
+      </div>
+
+      <mat-card-title>Cумма: {{orderService.price}}</mat-card-title>
+      <span class="alert">Увага! Доставка БЕЗКОШТОВНА за умови замовлення від 200грн.</span>
+      <div class="item-quantity">
+        К-ть додаткових порцій додатків (імбир + васабі)
+        <mat-card-subtitle>10 грн/порція</mat-card-subtitle>
+        <button class="minus material-icons" (click)="decrementQuantity(orderList.find(isExtras))"
+                [disabled]="!orderList.find(isExtras).quantity">remove
+        </button>
+        <input type="number" [(ngModel)]="orderList.find(isExtras).quantity" (change)="computePrice()" min="-1"
+               oninput="validity.valid||(value=0);"/>
+        <button class="plus material-icons" (click)="incrementQuantity(orderList.find(isExtras))">add</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="customer-container block">
+    <mat-card-title>Ваші контактні дані</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="userForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Ім'я<span>*</span></mat-label>
+          <input matInput type="text" formControlName="first_name">
+          <mat-error
+            *ngIf="userForm.get('first_name').hasError('required') && userForm.get('first_name').touched">
+            Обов'язково введіть ваше ім'я
+          </mat-error>
+          <mat-error
+            *ngIf="userForm.get('first_name').hasError('pattern') &&  !userForm.get('first_name').hasError('required')">
+            Ім'я може складатись лише з літер або ' та -
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Прізвище<span>*</span></mat-label>
+          <input matInput type="text" formControlName="last_name">
+          <mat-error
+            *ngIf="userForm.get('last_name').hasError('required') && userForm.get('last_name').touched">
+            Обов'язково введіть ваше прізвище
+          </mat-error>
+          <mat-error
+            *ngIf="userForm.get('last_name').hasError('pattern') &&  !userForm.get('last_name').hasError('required')">
+            Прізвище може складатись лише з літер або ' та -
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Номер телефону<span>*</span></mat-label>
+          <input matInput type="text" formControlName="phone" placeholder="+380665551799">
+          <mat-error *ngIf="userForm.get('phone').hasError('required') && userForm.get('phone').touched">
+            Обов'язково введіть ваш номер телефону
+          </mat-error>
+          <mat-error
+            *ngIf="userForm.get('phone').hasError('pattern') &&  !userForm.get('phone').hasError('required')">
+            Будь-ласка, введіть дійсний номер телефону у форматі +380665551799
+          </mat-error>
+        </mat-form-field>
+
+
+      </form>
+    </mat-card-content>
+
+  </div>
+  <div class="address-container block">
+    <mat-card-title>Ваша адреса</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="addressForm">
+        <mat-form-field appearance="standard" class="half-input">
+          <mat-label>Вулиця <span>*</span></mat-label>
+          <input matInput type="text" formControlName="street">
+          <mat-error
+            *ngIf="addressForm.get('street').hasError('required') && addressForm.get('street').touched">
+            Обов'язково введіть назву вулиці
+          </mat-error>
+          <mat-error
+            *ngIf="addressForm.get('street').hasError('pattern') &&  !addressForm.get('street').hasError('required')">
+            Назва вулиці може складатись лише з літер та 'ʼ"-,
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="half-input">
+          <mat-label>Номер <span>*</span></mat-label>
+          <input matInput type="text" formControlName="number">
+          <mat-error
+            *ngIf="addressForm.get('number').hasError('required') && addressForm.get('number').touched">
+            Обов'язково введіть номер вулиці.
+          </mat-error>
+          <mat-error
+            *ngIf="addressForm.get('number').hasError('pattern') &&  !addressForm.get('number').hasError('required')">
+            Номер вулиці може складатись с цифр і літер.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="half-input">
+          <mat-label>Під'їзд</mat-label>
+          <input matInput type="text" formControlName="entrance">
+          <mat-error
+            *ngIf="addressForm.get('entrance').hasError('pattern') &&  !addressForm.get('entrance').hasError('required')">
+            Номер під'їзда може складатись лише з цифр або літер.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="half-input">
+          <mat-label>Корпус</mat-label>
+          <input matInput type="text" formControlName="housing">
+          <mat-error
+            *ngIf="addressForm.get('housing').hasError('pattern') &&  !addressForm.get('housing').hasError('required')">
+            Номер корпусу може складатись лише з цифр або літер.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="half-input">
+          <mat-label>Квартира</mat-label>
+          <input matInput type="text" formControlName="door">
+          <mat-error
+            *ngIf="addressForm.get('door').hasError('pattern') &&  !addressForm.get('door').hasError('required')">
+            Номер квартири може складатись лише з цифр або літер.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="half-input">
+          <mat-label>Поверх</mat-label>
+          <input matInput type="text" formControlName="floor">
+          <mat-error
+            *ngIf="addressForm.get('floor').hasError('pattern') &&  !addressForm.get('floor').hasError('required')">
+            Номер поверху може складатись лише з цифр або літер.
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </div>
+  <div class="payment-container block">
+    <mat-card-title>Спосіб оплати<span>*</span></mat-card-title>
+    <section class="" [formGroup]="paymentForm">
+      <mat-radio-group formControlName="payment_method">
+        <mat-radio-button class="" value="cash">Готівкою при отриманні</mat-radio-button>
+        <mat-radio-button class="" value="card">Банківьскою картою</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Промо код</mat-label>
+        <input matInput type="text" formControlName="promo_code">
+
+        <mat-error
+          *ngIf="paymentForm.get('promo_code').hasError('pattern') &&  paymentForm.get('promo_code').touched">
+          Номер поверху може складатись лише з цифр або літер.
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+
+  </div>
+  <div class="commentary-container block" [formGroup]="commentaryForm">
+    <mat-card-title>Додаткова інформація</mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Введіть ваш коментар, щодо побажань або алергій...</mat-label>
+      <textarea matInput formControlName="commentary"></textarea>
+    </mat-form-field>
+
+    <div class="flex row evenly marginbot20 wrap">
+      <div class="item-quantity">
+        К-ть навчальних паличок
+        <button class="minus material-icons" (click)="decrementTrainingSticks(commentaryForm)"
+                [disabled]="isMinimumSticks(commentaryForm.controls.training_ch.value)">remove
+        </button>
+        <input type="number" formControlName="training_ch" min="0" oninput="validity.valid||(value=0);"/>
+        <button class="plus material-icons" (click)="incrementTrainingSticks(commentaryForm)">add</button>
+      </div>
+
+      <div class="item-quantity">
+        К-ть звичайних паличок
+        <button class="minus material-icons" (click)="decrementNormalSticks(commentaryForm)"
+                [disabled]="isMinimumSticks(commentaryForm.controls.normal_ch.value)">remove
+        </button>
+        <input type="number" formControlName="normal_ch" min="0" oninput="validity.valid||(value=0);"/>
+        <button class="plus material-icons" (click)="incrementNormalSticks(commentaryForm)">add</button>
+      </div>
+
+
+    </div>
+
+  </div>
+  <mat-card-actions class="flex column ">
+    <button mat-raised-button class="order-btn">Замовити</button>
+    <mat-card-subtitle class="self-center">Зверніть увагу! Порція додатків(імбир,соєвий соус, васабі, набір паличок) разраховано на одну особу за один рол:)</mat-card-subtitle>
+  </mat-card-actions>
+</mat-dialog-content>

@@ -34,6 +34,8 @@ import { CategoriesComponent } from './shared/components/menu/categories/categor
 import { CartComponent } from './shared/components/cart/cart.component';
 import { MainPageComponent } from './shared/components/main-page/main-page.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatIconModule} from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -52,29 +54,31 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CartComponent,
     MainPageComponent,
   ],
-  imports: [
-    FontAwesomeModule,
-    AppRoutingModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatDialogModule,
-    RouterModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatMomentDateModule,
-    MomentDateModule,
-    MatTabsModule,
-    MatToolbarModule,
-    FontAwesomeModule,
-  ],
+    imports: [
+        FontAwesomeModule,
+        AppRoutingModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatDialogModule,
+        RouterModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatMomentDateModule,
+        MomentDateModule,
+        MatTabsModule,
+        MatToolbarModule,
+        FontAwesomeModule,
+        MatIconModule,
+        MatRadioModule,
+    ],
   providers: [
     AuthService,
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

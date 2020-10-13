@@ -17,8 +17,8 @@ h1, h2, h3, h4, h5, h6, a, p, span {
   text-align: center;
 }
 
-body {
-  background: #E9E0D6;
+.artboard {
+  background: var(--bg-primary);
   font-family: "Raleway", sans-serif;
   text-align: center;
 }
@@ -33,11 +33,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   position: absolute;
 }
-
+.domino {
+  margin-top: 50px;
+}
 .domino > div {
   border-radius: 8px;
   display: inline-flex;
@@ -66,11 +68,11 @@ body {
 }
 
 .domino > div:nth-child(3) {
-  background: #ffffff;
+  background: var(--bg-secondary);
 }
 
 .domino > div:nth-child(3):after {
-  background: #ffffff;
+  background: var(--bg-secondary);
   animation-delay: 1.8s;
 }
 
@@ -127,3 +129,13 @@ body {
     opacity: 0;
   }
 }
+.img-container {
+  display: block;
+  width: 500px;
+  height: 175px;
+}
+.img-container img {
+  width: 500px;
+  height: 175px;
+}
+

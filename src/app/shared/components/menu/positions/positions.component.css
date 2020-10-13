@@ -58,6 +58,9 @@
   padding-left: 3rem;
   margin-bottom: 1rem;
 }
+.mat-card {
+  z-index: 0;
+}
 .mat-card-header button {
   display: block;
   visibility: visible;
@@ -107,8 +110,9 @@
   }
 }
 .card__one {
-  transition: transform 0.5s;
+  transition: transform var(--transition-speed);
 }
+
 .card__one::after {
   position: absolute;
   top: 0;

@@ -5,12 +5,7 @@ import {RegisterComponent} from '../register/register.component';
 import {UserService} from '../../services/user/user.service';
 import {AuthService} from '../../services/user/auth.service';
 import {Router} from '@angular/router';
-
-
-
-
-
-
+import {faShoppingBag} from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -43,8 +38,10 @@ export class NavBarComponent implements OnInit {
 
     const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((response) => {
-      console.log(response.data);
-      this.openLoginDialog();
+      if (response) {
+        console.log(response.data);
+        this.openLoginDialog();
+      }
     }, (error) => {
       console.log(error);
     });
