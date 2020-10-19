@@ -19,7 +19,7 @@
                 <button class="minus material-icons" (click)="decrementQuantity(item)"
                         [disabled]="isMinimum(item.quantity)">remove
                 </button>
-                <input type="number" [(ngModel)]="item.quantity" min="1" oninput="validity.valid||(value=1);"/>
+                <input type="number" [(ngModel)]="item.quantity" (change)="orderService.setToLocalStorage()" min="1" oninput="validity.valid||(value=1);"/>
                 <button class="plus material-icons" (click)="incrementQuantity(item)">add</button>
               </div>
               <div class="item-price">
@@ -38,15 +38,16 @@
         </div>
       </div>
 
-      <mat-card-title>Cумма: {{orderService.price}}</mat-card-title>
+      <mat-card-title>Cумма: {{orderService.getTotalPrice()}}</mat-card-title>
       <span class="alert">Увага! Доставка БЕЗКОШТОВНА за умови замовлення від 200грн.</span>
-      <div class="item-quantity">
+      <div class="item-quantity extras">
         К-ть додаткових порцій додатків (імбир + васабі)
         <mat-card-subtitle>10 грн/порція</mat-card-subtitle>
         <button class="minus material-icons" (click)="decrementQuantity(orderList.find(isExtras))"
-                [disabled]="!orderList.find(isExtras).quantity">remove
+                [disabled]="!orderList.find(isExtras).quantity"
+        >remove
         </button>
-        <input type="number" [(ngModel)]="orderList.find(isExtras).quantity" (change)="computePrice()" min="-1"
+        <input type="number" [(ngModel)]="orderList.find(isExtras).quantity" (change)="onExtrasChange()" min="0"
                oninput="validity.valid||(value=0);"/>
         <button class="plus material-icons" (click)="incrementQuantity(orderList.find(isExtras))">add</button>
       </div>
@@ -217,7 +218,9 @@
 
   </div>
   <mat-card-actions class="flex column ">
-    <button mat-raised-button class="order-btn">Замовити</button>
+    <button mat-raised-button class="order-btn"
+            [disabled]="!(orderService.getOrderList().length >= 2 &&userForm.valid && addressForm.valid && paymentForm.valid && commentaryForm.valid)"
+     (click)="submitOrder([userForm.controls, addressForm.controls, paymentForm.controls, commentaryForm.controls, orderList])">Замовити</button>
     <mat-card-subtitle class="self-center">Зверніть увагу! Порція додатків(імбир,соєвий соус, васабі, набір паличок) разраховано на одну особу за один рол:)</mat-card-subtitle>
   </mat-card-actions>
 </mat-dialog-content>

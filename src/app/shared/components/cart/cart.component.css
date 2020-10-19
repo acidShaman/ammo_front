@@ -8,6 +8,8 @@
 }
 .img-container {
   align-self: flex-start;
+  width: 70px;
+  height: 70px;
 }
 .block {
   padding-top: 15px;
@@ -112,6 +114,7 @@ span {
   font-weight: 300;
   color: red;
   cursor: default;
+  margin-bottom: 20px;
 }
 .item-price {
   width: 105px;
@@ -227,4 +230,9 @@ textarea {
   background: var(--accent-orange);
   color: var(--bg-primary);
   border-radius: 5px;
+}
+.extras {
+  width: 572px;
+  margin: 0 auto;
+  align-self: center;
 }

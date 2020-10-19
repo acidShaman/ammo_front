@@ -18,8 +18,6 @@ export class CategoriesComponent implements OnInit {
     // @ts-ignore
     this.loading = true;
     this.categories = this.activatedRoute.snapshot.data.categories;
-    console.log(this.activatedRoute.snapshot.data);
-    console.log(this.categories);
   }
 
 }

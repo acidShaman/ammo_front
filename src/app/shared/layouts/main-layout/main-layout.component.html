@@ -3,19 +3,19 @@
   <app-side-bar class="side-bar"></app-side-bar>
   <div class="fader"></div>
 </div>
-<div class="cart-container" *ngIf="orderService.getOrderList().length >= 2">
+<div class="cart-container" *ngIf="order.length >= 2">
   <div class="cart-price"></div>
   <button class="cart-icon-wrapper card__one card" mat-fab (click)="openCartDialog()">
     <img src="assets/shopping-bag.svg" alt="cart">
   </button>
-  <div class="cart-counter">
-    {{orderService.getOrderList().length - 1}}
+  <div class="cart-counter" *ngIf="order.length >= 2">
+    {{order.length - 1}}
+  </div>
+
+  <div class="cart-counter" *ngIf="this.orderService.getOrderListFromLocalStorage().length >= 2">
+    {{this.orderService.getOrderListFromLocalStorage().length - 1}}
   </div>
 </div>
 <div class="container">
-
-
-
-
   <router-outlet></router-outlet>
 </div>

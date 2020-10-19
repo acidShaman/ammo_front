@@ -17,7 +17,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  currentUser: BehaviorSubject<Partial<IUserData>> = new BehaviorSubject({});
+  currentUser: BehaviorSubject<Partial<IUserData>> = new BehaviorSubject(null);
 
   registerNewUser(userData: Partial<IUser>): Observable<any> {
     return this.httpClient.post(`${this.URL}profile/register/`, userData);
@@ -70,9 +70,7 @@ export class UserService {
     return this.httpClient.get<IUserData>(`${this.URL}profile/`, options)
       .pipe(
         tap((response: IUserData) => {
-          // console.log('aaaaaa', response);
           this.currentUser.next(response);
-          // console.log(this.currentUser.getValue());
         }),
         catchError((err: any) => {
           return throwError(err);

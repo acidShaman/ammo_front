@@ -81,6 +81,7 @@ import {MatRadioModule} from '@angular/material/radio';
     ],
   providers: [
     AuthService,
+    CartComponent,
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     {
       provide: HTTP_INTERCEPTORS,

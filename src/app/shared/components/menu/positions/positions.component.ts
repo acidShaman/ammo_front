@@ -32,16 +32,16 @@ export class PositionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.orderService.setOrderList(this.orderService.getOrderListFromLocalStorage());
     this.loading = true;
     this.user = this.activatedRoute.snapshot.data.user;
     this.category = this.activatedRoute.snapshot.data.category;
-    this.category.dishes.forEach((dish: any) => {
-      dish.favorite = Boolean(this.user.fav_dishes.find(favDish => favDish.id === dish.id ));
-      console.log(dish);
-    });
-    // tslint:disable-next-line:prefer-for-of
-    console.log(this.category.dishes);
-    console.log(this.user);
+    if (this.user !== null) {
+      this.category.dishes.forEach((dish: any) => {
+        dish.favorite = Boolean(this.user.fav_dishes.find(favDish => favDish.id === dish.id));
+        console.log(dish);
+      });
+    }
   }
 
   toggleFavorite(dish): void {
@@ -77,6 +77,7 @@ export class PositionsComponent implements OnInit {
   addToCart(position: IDishData): void {
     this.orderService.add(position);
     console.log('Added', position.name);
+    console.log(this.orderService.getOrderListFromLocalStorage());
   }
 
 }

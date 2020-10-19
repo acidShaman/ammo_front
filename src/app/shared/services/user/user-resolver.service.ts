@@ -14,6 +14,10 @@ export class UserResolverService implements Resolve<IUserData> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IUserData> | Promise<IUserData> | IUserData {
-    return this.userService.getUserInfoByToken(this.authService.getAccessToken());
+    if (this.authService.isAuthenticated()) {
+      return this.userService.getUserInfoByToken(this.authService.getAccessToken());
+    } else {
+      return null;
+    }
   }
 }
