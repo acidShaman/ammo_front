@@ -40,8 +40,7 @@ export class MainLayoutComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe( data => {
       if (data === true) {
-        this.orderService.setOrderList(this.orderService.orderListTemplate);
-        this.orderService.orderListUpdated.emit(this.orderService.orderList);
+        this.order = [];
       }
     });
   }

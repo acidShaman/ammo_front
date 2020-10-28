@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -20,7 +20,7 @@ import {RegisterComponent} from './shared/components/register/register.component
 import {LoginComponent} from './shared/components/login/login.component';
 import {NavBarComponent} from './shared/components/nav-bar/nav-bar.component';
 import {SideBarComponent} from './shared/components/side-bar/side-bar.component';
-import {ProfileComponent} from './shared/components/profile/profile.component';
+import {ProfileComponent} from './shared/components/account/profile/profile.component';
 import {MY_DATE_FORMATS} from './directive/date-format/date-format';
 import {TokenInterceptor} from './shared/classes/token.interceptor';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
@@ -36,6 +36,18 @@ import { MainPageComponent } from './shared/components/main-page/main-page.compo
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { AccountComponent } from './shared/components/account/account.component';
+import { AddressComponent } from './shared/components/account/address/address.component';
+import { FavoritesComponent } from './shared/components/account/favorites/favorites.component';
+import { OrderHistoryComponent } from './shared/components/account/order-history/order-history.component';
+import {MatSortModule} from '@angular/material/sort';
+import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
+import { RecoveryPasswordComponent } from './shared/components/recovery-password/recovery-password.component';
+import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
+
+
 
 
 @NgModule({
@@ -53,32 +65,41 @@ import {MatRadioModule} from '@angular/material/radio';
     CategoriesComponent,
     CartComponent,
     MainPageComponent,
+    FooterComponent,
+    AccountComponent,
+    AddressComponent,
+    FavoritesComponent,
+    OrderHistoryComponent,
+    RecoveryPasswordComponent,
+    ResetPasswordComponent,
   ],
-    imports: [
-        FontAwesomeModule,
-        AppRoutingModule,
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatDialogModule,
-        RouterModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatMomentDateModule,
-        MomentDateModule,
-        MatTabsModule,
-        MatToolbarModule,
-        FontAwesomeModule,
-        MatIconModule,
-        MatRadioModule,
-    ],
+  imports: [
+    FontAwesomeModule,
+    AppRoutingModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDialogModule,
+    RouterModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MomentDateModule,
+    MatTabsModule,
+    MatToolbarModule,
+    FontAwesomeModule,
+    MatIconModule,
+    MatRadioModule,
+    MatTableModule,
+    MatSortModule,
+  ],
   providers: [
     AuthService,
     CartComponent,
@@ -87,6 +108,24 @@ import {MatRadioModule} from '@angular/material/radio';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: TokenInterceptor
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '70926655559-buqdfnlrlvp4k9i8djhom3c71boa395m.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('389896282375476'),
+          }
+        ],
+      } as SocialAuthServiceConfig,
     }
   ],
   bootstrap: [AppComponent],

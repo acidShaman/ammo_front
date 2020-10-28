@@ -1,0 +1,9 @@
+.order_history {
+  width: 100%;
+  height: max-content;
+}
+.self-center {
+  margin-top: 50px;
+  font-size: 24px;
+  text-align: center;
+}

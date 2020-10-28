@@ -71,6 +71,7 @@ export class UserService {
       .pipe(
         tap((response: IUserData) => {
           this.currentUser.next(response);
+          console.log(this.currentUser.value);
         }),
         catchError((err: any) => {
           return throwError(err);

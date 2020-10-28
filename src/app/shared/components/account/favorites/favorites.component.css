@@ -1,81 +1,4 @@
-span {
-  color: red;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  width: 20rem;
-}
-mat-card-actions {
-  display: flex;
-  justify-content: center;
-}
-mat-form-field {
-  width: 100%;
-}
-.mat-card-title {
-  color: var(--text-primary);
-}
-.address-card{
-  border-radius: 8px;
-  border: 1px solid var(--bg-light);
-  background: var(--bg-light);
-  width: 25rem;
-  height: max-content;
-  margin: 1rem 3rem;
-}
-.address-card .mat-card-content mat-form-field {
-  margin: 0 0.5rem;
-  font-size: 17px;
-}
-.half-input {
-  width: calc(50% - 1rem);
-}
-.half-input .mat-form-field {
-  margin-right: 1rem;
-}
-.update-btn {
-  background: var(--accent-orange);
-  color: white;
-  transition: ease var(--transition-speed);
-}
-.update-btn:disabled {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-}
-.address-card mat-card-content form{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  width: 100%;
-}
-#update-card {
-  width: fit-content;
-  height: fit-content;
-  padding-left: 2rem;
-  margin: 1rem 3rem;
-  border: 1px solid var(--bg-light) !important;
-  background: var(--bg-light);
-  border-radius: 8px;
-}
-.mat-card-content {
-  padding-right: 20px;
-  padding-top: 15px;
 
-}
-
-
-.flex {
-  display: flex;
-}
-.mat-tab-group {
-  background-color: white;
-  color: var(--text-primary);
-}
-::ng-deep .mat-ink-bar {
-  background-color: var(--accent-orange) !important;
-}
 .flex {
   display: flex;
 }
@@ -149,9 +72,11 @@ mat-form-field {
   margin-bottom: 20px !important;
 }
 .self-center{
-  margin-top: 30px;
-
+  margin-top: 50px;
   text-align: center;
+}
+.font-big{
+  font-size: 24px;
 }
 .price {
   font-size: 16px;

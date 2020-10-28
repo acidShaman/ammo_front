@@ -1,0 +1,34 @@
+<div *ngIf="user.order_history.length > 0">
+  <table class="order_history" mat-table matSort (matSortChange)="sortData($event)" [dataSource]="user.order_history">
+    <ng-container matColumnDef="Номер замовлення">
+      <th mat-header-cell *matHeaderCellDef> Номер замовлення</th>
+      <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Дата і час замовлення">
+      <th mat-header-cell *matHeaderCellDef> Дата і час замовлення</th>
+      <td mat-cell *matCellDef="let order"> {{formatDate(order.created)}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Позиції">
+      <th mat-header-cell *matHeaderCellDef>Позиції</th>
+      <td mat-cell *matCellDef="let order">
+        <p *ngFor="let orderItem of order.order_items">{{orderItem.quantity}}
+          x {{orderItem.dish.name === 'extra_adds'? 'Додатки(імбир + васабі)' : orderItem.dish.name}}</p>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Сума">
+      <th mat-header-cell *matHeaderCellDef>Сума</th>
+      <td mat-cell *matCellDef="let order"> {{calculatedPrice(order.order_items)}} грн.</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<div  class="self-center" *ngIf="user.order_history.length === 0">
+  У вас немає жодного замовлення в історії(
+</div>

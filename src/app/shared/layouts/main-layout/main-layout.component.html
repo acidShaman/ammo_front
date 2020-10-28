@@ -12,10 +12,11 @@
     {{order.length - 1}}
   </div>
 
-  <div class="cart-counter" *ngIf="this.orderService.getOrderListFromLocalStorage().length >= 2">
-    {{this.orderService.getOrderListFromLocalStorage().length - 1}}
+  <div class="cart-counter" *ngIf="order.length >= 2">
+    {{order.length - 1}}
   </div>
 </div>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+<app-footer></app-footer>

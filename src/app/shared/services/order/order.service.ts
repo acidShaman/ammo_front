@@ -11,7 +11,7 @@ export class OrderService {
   URL = 'http://localhost:8000/';
   public orderListUpdated: EventEmitter<OrderItem[]> = new EventEmitter<OrderItem[]>();
   @Input() public orderList: OrderItem[] = [];
-  public orderListTemplate: OrderItem[] = [{id: 0, name: 'extra_adds', price: 10, quantity: 0, image: null}];
+  public orderListTemplate: OrderItem[] = [{id: 1, name: 'extra_adds', price: 10, quantity: 0, image: null}];
   public price = 0;
 
   constructor(private httpClient: HttpClient) {
@@ -118,7 +118,6 @@ export class OrderService {
         strings.forEach(key => {
           if (body[key].value !== '') {
             formData.append(key, body[key].value);
-            console.log(key, body[key].value);
           }
         });
       } else {

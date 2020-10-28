@@ -1,4 +1,4 @@
-<mat-card id="login-card">
+<div class="container">
   <mat-card-header class="content">
     <mat-card-title>Авторизація</mat-card-title>
   </mat-card-header>
@@ -35,13 +35,13 @@
           Обов'язково введіть ваш пароль
         </mat-error>
       </mat-form-field>
-      <span>Забули пароль?</span>
+      <span><a (click)="openRecoveryPwdDialog()">Забули пароль?</a></span>
     </form>
   </mat-card-content>
   <mat-card-actions class="content">
     <button type="submit" mat-raised-button id="login-btn" [disabled]="loginForm.invalid || loginForm.disabled"
             (click)="onSubmit()">Увійти
     </button>
-    <button mat-stroked-button id="register-btn">Зареєструватись</button>
+    <button mat-stroked-button id="register-btn" (click)="openRegisterDialog()">Зареєструватись</button>
   </mat-card-actions>
-</mat-card>
+</div>

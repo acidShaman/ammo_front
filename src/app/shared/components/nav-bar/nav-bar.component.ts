@@ -24,6 +24,8 @@ export class NavBarComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;
     dialogConfig.hasBackdrop = true;
+    dialogConfig.height = '450px';
+    dialogConfig.width = '400px';
 
     const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
   }

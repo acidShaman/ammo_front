@@ -21,12 +21,13 @@ export interface IUserData {
     username: string;
     first_name: string;
     last_name: string;
-    address: IArrayAddresses;
   };
   fav_dishes?: Array<IDishData>;
+  order_history?: Array<any>;
   birthday: string;
   phone: string;
   sex: string;
+  address: IArrayAddresses;
 }
 
 export interface IUserEdit {
@@ -46,3 +47,12 @@ export interface IChangePasswords {
   new_passwords: string;
 }
 
+export interface SocialUser {
+  provider: string;
+  id: string;
+  email: string;
+  name: string;
+  image: string;
+  token?: string;
+  idToken?: string;
+}

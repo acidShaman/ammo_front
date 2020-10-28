@@ -15,6 +15,7 @@ import {IUserData} from '../../interfaces/user.interface';
 export class CartComponent implements OnInit {
   private currentUser: Partial<IUserData> = null;
   @Input() public orderList: OrderItem[];
+  public totalPrice: number;
   public userForm: FormGroup;
   public addressForm: FormGroup;
   public paymentForm: FormGroup;
@@ -30,11 +31,14 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.userService.currentUser !== null) {
-      this.currentUser = this.userService.currentUser.value;
-    }
+    this.userService.currentUser.subscribe(value => {
+      this.currentUser = value;
+    });
     this.orderService.orderListUpdated.subscribe((orderList) => {
       this.orderList = orderList;
+      if (this.orderList.length === 1) {
+        this.dialogRef.close(false);
+      }
       console.log(this.orderList);
     });
     this.computePrice();
@@ -68,7 +72,7 @@ export class CartComponent implements OnInit {
   }
 
   initAddressForm(): void {
-    if (this.currentUser === null) {
+    if (this.currentUser === null || this.currentUser.address[0] === undefined) {
       this.addressForm = new FormGroup({
         street: new FormControl('', [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё,. -'ʼ"]{3,50})$/)]),
         number: new FormControl('', [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я,. -'ʼ"]{1,6})$/)]),
@@ -79,12 +83,12 @@ export class CartComponent implements OnInit {
       });
     } else {
       this.addressForm = new FormGroup({
-        street: new FormControl(this.currentUser.user.address[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё,. -'ʼ"]{3,50})$/)]),
-        number: new FormControl(this.currentUser.user.address[0].number, [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я,. -'ʼ"]{1,6})$/)]),
-        entrance: new FormControl(this.currentUser.user.address[0].entrance, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,10})$/)]),
-        housing: new FormControl(this.currentUser.user.address[0].housing, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,5})$/)]),
-        door: new FormControl(this.currentUser.user.address[0].door, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,7})$/)]),
-        floor: new FormControl(this.currentUser.user.address[0].floor, [Validators.pattern(/^([0-9 -]{0,10})$/)])
+        street: new FormControl(this.currentUser.address[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё,. -'ʼ"]{3,50})$/)]),
+        number: new FormControl(this.currentUser.address[0].number, [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я,. -'ʼ"]{1,6})$/)]),
+        entrance: new FormControl(this.currentUser.address[0].entrance, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,10})$/)]),
+        housing: new FormControl(this.currentUser.address[0].housing, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,5})$/)]),
+        door: new FormControl(this.currentUser.address[0].door, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,7})$/)]),
+        floor: new FormControl(this.currentUser.address[0].floor, [Validators.pattern(/^([0-9 -]{0,10})$/)])
       });
     }
   }
@@ -148,7 +152,7 @@ export class CartComponent implements OnInit {
   }
 
   isExtras(object): boolean {
-    return object.id === 0;
+    return object.id === 1;
   }
 
   submitOrder(orderInfo): void {
@@ -159,7 +163,7 @@ export class CartComponent implements OnInit {
     }, (error) => {
       console.log(error);
       this.dialogRef.close(false);
-  });
+    });
   }
 
   onExtrasChange(): void {

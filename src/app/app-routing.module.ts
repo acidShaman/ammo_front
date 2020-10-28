@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {MainLayoutComponent} from './shared/layouts/main-layout/main-layout.component';
-import {ProfileComponent} from './shared/components/profile/profile.component';
+import {ProfileComponent} from './shared/components/account/profile/profile.component';
 import {AuthGuard} from './shared/classes/auth.guard';
 import {UserResolverService} from './shared/services/user/user-resolver.service';
 import {MenuComponent} from './shared/components/menu/menu.component';
@@ -19,6 +19,12 @@ import {BowlsResolverService} from './shared/services/menu/bowls-resolver.servic
 import {CategoriesComponent} from './shared/components/menu/categories/categories.component';
 import {MainPageComponent} from './shared/components/main-page/main-page.component';
 import {LoaderComponent} from './shared/components/loader/loader.component';
+import {AccountComponent} from './shared/components/account/account.component';
+import {AddressComponent} from './shared/components/account/address/address.component';
+import {FavoritesComponent} from './shared/components/account/favorites/favorites.component';
+import {OrderHistoryComponent} from './shared/components/account/order-history/order-history.component';
+import {LoginComponent} from './shared/components/login/login.component';
+import {ResetPasswordComponent} from './shared/components/reset-password/reset-password.component';
 // import {CategoryResolverService} from './shared/services/menu/positions-resolver.service';
 
 
@@ -26,8 +32,17 @@ const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: '', component: MainPageComponent},
-      {path: 'profile', component: ProfileComponent, resolve: {user: UserResolverService}, canActivate: [AuthGuard]},
-      {path: 'menu',  component: MenuComponent, children: [
+      {
+        path: 'account', component: AccountComponent, canActivate: [AuthGuard], children: [
+          {path: '', redirectTo: 'profile', pathMatch: 'full'},
+          {path: 'profile', component: ProfileComponent, resolve: {user: UserResolverService}},
+          {path: 'address', component: AddressComponent, resolve: {user: UserResolverService}},
+          {path: 'favorites', component: FavoritesComponent, resolve: {user: UserResolverService}},
+          {path: 'order-history', component: OrderHistoryComponent, resolve: {user: UserResolverService}}
+        ]
+      },
+      {
+        path: 'menu', component: MenuComponent, children: [
           {path: '', component: CategoriesComponent, resolve: {categories: CategoriesResolverService, user: UserResolverService}},
           {path: 'rolls', component: PositionsComponent, resolve: {category: RollsResolverService, user: UserResolverService}},
           {path: 'hot-rolls', component: PositionsComponent, resolve: {category: HotrollsResolverService, user: UserResolverService}},
@@ -39,8 +54,9 @@ const routes: Routes = [
           // {path: 'additionals', component: PositionsComponent, resolve: {positions: AdditionalsResolverService}},
         ]
       }
-    ]
+    ],
   },
+  {path: 'password_reset/:reset_token', component: ResetPasswordComponent},
   {
     path: '**', redirectTo: ''
   }
@@ -50,7 +66,9 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      anchorScrolling: 'enabled'
+    })
   ],
   exports: [
     RouterModule

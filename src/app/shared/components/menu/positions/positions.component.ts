@@ -27,7 +27,7 @@ export class PositionsComponent implements OnInit {
     private menuService: MenuService,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
-    private authService: AuthService,
+    public authService: AuthService,
     private orderService: OrderService) {
   }
 
@@ -39,7 +39,6 @@ export class PositionsComponent implements OnInit {
     if (this.user !== null) {
       this.category.dishes.forEach((dish: any) => {
         dish.favorite = Boolean(this.user.fav_dishes.find(favDish => favDish.id === dish.id));
-        console.log(dish);
       });
     }
   }

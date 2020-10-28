@@ -1,0 +1,144 @@
+<div class="container">
+  <mat-card class="update-card">
+    <mat-card-header>
+      <mat-card-title>Редагування профіля</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="updateForm" (ngSubmit)="editUser()">
+        <mat-form-field appearance="standard">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="username">
+          <mat-error
+            *ngIf="updateForm.get('username').hasError('email') &&  !updateForm.get('username').hasError('required')">
+            Будь-ласка, введіть дійсну Email адресу
+          </mat-error>
+          <mat-error
+            *ngIf="updateForm.get('username').hasError('email') &&  !updateForm.get('username').hasError('required')">
+            Будь-ласка, введіть дійсну Email адресу
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Ім'я</mat-label>
+          <input matInput type="text" formControlName="first_name">
+          <mat-error
+            *ngIf="updateForm.get('first_name').hasError('required') && updateForm.get('first_name').touched">
+            Обов'язково введіть ваше ім'я
+          </mat-error>
+          <mat-error
+            *ngIf="updateForm.get('first_name').hasError('pattern') &&  !updateForm.get('first_name').hasError('required')">
+            Ім'я може складатись лише з літер або ' та -
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Прізвище</mat-label>
+          <input matInput type="text" formControlName="last_name">
+          <mat-error
+            *ngIf="updateForm.get('last_name').hasError('required') && updateForm.get('last_name').touched">
+            Обов'язково введіть ваше прізвище
+          </mat-error>
+          <mat-error
+            *ngIf="updateForm.get('last_name').hasError('pattern') &&  !updateForm.get('last_name').hasError('required')">
+            Прізвище може складатись лише з літер або ' та -
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Номер телефону</mat-label>
+          <input matInput type="text" formControlName="phone" placeholder="+380665551799">
+          <mat-error *ngIf="updateForm.get('phone').hasError('required') && updateForm.get('phone').touched">
+            Обов'язково введіть ваш номер телефону
+          </mat-error>
+          <mat-error
+            *ngIf="updateForm.get('phone').hasError('pattern') &&  !updateForm.get('phone').hasError('required')">
+            Будь-ласка, введіть дійсний номер телефону у форматі +380665551799
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Стать</mat-label>
+          <mat-select formControlName="sex">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Дата народження</mat-label>
+          <input formControl="birthday" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate"
+                 [value]="updateForm.controls.birthday.value"
+                 placeholder="MM-DD-YYYY">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-raised-button class="update-btn" [disabled]="updateForm.invalid"
+              (click)="editUser()">Оновити дані
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="update-card">
+    <mat-card-header>
+      <mat-card-title>
+        Бажаєте змінити пароль?
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-actions id="changePwd">
+      <button mat-stroked-button class="update-btn"  (click)="togglePasswordForm()">
+        Змінити пароль
+      </button>
+    </mat-card-actions>
+    <mat-card-content *ngIf="PasswordFormVisibility">
+      <form [formGroup]="changePasswordForm">
+        <mat-form-field appearance="standard">
+          <mat-label>Дійсний пароль<span>*</span></mat-label>
+          <input matInput type="password" formControlName="old_pwd">
+          <mat-error
+            *ngIf="changePasswordForm.get('old_pwd').hasError('pattern') &&  !changePasswordForm.get('old_pwd').hasError('required')">
+            Пароль має містити мінімум 6 символів: букви обох регістрів та цифри
+          </mat-error>
+          <mat-error
+            *ngIf="changePasswordForm.get('old_pwd').hasError('required') && changePasswordForm.get('old_pwd').touched">
+            Обов'язково введіть ваш пароль
+          </mat-error>
+        </mat-form-field>
+        <div formGroupName="passwords">
+        <mat-form-field appearance="standard">
+          <mat-label>Введіть новий пароль<span>*</span></mat-label>
+          <input matInput type="password" formControlName="new_pwd" [errorStateMatcher]="matcher">
+          <mat-error
+            *ngIf="changePasswordForm.get('passwords.new_pwd').hasError('pattern') &&  !changePasswordForm.get('passwords.new_pwd').hasError('required')">
+            Пароль має містити мінімум 6 символів: букви обох регістрів та цифри
+          </mat-error>
+          <mat-error
+            *ngIf="changePasswordForm.get('passwords.new_pwd').hasError('required') && changePasswordForm.get('passwords.new_pwd').touched">
+            Введіть ваш новий пароль
+          </mat-error>
+          <mat-error *ngIf="changePasswordForm.hasError('same')">
+            Новий і старий паролі не можуть збігатись!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Повторіть пароль<span>*</span></mat-label>
+          <input matInput type="password" formControlName="confirm_pwd" [errorStateMatcher]="matcher">
+          <mat-error *ngIf="changePasswordForm.get('passwords.confirm_pwd').hasError('required') && changePasswordForm.get('passwords.confirm_pwd').touched">
+            Обов'язково повторно введіть ваш новий пароль
+          </mat-error>
+          <mat-error *ngIf="changePasswordForm.hasError('notSame', 'passwords')">
+            Паролі не співпадають
+          </mat-error>
+        </mat-form-field>
+        </div>
+      </form>
+      <mat-card-actions>
+        <button mat-raised-button class="update-btn" (click)="resetPassword()" [disabled]="changePasswordForm.invalid">
+          Підтвердити зміну паролю
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

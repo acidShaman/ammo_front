@@ -51,6 +51,8 @@ export class TokenInterceptor implements HttpInterceptor {
       if (error instanceof HttpErrorResponse && error.status === 401) {
         return this.handle401Error(request, next);
       } else {
+        this.authService.logout();
+        console.log('Вам треба по-новому авторизуватись!');
         return throwError(error);
       }
     }));

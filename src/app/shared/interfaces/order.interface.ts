@@ -1,3 +1,5 @@
+import {IDishData} from './menu.interface';
+
 export interface Order {
   date?: Date;
   id?: number;
@@ -11,4 +13,16 @@ export interface OrderItem {
   name: string;
   price: number;
   quantity: number;
+}
+
+export interface OrderBackEnd {
+  id?: number;
+  created?: Date;
+  order_items?: Array<OrderItemBackEnd>;
+}
+
+export interface OrderItemBackEnd {
+  id?: number;
+  quantity?: number;
+  dish: IDishData;
 }

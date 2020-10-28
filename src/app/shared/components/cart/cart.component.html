@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <mat-card-title>Cумма: {{orderService.getTotalPrice()}}</mat-card-title>
+      <mat-card-title>Cумма: {{orderService.getTotalPrice() >= 200 ? orderService.getTotalPrice() : orderService.getTotalPrice() + 50}}</mat-card-title>
       <span class="alert">Увага! Доставка БЕЗКОШТОВНА за умови замовлення від 200грн.</span>
       <div class="item-quantity extras">
         К-ть додаткових порцій додатків (імбир + васабі)
