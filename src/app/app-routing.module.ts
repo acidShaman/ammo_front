@@ -25,13 +25,14 @@ import {FavoritesComponent} from './shared/components/account/favorites/favorite
 import {OrderHistoryComponent} from './shared/components/account/order-history/order-history.component';
 import {LoginComponent} from './shared/components/login/login.component';
 import {ResetPasswordComponent} from './shared/components/reset-password/reset-password.component';
+import {MainPageResolverService} from './shared/services/menu/main-page-resolver.service';
 // import {CategoryResolverService} from './shared/services/menu/positions-resolver.service';
 
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
-      {path: '', component: MainPageComponent},
+      {path: '', component: MainPageComponent, resolve: {categories: MainPageResolverService, user: UserResolverService}},
       {
         path: 'account', component: AccountComponent, canActivate: [AuthGuard], children: [
           {path: '', redirectTo: 'profile', pathMatch: 'full'},

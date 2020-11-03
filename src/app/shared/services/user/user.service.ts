@@ -20,7 +20,7 @@ export class UserService {
   currentUser: BehaviorSubject<Partial<IUserData>> = new BehaviorSubject(null);
 
   registerNewUser(userData: Partial<IUser>): Observable<any> {
-    return this.httpClient.post(`${this.URL}profile/register/`, userData);
+    return this.httpClient.post<any>(`${this.URL}profile/register/`, userData);
   }
 
   deleteFavDish(userId, dishId): Observable<any> {
@@ -36,7 +36,7 @@ export class UserService {
   //   return this.httpClient.post<ITokens>(`${this.URL}token/`, {username: user.username, password: user.password});
   // }
 
-  updateUser(id, user): Observable<IUser> {
+  updateUser(id, user): Observable<object> {
     const formData: FormData = new FormData();
     const {...body} = user;
 
@@ -45,7 +45,7 @@ export class UserService {
       formData.append(key, body[key]);
     });
 
-    return this.httpClient.patch<IUser>(`${this.URL}profile` + `/${id}/`, formData);
+    return this.httpClient.patch<object>(`${this.URL}profile` + `/${id}/`, formData);
   }
 
   updateAddress(userId, address): Observable<IAddress> {

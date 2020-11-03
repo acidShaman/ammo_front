@@ -9,13 +9,17 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {AuthService} from '../services/user/auth.service';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {ResponseAccessToken} from '../interfaces/token.interface';
+import {Router} from '@angular/router';
+import {SnackbarService} from '../services/snackbar.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {LoginComponent} from '../components/login/login.component';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router, private snackBar: SnackbarService, private dialog: MatDialog) {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -35,10 +39,29 @@ export class TokenInterceptor implements HttpInterceptor {
     } else {
       return this.refreshTokenSubject.pipe(filter(token => token !== null),
         take(1),
-        switchMap( token => {
-          return next.handle(this.addToken(request, this.authService.getAccessToken()));
+        switchMap(token => {
+          return next.handle(this.addToken(token, this.authService.getAccessToken()));
         }));
     }
+  }
+
+  openLoginDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.height = '450px';
+    dialogConfig.width = '400px';
+
+    const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((response) => {
+      if (response) {
+        console.log(response.data);
+      }
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -51,8 +74,6 @@ export class TokenInterceptor implements HttpInterceptor {
       if (error instanceof HttpErrorResponse && error.status === 401) {
         return this.handle401Error(request, next);
       } else {
-        this.authService.logout();
-        console.log('Вам треба по-новому авторизуватись!');
         return throwError(error);
       }
     }));

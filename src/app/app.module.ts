@@ -46,6 +46,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
 import { RecoveryPasswordComponent } from './shared/components/recovery-password/recovery-password.component';
 import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
+import {CountdownModule} from 'ngx-countdown';
+import {MatSnackBarContainer, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -74,6 +76,7 @@ import { ResetPasswordComponent } from './shared/components/reset-password/reset
     ResetPasswordComponent,
   ],
   imports: [
+    CountdownModule,
     FontAwesomeModule,
     AppRoutingModule,
     BrowserModule,
@@ -99,8 +102,10 @@ import { ResetPasswordComponent } from './shared/components/reset-password/reset
     MatRadioModule,
     MatTableModule,
     MatSortModule,
+    MatSnackBarModule
   ],
   providers: [
+    MatSnackBarContainer,
     AuthService,
     CartComponent,
     {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},

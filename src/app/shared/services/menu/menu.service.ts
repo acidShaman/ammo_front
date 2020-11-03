@@ -19,6 +19,10 @@ export class MenuService {
     return this.httpClient.get<ICategoryData>(`${this.URL}menu/${category}`);
   }
 
+  getFewDishesFromCategories(): Observable<ICategoryData[]> {
+    return this.httpClient.get<ICategoryData[]>(`${this.URL}menu/all/`);
+  }
+
   getRolls(): Observable<ICategoryData> {
     return this.getCategory('rolls');
   }

@@ -65,8 +65,7 @@
 
         <mat-form-field appearance="standard">
           <mat-label>Дата народження</mat-label>
-          <input formControl="birthday" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate"
-                 [value]="updateForm.controls.birthday.value"
+          <input formControl="birthday" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [value]="user.birthday"
                  placeholder="MM-DD-YYYY">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="multi-year"></mat-datepicker>

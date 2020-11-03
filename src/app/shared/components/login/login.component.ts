@@ -1,15 +1,12 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {UserService} from '../../services/user/user.service';
-import {Subscription} from 'rxjs';
-import {MainLayoutComponent} from '../../layouts/main-layout/main-layout.component';
-import {ActivatedRoute, Router} from '@angular/router';
 import {NavBarComponent} from '../nav-bar/nav-bar.component';
 import {AuthService} from '../../services/user/auth.service';
 import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
 import {RegisterComponent} from '../register/register.component';
 import {RecoveryPasswordComponent} from '../recovery-password/recovery-password.component';
+import {SnackbarService} from '../../services/snackbar.service';
 
 
 @Component({
@@ -24,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private dialog: MatDialog,
-              private dialogRef: MatDialogRef<NavBarComponent>) {}
+              private dialogRef: MatDialogRef<NavBarComponent>,
+              private snackbarService: SnackbarService) {}
 
 
   ngOnInit(): void {
@@ -38,11 +36,9 @@ export class LoginComponent implements OnInit {
     this.loginForm.disable();
     this.authService.authUser(form.value).subscribe((value) => {
         console.log(value);
-      },
-      (error) => {
-        console.log(error);
-        this.loginForm.enable();
+        this.dialogRef.close();
       });
+    this.loginForm.enable();
   }
 
   signInWithGoogle(): void {
@@ -62,12 +58,9 @@ export class LoginComponent implements OnInit {
 
     const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((response) => {
-      if (response) {
-        console.log(response.data);
-        this.openLoginDialog();
+      if (response === true) {
+        this.snackbarService.openSuccessSnackBar('Вітаєме, ваш акаунт успішно зареєстровано, тепер ви можете зайти у свій кабінет!');
       }
-    }, (error) => {
-      console.log(error);
     });
   }
 
@@ -81,6 +74,7 @@ export class LoginComponent implements OnInit {
     dialogConfig.width = '400px';
 
     const dialogRef = this.dialog.open(LoginComponent, dialogConfig);
+
   }
 
   signOut(): void {
@@ -89,8 +83,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.login(this.loginForm);
-    this.dialogRef.close();
-    console.log('Success');
   }
 
   openRecoveryPwdDialog(): void {

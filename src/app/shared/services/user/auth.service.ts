@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {IUser} from '../../interfaces/user.interface';
+import {IUser, IUserData} from '../../interfaces/user.interface';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map, share, tap} from 'rxjs/operators';
 import {ITokens, ResponseAccessToken} from '../../interfaces/token.interface';
 import {UserService} from './user.service';
+import {SnackbarService} from '../snackbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,40 +15,28 @@ export class AuthService {
   private readonly refresh = 'refresh_token';
   private readonly URL = 'http://localhost:8000/';
 
-  constructor(private httpClient: HttpClient, private userService: UserService) {
+  constructor(private httpClient: HttpClient, private userService: UserService, private snackbarService: SnackbarService) {
   }
 
-  authUser(authInfo?: Partial<IUser>, providerId?: any): Observable<any> {
+  authUser(authInfo?: Partial<IUser>, providerId?: any): Observable<ITokens> {
     this.deleteTokens();
     this.userService.currentUser.next(null);
     if (authInfo !== null) {
-      return this.httpClient.post(`${this.URL}token/`, authInfo).pipe(tap((response) => {
-          console.log(response);
-          // @ts-ignore
+      return this.httpClient.post<ITokens>(`${this.URL}token/`, authInfo).pipe(tap((response) => {
           const {access, refresh} = response;
           this.setTokens({access, refresh});
-          this.userService.getUserInfoByToken(access);
+          this.userService.getUserInfoByToken(access).subscribe( (res: IUserData) => {
+            this.snackbarService.openSuccessSnackBar(`Вітаю, ${res.user.first_name}, ви успішно залоговані!`);
+          });
         }),
         catchError((err: any) => {
-          return throwError(err);
-        })
-      );
-    } else if (providerId !== null) {
-      return this.httpClient.post(`${this.URL}token/`, providerId).pipe(tap((response) => {
-          console.log(response);
-          // @ts-ignore
-          const {access, refresh} = response;
-          this.setTokens({access, refresh});
-          this.userService.getUserInfoByToken(access);
-        }),
-        catchError((err: any) => {
-          return throwError(err);
+            this.snackbarService.openFailureSnackBar('Ви ввели неправильну пошту або пароль!');
+            return throwError(err);
         })
       );
     }
-
-
   }
+
 
 
   logout(): void {
@@ -63,10 +52,13 @@ export class AuthService {
   refreshToken(): Observable<ITokens> {
     console.log('Refreshing token...');
     const refreshToken = this.getRefreshToken();
-
     return this.httpClient.post<ITokens>(`${this.URL}token/refresh/`, {refresh: refreshToken})
       .pipe(tap((response: ITokens) => {
+        console.log('Response after refresh', response);
         this.setTokens(response);
+      }, (err) => {
+        this.snackbarService.openFailureSnackBar('Будь-ласка, перезайдіть у ваш кабінет!');
+        this.logout();
       }));
   }
 

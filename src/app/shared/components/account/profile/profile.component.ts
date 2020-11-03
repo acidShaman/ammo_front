@@ -1,17 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {UserService} from '../../../services/user/user.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 import {IUserData, IUserEdit} from '../../../interfaces/user.interface';
 import {AuthService} from '../../../services/user/auth.service';
-import * as _moment from 'moment';
 import {Moment} from 'moment';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IAddressEdit} from '../../../interfaces/address.interface';
-import {faHeart} from '@fortawesome/free-regular-svg-icons';
-import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
-import {OrderItemBackEnd} from '../../../interfaces/order.interface';
 import {ErrorStateMatcher} from '@angular/material/core';
+import * as _moment from 'moment';
+import {SnackbarService} from '../../../services/snackbar.service';
 
 const moment = _moment;
 
@@ -48,11 +45,13 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService,
               private datePipe: DatePipe,
               private authService: AuthService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private snackbarService: SnackbarService) {
   }
 
   ngOnInit(): void {
     this.user = this.activatedRoute.snapshot.data.user;
+    this.userService.currentUser.next(this.user);
     console.log(this.user);
     this.maxDate = moment();
     this.initProfileForm();
@@ -95,7 +94,7 @@ export class ProfileComponent implements OnInit {
       last_name: new FormControl(this.user.user.last_name, [Validators.pattern(/^([a-zA-Zа-яА-ЯЇїєЄІіЁё'-]{1,30})$/)]),
       phone: new FormControl(this.user.phone, [Validators.pattern(/^([+])(\d{8,14})$/)]),
       sex: new FormControl(this.user.sex),
-      birthday: new FormControl(new Date(this.user.birthday))
+      birthday: new FormControl('', [Validators.minLength(8)])
     });
   }
 
@@ -105,18 +104,31 @@ export class ProfileComponent implements OnInit {
     const id: number = this.user.user.id;
     const fields = Object.keys(data);
     fields.forEach(key => {
-      if (!data[key]) {
+      if (!data[key] || this.userService.currentUser.value[key] === data[key] || this.userService.currentUser.value.user[key] === data[key]) {
         delete data[key];
       }
     });
+    console.log(data);
     this.updateUser(id, data);
   }
 
   private updateUser(id: number, user: IUserEdit): void {
-    this.userService.updateUser(id, user).subscribe(() => {
-        console.log('Редагування пройшло успішно', 'success');
+    this.userService.updateUser(id, user).subscribe((response: any) => {
+        console.log(response);
+        if (response.status === 200) {
+          this.userService.currentUser.next(response.data.user);
+          this.initProfileForm();
+          this.snackbarService.openSuccessSnackBar('Профіль успішно оновлений!');
+        }
       },
-      () => console.log('Невдала спроба', ''));
+      (error) => {
+        if (error.error.message === 'Phone exists') {
+          this.snackbarService.openFailureSnackBar('Користувач з таким телефоном вже зареєстрований!');
+        } else if (error.error.message === 'Email exists') {
+          this.snackbarService.openFailureSnackBar('Користувач з такою поштою вже зареєстрований!');
+        }
+        console.log('Невдала спроба', error);
+      });
   }
 
 

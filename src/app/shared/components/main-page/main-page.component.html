@@ -10,11 +10,43 @@
 <!--  </slide>-->
 <!--</carousel>-->
 
-  <div class="banner-img">
-    <div class="banner-text">
+<div class="banner-img">
+  <div class="banner-text">
+    <h1>КОМБО:</h1>
+    <h3>Рол "Папріка MOOD"+Кола 0.5 л</h3>
+    <h1>БЕЗКОШТОВНО до твого замовлення:</h1>
+    <h3>Встигни добавити акцію до кошика замовленнь</h3>
+    <h1>
+      <countdown #cd [config]='{leftTime: 1000000000}'></countdown>
+    </h1>
+    <h3>тицяй тут!</h3>
+    <button mat-raised-button class="add-to-cart-btn banner-btn">Забрати</button>
+  </div>
+</div>
+<div class="content">
+  <div *ngFor="let category of menu" class="category">
+    <div *ngIf="category.name !== 'Додатки'">
+      <mat-card-title class="category-header">{{category.name}}</mat-card-title>
+      <div class="flex row wrap dishes">
+        <mat-card *ngFor="let dish of category.dishes" class="card card__one flex column">
+          <mat-card-header class="flex column-reverse">
+            <button mat-fab color="accent" *ngIf="authService.isAuthenticated()"
+                    aria-label="Example icon button with a bookmark icon" (click)="toggleFavorite(dish)">
+              <fa-icon [icon]="HeartIcon" size="3x" *ngIf="!dish.favorite"></fa-icon>
+              <fa-icon [icon]="HeartIconSolid" size="3x" *ngIf="dish.favorite"></fa-icon>
+            </button>
+            <img mat-card-lg-image src="{{URL}}{{dish.image}}">
+            <mat-card-title class=" self-center">{{dish.name}}</mat-card-title>
+            <mat-card-subtitle class="self-center">{{dish.ingredients}}</mat-card-subtitle>
+            <mat-card-subtitle class="price self-center">{{dish.price}} грн.</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions class="flex row evenly">
+            <button mat-raised-button class="add-to-cart-btn" (click)="addToCart(dish)">До кошика</button>
+            <button mat-stroked-button class="about-btn">Докладніше</button>
+          </mat-card-actions>
+        </mat-card>
 
+      </div>
     </div>
   </div>
-  <div class="content">
-
-  </div>
+</div>

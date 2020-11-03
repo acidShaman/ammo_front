@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {LoginComponent} from '../login/login.component';
 import {RegisterComponent} from '../register/register.component';
@@ -6,6 +6,7 @@ import {UserService} from '../../services/user/user.service';
 import {AuthService} from '../../services/user/auth.service';
 import {Router} from '@angular/router';
 import {faShoppingBag} from '@fortawesome/free-solid-svg-icons';
+import {SnackbarService} from '../../services/snackbar.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ import {faShoppingBag} from '@fortawesome/free-solid-svg-icons';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, public authService: AuthService, private router: Router) { }
+  constructor(private dialog: MatDialog, public authService: AuthService, private router: Router, private snackbarService: SnackbarService) {
+  }
 
   openLoginDialog(): void {
     const dialogConfig = new MatDialogConfig();
@@ -39,13 +41,10 @@ export class NavBarComponent implements OnInit {
     dialogConfig.hasBackdrop = true;
 
     const dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((response) => {
-      if (response) {
-        console.log(response.data);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
         this.openLoginDialog();
       }
-    }, (error) => {
-      console.log(error);
     });
   }
 

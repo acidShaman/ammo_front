@@ -1,4 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+snack-bar-container {
+  position: absolute;
+  top: 200px;
+  right: 20px;
+}
+.mat-simple-snackbar{
+  font-size: 24px !important;
+  font-weight: 400 !important;
+}
+.green-snackbar {
+  background: rgb(65, 252, 134);
+  color: white;
+}
+
+.green-snackbar button {
+  background-color: rgb(65, 252, 134);
+  color: white;
+  border: none;
+}
+
+.red-snackbar {
+  background: #F44336;
+  color: white;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.red-snackbar button {
+  background-color: #F44336;
+  color: white !important;
+  border: none;
+}
