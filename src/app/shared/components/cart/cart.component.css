@@ -216,13 +216,6 @@ textarea {
 .commentary-container .item-quantity {
   margin: 15px 0;
 }
-.mat-dialog-container mat-dialog-container {
-  width: 700px;
-}
-
-::ng-deep :root mat-dialog-container {
-  max-width: 750px;
-}
 .order-btn {
   align-self: center;
   width: 80%;

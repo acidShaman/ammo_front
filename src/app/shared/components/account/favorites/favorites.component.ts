@@ -5,6 +5,7 @@ import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {IDishData} from '../../../interfaces/menu.interface';
 import {OrderService} from '../../../services/order/order.service';
+import {SnackbarService} from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-favorites',
@@ -17,7 +18,7 @@ export class FavoritesComponent implements OnInit {
   HeartIconSolid = faHeartSolid;
   URL = 'http://localhost:8000';
 
-  constructor(private userService: UserService, private orderService: OrderService) {
+  constructor(private userService: UserService, private orderService: OrderService, private snackbarService: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -36,9 +37,11 @@ export class FavoritesComponent implements OnInit {
     });
     this.userService.deleteFavDish(userId, dishId).subscribe((response) => {
         console.log(response);
+        this.snackbarService.openSuccessSnackBar('Блюдо було успішно видалено з обраного!');
       },
       (error) => {
         console.log(error);
+        this.snackbarService.openFailureSnackBar('Сталася невідома помилка, спробуйте пізніше');
       });
     console.log('deleted!');
   }
@@ -52,6 +55,7 @@ export class FavoritesComponent implements OnInit {
 
   addToCart(position: IDishData): void {
     this.orderService.add(position);
+    this.snackbarService.openSuccessSnackBar(position.name + ' було додано до замовлення');
     console.log('Added', position.name);
     console.log(this.orderService.getOrderListFromLocalStorage());
   }

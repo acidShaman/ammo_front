@@ -8,6 +8,7 @@ import {UserService} from '../../../services/user/user.service';
 import {IUserData} from '../../../interfaces/user.interface';
 import {AuthService} from '../../../services/user/auth.service';
 import {OrderService} from '../../../services/order/order.service';
+import {SnackbarService} from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-category',
@@ -28,7 +29,8 @@ export class PositionsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     public authService: AuthService,
-    private orderService: OrderService) {
+    private orderService: OrderService,
+    private snackbarService: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class PositionsComponent implements OnInit {
     this.loading = true;
     this.user = this.activatedRoute.snapshot.data.user;
     this.category = this.activatedRoute.snapshot.data.category;
+    console.log(this.category);
     if (this.user !== null) {
       this.category.dishes.forEach((dish: any) => {
         dish.favorite = Boolean(this.user.fav_dishes.find(favDish => favDish.id === dish.id));
@@ -55,9 +58,11 @@ export class PositionsComponent implements OnInit {
 
   deleteFromFav(userId, dishId): void {
     this.userService.deleteFavDish(userId, dishId).subscribe((response) => {
+        this.snackbarService.openSuccessSnackBar('Блюдо було успішно видалено з обраного!');
         console.log(response);
       },
       (error) => {
+        this.snackbarService.openFailureSnackBar('Сталася невідома помилка, спробуйте пізніше');
         console.log(error);
       });
     console.log('deleted!');
@@ -66,15 +71,18 @@ export class PositionsComponent implements OnInit {
   addToFav(userId, dishId): void {
     this.userService.addFavDish(userId, dishId).subscribe((response) => {
         console.log(response);
+        this.snackbarService.openSuccessSnackBar('Блюдо було успішно додано до обраного!');
       },
       (error) => {
         console.log(error);
+        this.snackbarService.openFailureSnackBar('Сталася невідома помилка, спробуйте пізніше');
       });
     console.log('Added to favorites!');
   }
 
   addToCart(position: IDishData): void {
     this.orderService.add(position);
+    this.snackbarService.openSuccessSnackBar(position.name + ' було додано до замовлення');
     console.log('Added', position.name);
     console.log(this.orderService.getOrderListFromLocalStorage());
   }

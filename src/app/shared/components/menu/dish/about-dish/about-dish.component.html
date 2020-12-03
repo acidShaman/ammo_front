@@ -1,0 +1,25 @@
+<div class="about-container">
+  <div class="img-container">
+    <img src="{{URL}}{{currDish.image}}" alt="{{currDish.name}}s image">
+  </div>
+  <div class="info">
+    <mat-card-header>
+      <mat-card-title>{{currDish.name}}</mat-card-title>
+      <mat-card-subtitle>{{currDish.price}} грн. <span *ngIf="isPromo(currDish)">175 грн.</span></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions *ngIf="isPromo(currDish); else notPromo">
+      <button mat-raised-button (click)="addToCart(currDish)">Додати в корзину за 0 грн.</button>
+    </mat-card-actions>
+    <ng-template #notPromo>
+      <mat-card-actions>
+        <button mat-raised-button (click)="addToCart(currDish)">Додати в корзину</button>
+      </mat-card-actions>
+    </ng-template>
+    <mat-card-content>
+      {{currDish.about_dish}}<br>
+      <span class="attention" *ngIf="isPromo(currDish)">
+        P.S-це як безкоштовний рол до вашого замовлення, тільки ми вирішили додати ще безкоштовний напій:)
+      </span>
+    </mat-card-content>
+  </div>
+</div>

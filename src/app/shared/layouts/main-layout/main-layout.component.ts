@@ -33,6 +33,7 @@ export class MainLayoutComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = false;
     dialogConfig.hasBackdrop = true;
+    dialogConfig.width = '750px';
     dialogConfig.data = {
       order: this.order
     };

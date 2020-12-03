@@ -48,6 +48,8 @@ import { RecoveryPasswordComponent } from './shared/components/recovery-password
 import { ResetPasswordComponent } from './shared/components/reset-password/reset-password.component';
 import {CountdownModule} from 'ngx-countdown';
 import {MatSnackBarContainer, MatSnackBarModule} from '@angular/material/snack-bar';
+import { AboutDishComponent } from './shared/components/menu/dish/about-dish/about-dish.component';
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 
 
 
@@ -74,6 +76,7 @@ import {MatSnackBarContainer, MatSnackBarModule} from '@angular/material/snack-b
     OrderHistoryComponent,
     RecoveryPasswordComponent,
     ResetPasswordComponent,
+    AboutDishComponent,
   ],
   imports: [
     CountdownModule,
@@ -102,7 +105,8 @@ import {MatSnackBarContainer, MatSnackBarModule} from '@angular/material/snack-b
     MatRadioModule,
     MatTableModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxUsefulSwiperModule
   ],
   providers: [
     MatSnackBarContainer,

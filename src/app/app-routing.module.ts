@@ -52,7 +52,7 @@ const routes: Routes = [
           {path: 'drinks', component: PositionsComponent, resolve: {category: DrinksResolverService, user: UserResolverService}},
           {path: 'breakfasts', component: PositionsComponent, resolve: {category: BreakfastsResolverService, user: UserResolverService}},
           {path: 'bowls', component: PositionsComponent, resolve: {category: BowlsResolverService, user: UserResolverService}},
-          // {path: 'additionals', component: PositionsComponent, resolve: {positions: AdditionalsResolverService}},
+          {path: 'additionals', component: PositionsComponent, resolve: {category: AdditionalsResolverService, user: UserResolverService}},
         ]
       }
     ],

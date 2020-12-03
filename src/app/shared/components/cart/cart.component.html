@@ -19,8 +19,8 @@
                 <button class="minus material-icons" (click)="decrementQuantity(item)"
                         [disabled]="isMinimum(item.quantity)">remove
                 </button>
-                <input type="number" [(ngModel)]="item.quantity" (change)="orderService.setToLocalStorage()" min="1" oninput="validity.valid||(value=1);"/>
-                <button class="plus material-icons" (click)="incrementQuantity(item)">add</button>
+                <input type="number" [(ngModel)]="item.quantity" (change)="orderService.setToLocalStorage()" [disabled]="isPromo(item)" min="1" oninput="validity.valid||(value=1);"/>
+                <button class="plus material-icons" (click)="incrementQuantity(item)" [disabled]="isPromo(item)">add</button>
               </div>
               <div class="item-price">
                 <mat-card-title>{{item.price * item.quantity}} грн.</mat-card-title>
@@ -39,6 +39,7 @@
       </div>
 
       <mat-card-title>Cумма: {{orderService.getTotalPrice() >= 200 ? orderService.getTotalPrice() : orderService.getTotalPrice() + 50}}</mat-card-title>
+      <span class="alert" *ngIf="isOnlyPromoInCart()">Будь-ласка, додайте ще одну позицію до замовлення. Ви не можете замовити лише безкоштовну акційну позицію!</span>
       <span class="alert">Увага! Доставка БЕЗКОШТОВНА за умови замовлення від 200грн.</span>
       <div class="item-quantity extras">
         К-ть додаткових порцій додатків (імбир + васабі)
@@ -219,7 +220,7 @@
   </div>
   <mat-card-actions class="flex column ">
     <button mat-raised-button class="order-btn"
-            [disabled]="!(orderService.getOrderList().length >= 2 &&userForm.valid && addressForm.valid && paymentForm.valid && commentaryForm.valid)"
+            [disabled]="!(orderService.getOrderList().length >= 2 &&userForm.valid && addressForm.valid && paymentForm.valid && commentaryForm.valid && !isOnlyPromoInCart())"
      (click)="submitOrder([userForm.controls, addressForm.controls, paymentForm.controls, commentaryForm.controls, orderList])">Замовити</button>
     <mat-card-subtitle class="self-center">Зверніть увагу! Порція додатків(імбир,соєвий соус, васабі, набір паличок) разраховано на одну особу за один рол:)</mat-card-subtitle>
   </mat-card-actions>

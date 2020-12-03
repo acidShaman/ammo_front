@@ -33,9 +33,11 @@
     "moment": "^2.27.0",
     "ngx-bootstrap": "^6.1.0",
     "ngx-countdown": "^10.0.1",
+    "ngx-useful-swiper": "^10.0.1",
     "primeicons": "^4.0.0",
     "primeng": "^10.0.0",
     "rxjs": "~6.5.5",
+    "swiper": "^6.3.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

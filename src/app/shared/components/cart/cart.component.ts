@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {UserService} from '../../services/user/user.service';
 import {IUserData} from '../../interfaces/user.interface';
+import {IDishData} from '../../interfaces/menu.interface';
 
 @Component({
   selector: 'app-cart',
@@ -171,4 +172,15 @@ export class CartComponent implements OnInit {
     this.computePrice();
   }
 
+
+  isPromo(position: OrderItem): boolean {
+    return position.name.includes('Акція:');
+  }
+
+
+  isOnlyPromoInCart(): boolean {
+    return !!(this.orderList.length <= 2 &&
+      this.orderList.find((item) => item.name === 'extra_adds') &&
+      this.orderList.find((item) => item.name.includes('Акція:')));
+  }
 }
