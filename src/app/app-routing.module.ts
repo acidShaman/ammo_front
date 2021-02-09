@@ -26,6 +26,7 @@ import {OrderHistoryComponent} from './shared/components/account/order-history/o
 import {LoginComponent} from './shared/components/login/login.component';
 import {ResetPasswordComponent} from './shared/components/reset-password/reset-password.component';
 import {MainPageResolverService} from './shared/services/menu/main-page-resolver.service';
+import {CategoryResolverService} from './shared/services/menu/category-resolver.service';
 // import {CategoryResolverService} from './shared/services/menu/positions-resolver.service';
 
 
@@ -45,14 +46,16 @@ const routes: Routes = [
       {
         path: 'menu', component: MenuComponent, children: [
           {path: '', component: CategoriesComponent, resolve: {categories: CategoriesResolverService, user: UserResolverService}},
-          {path: 'rolls', component: PositionsComponent, resolve: {category: RollsResolverService, user: UserResolverService}},
-          {path: 'hot-rolls', component: PositionsComponent, resolve: {category: HotrollsResolverService, user: UserResolverService}},
-          {path: 'sets', component: PositionsComponent, resolve: {category: SetsResolverService, user: UserResolverService}},
-          {path: 'salads', component: PositionsComponent, resolve: {category: SaladsResolverService, user: UserResolverService}},
-          {path: 'drinks', component: PositionsComponent, resolve: {category: DrinksResolverService, user: UserResolverService}},
-          {path: 'breakfasts', component: PositionsComponent, resolve: {category: BreakfastsResolverService, user: UserResolverService}},
-          {path: 'bowls', component: PositionsComponent, resolve: {category: BowlsResolverService, user: UserResolverService}},
-          {path: 'additionals', component: PositionsComponent, resolve: {category: AdditionalsResolverService, user: UserResolverService}},
+          {path: ':category', component: PositionsComponent, resolve:{ user: UserResolverService}}
+          // {path: 'rolls', component: PositionsComponent, resolve: {category: RollsResolverService, user: UserResolverService}},
+          // {path: 'hot-rolls', component: PositionsComponent, resolve: {category: HotrollsResolverService, user: UserResolverService}},
+          // {path: 'sets', component: PositionsComponent, resolve: {category: SetsResolverService, user: UserResolverService}},
+          // {path: 'salads', component: PositionsComponent, resolve: {category: SaladsResolverService, user: UserResolverService}},
+          // {path: 'drinks', component: PositionsComponent, resolve: {category: DrinksResolverService, user: UserResolverService}},
+          // {path: 'breakfasts', component: PositionsComponent, resolve: {category: BreakfastsResolverService, user: UserResolverService}},
+          // {path: 'bowls', component: PositionsComponent, resolve: {category: BowlsResolverService, user: UserResolverService}},
+          // tslint:disable-next-line:max-line-length
+          // {path: 'additionals', component: PositionsComponent, resolve: {category: AdditionalsResolverService, user: UserResolverService}},
         ]
       }
     ],

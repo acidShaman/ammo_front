@@ -4,6 +4,9 @@ html, body {
   height: 100%;
 }
 
+app-main-layout {
+  margin-bottom: 300px;
+}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -39,4 +42,47 @@ snack-bar-container {
   background-color: #F44336;
   color: white !important;
   border: none;
+}
+
+
+@media screen and (min-width: 768px) {
+  .grid {
+    max-width: 1200px;
+  }
+}
+.card {
+  width: 400px;
+  height: 420px;
+  margin: 20px 20px;
+}
+
+.dish-card {
+  width: 260px !important;
+  height: 485px !important;
+}
+/*@media screen and (min-width: 768px) {*/
+/*  .card {*/
+/*    margin: 0 31px;*/
+/*  }*/
+/*}*/
+.card__one {
+  transition: transform 0.5s;
+}
+.card__one::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+  content: '';
+  opacity: 0;
+  z-index: -1;
+}
+.card__one:hover, .card__one:focus {
+  transform: scale3d(1.006, 1.006, 1);
+}
+.card__one:hover::after, .card__one:focus::after {
+  opacity: 1;
 }

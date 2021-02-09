@@ -2,7 +2,7 @@
   <div class="order-container">
     <mat-card-title>Ваше замовлення</mat-card-title>
 
-    <div *ngIf="orderList.length >= 1">
+    <div *ngIf="orderList && orderList.length >= 1">
       <div class="order-items block">
         <div *ngFor="let item of orderList">
           <div *ngIf="item.name !== 'extra_adds'" class="item">

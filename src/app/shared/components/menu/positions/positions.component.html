@@ -1,26 +1,32 @@
 <div class="flex row wrap">
 
+  <ng-container *ngIf="category?.dishes; else noDishes">
+    <mat-card *ngFor="let dish of category.dishes" class=" dish-card card card__one flex column">
+      <mat-card-header class="flex column-reverse">
+        <button mat-fab color="accent" *ngIf="authService.isAuthenticated()"
+                aria-label="Example icon button with a bookmark icon" (click)="toggleFavorite(dish)">
+          <fa-icon [icon]="HeartIcon" size="3x" *ngIf="!dish.favorite"></fa-icon>
+          <fa-icon [icon]="HeartIconSolid" size="3x" *ngIf="dish.favorite"></fa-icon>
+        </button>
+        <img mat-card-lg-image src="{{URL}}{{dish.image}}">
+        <mat-card-title class=" self-center">{{dish.name}}</mat-card-title>
+        <mat-card-subtitle class="self-center">{{dish.ingredients}}</mat-card-subtitle>
+        <mat-card-subtitle class="price self-center">{{dish.price}} грн.</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions class="flex row evenly">
+        <button mat-raised-button class="add-to-cart-btn" (click)="addToCart(dish)">До кошика</button>
+        <button mat-stroked-button class="about-btn" (click)="aboutDish(dish)">Докладніше</button>
 
-  <mat-card *ngFor="let dish of category.dishes" class="card card__one flex column">
-    <mat-card-header class="flex column-reverse">
-      <button mat-fab color="accent" *ngIf="authService.isAuthenticated()" aria-label="Example icon button with a bookmark icon" (click)="toggleFavorite(dish)">
-        <fa-icon [icon]="HeartIcon" size="3x" *ngIf="!dish.favorite"></fa-icon>
-        <fa-icon [icon]="HeartIconSolid" size="3x" *ngIf="dish.favorite"></fa-icon>
-      </button>
-      <img mat-card-lg-image src="{{URL}}{{dish.image}}">
-      <mat-card-title class=" self-center">{{dish.name}}</mat-card-title>
-      <mat-card-subtitle class="self-center">{{dish.ingredients}}</mat-card-subtitle>
-      <mat-card-subtitle class="price self-center">{{dish.price}} грн.</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions class="flex row evenly">
-      <button mat-raised-button class="add-to-cart-btn" (click)="addToCart(dish)">До кошика</button>
-      <button mat-stroked-button class="about-btn">Докладніше</button>
 
-
-    </mat-card-actions>
-  </mat-card>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
 </div>
 
-<div class="self-center" *ngIf="!category.dishes">
-  У цій категорії немає жодних позицій!
-</div>
+<ng-template #noDishes>
+  <ng-container>
+    <div class="self-center">
+      У цій категорії немає жодних позицій!
+    </div>
+  </ng-container>
+</ng-template>

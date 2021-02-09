@@ -25,35 +25,24 @@ export class CartComponent implements OnInit {
 
   constructor(public orderService: OrderService,
               private dialogRef: MatDialogRef<CartComponent>,
-              @Inject(MAT_DIALOG_DATA) data,
               private userService: UserService) {
-    this.orderList = data.order;
-    console.log(this.orderList);
   }
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe(value => {
       this.currentUser = value;
     });
-    this.orderService.orderListUpdated.subscribe((orderList) => {
-      this.orderList = orderList;
-      if (this.orderList.length === 1) {
-        this.dialogRef.close(false);
-      }
-      console.log(this.orderList);
-    });
+    this.orderList = this.orderService.getOrderList();
+    console.log(this.orderList);
     this.computePrice();
+    this.initCartForms();
+  }
+
+  initCartForms(): void {
     this.initUserForm();
     this.initAddressForm();
-    this.paymentForm = new FormGroup({
-      payment_method: new FormControl('', [Validators.required]),
-      promo_code: new FormControl('', [Validators.pattern(/^([a-zA-Z0-9., ]{1,20})$/)]),
-    });
-    this.commentaryForm = new FormGroup({
-      commentary: new FormControl(''),
-      training_ch: new FormControl(0, [Validators.pattern(/^([0-9]{1,5})$/)]),
-      normal_ch: new FormControl(this.orderService.getOrderList().length - 1, [Validators.pattern(/^([0-9]{1,5})$/)]),
-    });
+    this.initPaymentForm();
+    this.initCommentaryForm();
   }
 
   initUserForm(): void {
@@ -92,6 +81,21 @@ export class CartComponent implements OnInit {
         floor: new FormControl(this.currentUser.address[0].floor, [Validators.pattern(/^([0-9 -]{0,10})$/)])
       });
     }
+  }
+
+  initPaymentForm(): void {
+    this.paymentForm = new FormGroup({
+      payment_method: new FormControl('', [Validators.required]),
+      promo_code: new FormControl('', [Validators.pattern(/^([a-zA-Z0-9., ]{1,20})$/)]),
+    });
+  }
+
+  initCommentaryForm(): void {
+    this.commentaryForm = new FormGroup({
+      commentary: new FormControl(''),
+      training_ch: new FormControl(0, [Validators.pattern(/^([0-9]{1,5})$/)]),
+      normal_ch: new FormControl(this.orderList.length - 1, [Validators.pattern(/^([0-9]{1,5})$/)]),
+    });
   }
 
 

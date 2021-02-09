@@ -1,7 +1,7 @@
 import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {ICategoryData, IDishArray, IDishData} from '../../../interfaces/menu.interface';
 import {MenuService} from '../../../services/menu/menu.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../../services/user/user.service';
@@ -9,6 +9,9 @@ import {IUserData} from '../../../interfaces/user.interface';
 import {AuthService} from '../../../services/user/auth.service';
 import {OrderService} from '../../../services/order/order.service';
 import {SnackbarService} from '../../../services/snackbar.service';
+import {filter, tap} from 'rxjs/operators';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {AboutDishComponent} from '../dish/about-dish/about-dish.component';
 
 @Component({
   selector: 'app-category',
@@ -30,15 +33,49 @@ export class PositionsComponent implements OnInit {
     private userService: UserService,
     public authService: AuthService,
     private orderService: OrderService,
-    private snackbarService: SnackbarService) {
+    private snackbarService: SnackbarService,
+    private router: Router,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.orderService.setOrderList(this.orderService.getOrderListFromLocalStorage());
     this.loading = true;
+    this.getDishes();
     this.user = this.activatedRoute.snapshot.data.user;
-    this.category = this.activatedRoute.snapshot.data.category;
-    console.log(this.category);
+
+
+  }
+
+  getDishes(): void {
+    const dishesCategory = this.router.url.split('/')[2];
+    this.menuService.getCategory(dishesCategory).pipe(
+      filter( dishes => dishes !== null)
+    ).subscribe(
+      dishes => {
+        this.category = dishes;
+        this.setFavorites();
+      }
+    );
+  }
+
+
+  aboutDish(position: IDishData): void {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.width = '900px';
+    dialogConfig.height = '600px';
+    dialogConfig.data = {
+      dish: position
+    };
+    const dialogRef = this.dialog.open(AboutDishComponent, dialogConfig);
+
+  }
+
+  setFavorites(): void {
     if (this.user !== null) {
       this.category.dishes.forEach((dish: any) => {
         dish.favorite = Boolean(this.user.fav_dishes.find(favDish => favDish.id === dish.id));

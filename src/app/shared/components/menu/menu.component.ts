@@ -19,7 +19,8 @@ export class MenuComponent implements OnInit {
     {category: 'bowls', name: 'Боули'},
     {category: 'breakfasts', name: 'Сніданки'},
     {category: 'drinks', name: 'Напої'},
-    {category: 'salads', name: 'Салати'}
+    {category: 'salads', name: 'Салати'},
+    {category: 'special-offer', name: 'Акційні пропозиції'}
     ];
   categoryName: string;
 

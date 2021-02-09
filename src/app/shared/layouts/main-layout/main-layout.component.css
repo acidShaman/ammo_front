@@ -10,7 +10,7 @@
   z-index: 100;
 }
 .container {
-  /*height: 100%;*/
+  height: max-content;
   width: calc(100% - 80px);
   z-index: -1;
   margin-left: 5rem;

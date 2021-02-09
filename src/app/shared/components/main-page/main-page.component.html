@@ -17,7 +17,7 @@
       <mat-card-title class="category-header">{{category.name}}</mat-card-title>
       <swiper [config]="swiperConfig">
         <div class="swiper-wrapper">
-          <mat-card *ngFor="let dish of category.dishes" class="card card__one flex column swiper-slide">
+          <mat-card *ngFor="let dish of category.dishes" class=" dish-card card card__one flex column swiper-slide">
             <mat-card-header class="flex column-reverse">
               <button mat-fab color="accent" *ngIf="authService.isAuthenticated()"
                       aria-label="Example icon button with a bookmark icon" (click)="toggleFavorite(dish)">
@@ -35,7 +35,7 @@
             </mat-card-actions>
           </mat-card>
 
-          <mat-card class="card card__one flex column swiper-slide to-category-card" (click)="goToCategory(category)">
+          <mat-card class="dish-card card card__one flex column swiper-slide to-category-card" (click)="goToCategory(category)">
             <mat-card-header class="flex column-reverse">
               Показати все в категорії {{category.name}}
             </mat-card-header>

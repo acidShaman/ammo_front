@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 export class OrderService {
   URL = 'http://localhost:8000/';
   public orderListUpdated: EventEmitter<OrderItem[]> = new EventEmitter<OrderItem[]>();
-  @Input() public orderList: OrderItem[] = [];
+  public orderList: OrderItem[] = [];
   public orderListTemplate: OrderItem[] = [{id: 1, name: 'extra_adds', price: 10, quantity: 0, image: null}];
   public price = 0;
 
@@ -107,7 +107,7 @@ export class OrderService {
 
     console.log('Order submitted', orderInfo);
     this.removeOrderFromLocalStorage();
-    this.orderList = this.getOrderListFromLocalStorage();
+    this.orderList = this.orderListTemplate;
     this.orderListUpdated.emit(this.orderList);
 
 
