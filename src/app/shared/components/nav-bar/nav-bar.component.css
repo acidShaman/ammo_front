@@ -7,6 +7,14 @@ a {
   text-decoration: none;
   color: var(--text-primary);
 }
+.nav-btn {
+  border-radius: 20px;
+  font-weight: 300;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .logo {
   cursor: pointer;
   padding: 15px;
@@ -29,7 +37,7 @@ display: inline-block;
 .list {
   margin: 0;
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   list-style-type: none;
   align-items: center;
   height: 100%;
@@ -79,6 +87,8 @@ display: inline-block;
   height: auto;
 }
 .dropdown-content {
+  margin-left: 31px;
+  margin-top: 39px;
   z-index: 110;
   display: flex;
   visibility: hidden;
@@ -94,6 +104,8 @@ display: inline-block;
 }
 .drop-btn {
   align-self: center;
+
+
 }
 
 .dropdown-content a {
@@ -141,7 +153,9 @@ display: inline-block;
   box-sizing: border-box;
   transition-delay: 0s, 0s, 0.3s;
 }
-
+.dropdown-content .nav-bar {
+  border-radius: 8px;
+}
 .sign-in {
   padding-top: 15px;
   background: var(--bg-primary);
@@ -204,6 +218,9 @@ display: inline-block;
   border: 1px solid var(--accent-orange);
   border-radius: 20px;
 }
+.phone{
+  width: 100%;
+}
 span {
   font-size: 12px;
   text-transform: none;
@@ -216,11 +233,6 @@ span {
   transition-duration: 0.4s;
 }
 
-.phone a:hover{
-  display: block;
-  color: var(--text-light);
-  transition: 0.4s;
-}
 .dropdown-content #logout-btn{
   background-color: var(--accent-orange);
   color: var(--bg-primary);
@@ -229,4 +241,37 @@ span {
 .dropdown-content #logout-btn:hover {
   justify-content: center;
 }
+::ng-deep .select-city {
+  margin-top: 8px;
+}
+
+::ng-deep .select-city .mat-select-value{
+  color: var(--text-primary);
+  font-weight: 300;
+}
+::ng-deep .select-city-panel.mat-select-panel{
+  border-radius: 4px;
+  margin-left: 16px;
+  margin-top: 39px;
+  width: 6rem;
+  color: var(--text-primary);
+}
+.select-city-field {
+  width: 7rem;
+}
+::ng-deep .select-city-panel .mat-option-text .svg-container{
+  display: inline-block;
+  width: 14px;
+  height: 12px;
+  margin-right: 1rem;
+}
+
+::ng-deep mat-form-field.mat-focused .mat-form-field-ripple {
+  background: black !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background: var(--text-primary);
+}
+
 

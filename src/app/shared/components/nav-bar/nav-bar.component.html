@@ -4,20 +4,20 @@
   </div>
   <div class="list-wrapper">
     <ul class="list">
-      <li><a routerLink="/">ГОЛОВНА</a></li>
-      <li><a routerLink="/menu/">МЕНЮ</a></li>
-      <li><a>ОПЛАТА І ДОСТАВКА</a></li>
-      <li><a>АКЦІЇ</a></li>
+      <li><a class="nav-btn" mat-button routerLink="/">ГОЛОВНА</a></li>
+      <li><a class="nav-btn" mat-button routerLink="/menu/">МЕНЮ</a></li>
+      <li><a class="nav-btn" mat-button>ОПЛАТА І ДОСТАВКА</a></li>
+      <li><a class="nav-btn" mat-button>АКЦІЇ</a></li>
       <li>
-        <div class="dropdown"><a class="drop-btn">КОНТАКТИ</a>
+        <div class="dropdown"><a mat-button class="drop-btn nav-btn">КОНТАКТИ</a>
           <div class="dropdown-content phone">
-            <a href="tel: +380 (73) 544 40 60">+380 (73) 544 40 60</a>
-            <a href="tel: +380 (67) 544 40 61">+380 (67) 544 40 61</a>
+            <a mat-button href="tel: +380 (73) 544 40 60">+380 (73) 544 40 60</a>
+            <a mat-button href="tel: +380 (67) 544 40 61">+380 (67) 544 40 61</a>
           </div>
         </div>
       </li>
       <li>
-        <div class="dropdown"><a class="drop-btn">МІЙ КАБІНЕТ</a>
+        <div class="dropdown"><a mat-button class="drop-btn nav-btn">МІЙ КАБІНЕТ</a>
           <ng-container *ngIf="authService.isAuthenticated(); else loggedOutDropdown">
             <div class="dropdown-content">
               <div class="nav-bar fit-content">
@@ -60,7 +60,31 @@
           </ng-template>
         </div>
       </li>
-      <li><a>Соц Мережі</a></li>
+      <li><a class="nav-btn" mat-button>Соц Мережі</a></li>
+      <li>
+        <mat-form-field appearance="legacy" class="select-city-field">
+          <mat-select class="select-city" panelClass="select-city-panel">
+            <mat-option value="Active">
+              <div class="svg-container">
+                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.25 1L4.5 11L0.75 7.25" stroke="#7BB62D" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </svg>
+              </div>
+              Львів
+            </mat-option>
+            <mat-option value="Archived">
+              <div class="svg-container">
+                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.25 1L4.5 11L0.75 7.25" stroke="#7BB62D" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </svg>
+              </div>
+              Нетішин
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
 
 
     </ul>
