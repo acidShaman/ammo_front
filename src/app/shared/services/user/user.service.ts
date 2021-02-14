@@ -12,23 +12,21 @@ import {IAddress} from '../../interfaces/address.interface';
   providedIn: 'root'
 })
 export class UserService {
-  URL = 'http://localhost:8000/';
-
   constructor(private httpClient: HttpClient) {
   }
 
   currentUser: BehaviorSubject<Partial<IUserData>> = new BehaviorSubject(null);
 
   registerNewUser(userData: Partial<IUser>): Observable<any> {
-    return this.httpClient.post<any>(`${this.URL}profile/register/`, userData);
+    return this.httpClient.post<any>(`/profile/register/`, userData);
   }
 
   deleteFavDish(userId, dishId): Observable<any> {
-    return this.httpClient.delete(`${this.URL}profile/${userId}/favorites/${dishId}`);
+    return this.httpClient.delete(`/profile/${userId}/favorites/${dishId}`);
   }
 
   addFavDish(userId, dishId): Observable<any> {
-    return this.httpClient.get(`${this.URL}profile/${userId}/favorites/${dishId}`);
+    return this.httpClient.get(`/profile/${userId}/favorites/${dishId}`);
   }
 
 
@@ -45,7 +43,7 @@ export class UserService {
       formData.append(key, body[key]);
     });
 
-    return this.httpClient.patch<object>(`${this.URL}profile` + `/${id}/`, formData);
+    return this.httpClient.patch<object>(`/profile` + `/${id}/`, formData);
   }
 
   updateAddress(userId, address): Observable<IAddress> {
@@ -57,7 +55,7 @@ export class UserService {
       formData.append(key, body[key]);
     });
 
-    return this.httpClient.post<IAddress>(`${this.URL}profile/${userId}/address/`, formData);
+    return this.httpClient.post<IAddress>(`/profile/${userId}/address/`, formData);
   }
 
   getUserInfoByToken(accessToken: string): Observable<any> {
@@ -67,7 +65,7 @@ export class UserService {
       })
     };
 
-    return this.httpClient.get<IUserData>(`${this.URL}profile/`, options)
+    return this.httpClient.get<IUserData>(`/profile/`, options)
       .pipe(
         tap((response: IUserData) => {
           this.currentUser.next(response);

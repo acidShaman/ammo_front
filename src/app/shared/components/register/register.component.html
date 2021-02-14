@@ -1,4 +1,4 @@
-<mat-card id="register-card">
+<!--<mat-card id="register-card">-->
   <mat-card-header>
     <mat-card-title>Реєстрація</mat-card-title>
   </mat-card-header>
@@ -21,8 +21,8 @@
           <mat-label>Пароль<span>*</span></mat-label>
           <input matInput type="password" formControlName="password">
           <mat-error
-            *ngIf="registerForm.get('passwords.password').hasError('pattern') &&  !registerForm.get('passwords.password').hasError('required')">
-            Пароль має містити мінімум 6 символів: букви обох регістрів та цифри
+            *ngIf="registerForm.get('passwords.password').hasError('minlength') &&  !registerForm.get('passwords.password').hasError('required')">
+            Пароль має містити мінімум 6 символів
           </mat-error>
           <mat-error *ngIf="registerForm.get('passwords.password').hasError('required') && registerForm.get('passwords.password').touched">
             Обов'язково введіть ваш пароль
@@ -67,7 +67,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Номер телефону<span>*</span></mat-label>
-        <input matInput type="text" formControlName="phone" placeholder="+380665551799">
+        <input matInput type="text" formControlName="phone" placeholder="+380235651089">
                 <mat-error *ngIf="registerForm.get('phone').hasError('pattern') &&  !registerForm.get('phone').hasError('required')" >
                   Будь-ласка, введіть дійсний номер телефону
                 </mat-error>
@@ -78,14 +78,14 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Стать</mat-label>
-        <mat-select formControlName="sex">
+        <mat-select formControlName="sex" [(value)]="genders[0]">
           <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="standard">
         <mat-label>Дата народження</mat-label>
-        <input formControl="birthday" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="MM-DD-YYYY">
+        <input formControlName="birthday" matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="MM-DD-YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker startView="multi-year"></mat-datepicker>
         <mat-error *ngIf="registerForm.get('birthday').invalid && registerForm.get('birthday').touched"></mat-error>
@@ -97,4 +97,4 @@
     (click)="onSubmit()">Зареєструватись</button>
     <button mat-stroked-button id="close-btn" (click)="closeDialog()">Закрити</button>
   </mat-card-actions>
-</mat-card>
+<!--</mat-card>-->

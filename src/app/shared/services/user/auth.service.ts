@@ -13,7 +13,6 @@ import {SnackbarService} from '../snackbar.service';
 export class AuthService {
   private readonly access = 'access_token';
   private readonly refresh = 'refresh_token';
-  private readonly URL = 'http://localhost:8000/';
 
   constructor(private httpClient: HttpClient, private userService: UserService, private snackbarService: SnackbarService) {
   }
@@ -22,7 +21,7 @@ export class AuthService {
     this.deleteTokens();
     this.userService.currentUser.next(null);
     if (authInfo !== null) {
-      return this.httpClient.post<ITokens>(`${this.URL}token/`, authInfo).pipe(tap((response) => {
+      return this.httpClient.post<ITokens>(`/token/`, authInfo).pipe(tap((response) => {
           const {access, refresh} = response;
           this.setTokens({access, refresh});
           this.userService.getUserInfoByToken(access).subscribe( (res: IUserData) => {
@@ -52,7 +51,7 @@ export class AuthService {
   refreshToken(): Observable<ITokens> {
     console.log('Refreshing token...');
     const refreshToken = this.getRefreshToken();
-    return this.httpClient.post<ITokens>(`${this.URL}token/refresh/`, {refresh: refreshToken})
+    return this.httpClient.post<ITokens>(`/token/refresh/`, {refresh: refreshToken})
       .pipe(tap((response: ITokens) => {
         console.log('Response after refresh', response);
         this.setTokens(response);
@@ -90,15 +89,15 @@ export class AuthService {
   }
 
   resetPasswordRequest(email: string): Observable<any> {
-    return this.httpClient.post(`${this.URL}profile/password_reset/`, {email});
+    return this.httpClient.post(`/profile/password_reset/`, {email});
   }
 
   resetPasswordConfirm(newPwd, resetToken): Observable<any> {
-    return this.httpClient.post(`${this.URL}profile/password_reset/confirm/`, {password: newPwd, token: resetToken});
+    return this.httpClient.post(`/profile/password_reset/confirm/`, {password: newPwd, token: resetToken});
   }
 
   newPassword(body): Observable<any> {
-    return this.httpClient.post(`${this.URL}profile/new-password/`, body);
+    return this.httpClient.post(`/profile/new-password/`, body);
   }
 
 }

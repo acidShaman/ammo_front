@@ -11,16 +11,16 @@ export class MenuService {
   constructor(private httpClient: HttpClient) { }
 
   getCategories(): Observable<ICategories> {
-    return this.httpClient.get<ICategories>(`${this.URL}menu/`);
+    return this.httpClient.get<ICategories>(`/menu/`);
   }
 
   // tslint:disable-next-line:ban-types
   getCategory(category: String): Observable<ICategoryData> {
-    return this.httpClient.get<ICategoryData>(`${this.URL}menu/${category}`);
+    return this.httpClient.get<ICategoryData>(`/menu/${category}`);
   }
 
   getFewDishesFromCategories(): Observable<ICategoryData[]> {
-    return this.httpClient.get<ICategoryData[]>(`${this.URL}menu/all/`);
+    return this.httpClient.get<ICategoryData[]>(`/menu/all/`);
   }
 
   getRolls(): Observable<ICategoryData> {

@@ -8,40 +8,58 @@
       <li><a routerLink="/menu/">МЕНЮ</a></li>
       <li><a>ОПЛАТА І ДОСТАВКА</a></li>
       <li><a>АКЦІЇ</a></li>
-      <li><div class="dropdown"><a class="drop-btn">КОНТАКТИ</a>
-        <div class="dropdown-content phone">
-          <a href="tel: +380 (73) 544 40 60">+380 (73) 544 40 60</a>
-          <a href="tel: +380 (67) 544 40 61">+380 (67) 544 40 61</a>
-        </div>
-      </div></li>
-      <li><div class="dropdown"><a class="drop-btn">МІЙ КАБІНЕТ</a>
-        <div class="dropdown-content" *ngIf="!authService.isAuthenticated()">
-          <div class="sign-in">
-            <a (click)="openLoginDialog()">Увійти</a>
-          </div>
-          <div class="sign-up">
-            <a (click)="openRegisterDialog()">Зареєструватись</a>
-          </div>
-          <span>Увійти через</span>
-          <div class="social">
-            <a><img src="../../../../assets/facebook.svg" alt="Facebook" width="20px" height="20px"></a>
-            <a><img src="../../../../assets/google.svg" alt="Google" width="20px" height="20px"></a>
+      <li>
+        <div class="dropdown"><a class="drop-btn">КОНТАКТИ</a>
+          <div class="dropdown-content phone">
+            <a href="tel: +380 (73) 544 40 60">+380 (73) 544 40 60</a>
+            <a href="tel: +380 (67) 544 40 61">+380 (67) 544 40 61</a>
           </div>
         </div>
-        <div class="dropdown-content" *ngIf="authService.isAuthenticated()">
-          <div class="nav-bar fit-content">
-            <div class="list-wrapper fit-content">
-              <ul class="list column fit-content">
-                <li><a routerLink="account/profile">Профіль</a></li>
-                <li><a routerLink="account/address">Адреси доставки</a></li>
-                <li><a routerLink="account/favorites">Вибране</a></li>
-                <li><a routerLink="account/order-history">Історія замовлень</a></li>
-                <li><a (click)="logout()" mat-raised-button id="logout-btn">Вийти</a></li>
-              </ul>
+      </li>
+      <li>
+        <div class="dropdown"><a class="drop-btn">МІЙ КАБІНЕТ</a>
+          <ng-container *ngIf="authService.isAuthenticated(); else loggedOutDropdown">
+            <div class="dropdown-content">
+              <div class="nav-bar fit-content">
+                <div class="list-wrapper fit-content">
+                  <ul class="list column fit-content">
+                    <li><a mat-button routerLink="account/profile">
+                      <mat-icon>account_circle</mat-icon>
+                      Профіль</a></li>
+                    <li><a mat-button routerLink="account/address">
+                      <mat-icon>delivery_dining</mat-icon>
+                      Адреси доставки</a></li>
+                    <li><a mat-button routerLink="account/favorites">
+                      <mat-icon>favorite_border</mat-icon>
+                      Улюблене</a></li>
+                    <li><a mat-button routerLink="account/order-history">
+                      <mat-icon>table_view</mat-icon>
+                      Історія замовлень</a></li>
+                    <li><a (click)="logout()" mat-raised-button id="logout-btn">Вийти</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
+          </ng-container>
+          <ng-template #loggedOutDropdown>
+            <ng-container>
+              <div class="dropdown-content" *ngIf="!authService.isAuthenticated()">
+                <div class="sign-in">
+                  <a (click)="openLoginDialog()">Увійти</a>
+                </div>
+                <div class="sign-up">
+                  <a (click)="openRegisterDialog()">Зареєструватись</a>
+                </div>
+                <span>Увійти через</span>
+                <div class="social">
+                  <a><img src="../../../../assets/facebook.svg" alt="Facebook" width="20px" height="20px"></a>
+                  <a><img src="../../../../assets/google.svg" alt="Google" width="20px" height="20px"></a>
+                </div>
+              </div>
+            </ng-container>
+          </ng-template>
         </div>
-      </div></li>
+      </li>
       <li><a>Соц Мережі</a></li>
 
 

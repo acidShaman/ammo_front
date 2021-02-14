@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
       last_name: new FormControl(this.user.user.last_name, [Validators.pattern(/^([a-zA-Zа-яА-ЯЇїєЄІіЁё'-]{1,30})$/)]),
       phone: new FormControl(this.user.phone, [Validators.pattern(/^([+])(\d{8,14})$/)]),
       sex: new FormControl(this.user.sex),
-      birthday: new FormControl('', [Validators.minLength(8)])
+      birthday: new FormControl(moment(this.user.birthday || null).format('YYYY-MM-DD'), [Validators.minLength(8)])
     });
   }
 
@@ -104,6 +104,7 @@ export class ProfileComponent implements OnInit {
     const id: number = this.user.user.id;
     const fields = Object.keys(data);
     fields.forEach(key => {
+      // tslint:disable-next-line:max-line-length
       if (!data[key] || this.userService.currentUser.value[key] === data[key] || this.userService.currentUser.value.user[key] === data[key]) {
         delete data[key];
       }

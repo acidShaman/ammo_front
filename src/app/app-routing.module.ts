@@ -8,26 +8,14 @@ import {UserResolverService} from './shared/services/user/user-resolver.service'
 import {MenuComponent} from './shared/components/menu/menu.component';
 import {CategoriesResolverService} from './shared/services/menu/categories-resolver.service';
 import {PositionsComponent} from './shared/components/menu/positions/positions.component';
-import {RollsResolverService} from './shared/services/menu/rolls-resolver.service';
-import {AdditionalsResolverService} from './shared/services/menu/additionals-resolver.service';
-import {HotrollsResolverService} from './shared/services/menu/hotrolls-resolver.service';
-import {SetsResolverService} from './shared/services/menu/sets-resolver.service';
-import {SaladsResolverService} from './shared/services/menu/salads-resolver.service';
-import {DrinksResolverService} from './shared/services/menu/drinks-resolver.service';
-import {BreakfastsResolverService} from './shared/services/menu/breakfasts-resolver.service';
-import {BowlsResolverService} from './shared/services/menu/bowls-resolver.service';
 import {CategoriesComponent} from './shared/components/menu/categories/categories.component';
 import {MainPageComponent} from './shared/components/main-page/main-page.component';
-import {LoaderComponent} from './shared/components/loader/loader.component';
 import {AccountComponent} from './shared/components/account/account.component';
 import {AddressComponent} from './shared/components/account/address/address.component';
 import {FavoritesComponent} from './shared/components/account/favorites/favorites.component';
 import {OrderHistoryComponent} from './shared/components/account/order-history/order-history.component';
-import {LoginComponent} from './shared/components/login/login.component';
 import {ResetPasswordComponent} from './shared/components/reset-password/reset-password.component';
 import {MainPageResolverService} from './shared/services/menu/main-page-resolver.service';
-import {CategoryResolverService} from './shared/services/menu/category-resolver.service';
-// import {CategoryResolverService} from './shared/services/menu/positions-resolver.service';
 
 
 const routes: Routes = [
@@ -46,16 +34,7 @@ const routes: Routes = [
       {
         path: 'menu', component: MenuComponent, children: [
           {path: '', component: CategoriesComponent, resolve: {categories: CategoriesResolverService, user: UserResolverService}},
-          {path: ':category', component: PositionsComponent, resolve:{ user: UserResolverService}}
-          // {path: 'rolls', component: PositionsComponent, resolve: {category: RollsResolverService, user: UserResolverService}},
-          // {path: 'hot-rolls', component: PositionsComponent, resolve: {category: HotrollsResolverService, user: UserResolverService}},
-          // {path: 'sets', component: PositionsComponent, resolve: {category: SetsResolverService, user: UserResolverService}},
-          // {path: 'salads', component: PositionsComponent, resolve: {category: SaladsResolverService, user: UserResolverService}},
-          // {path: 'drinks', component: PositionsComponent, resolve: {category: DrinksResolverService, user: UserResolverService}},
-          // {path: 'breakfasts', component: PositionsComponent, resolve: {category: BreakfastsResolverService, user: UserResolverService}},
-          // {path: 'bowls', component: PositionsComponent, resolve: {category: BowlsResolverService, user: UserResolverService}},
-          // tslint:disable-next-line:max-line-length
-          // {path: 'additionals', component: PositionsComponent, resolve: {category: AdditionalsResolverService, user: UserResolverService}},
+          {path: ':category', component: PositionsComponent, resolve: { user: UserResolverService}}
         ]
       }
     ],

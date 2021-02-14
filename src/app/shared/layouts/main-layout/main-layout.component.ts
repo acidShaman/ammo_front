@@ -4,6 +4,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CartComponent} from '../../components/cart/cart.component';
 import {OrderService} from '../../services/order/order.service';
 import {OrderItem} from '../../interfaces/order.interface';
+import {ModalService} from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -13,9 +14,10 @@ import {OrderItem} from '../../interfaces/order.interface';
 })
 export class MainLayoutComponent implements OnInit {
   shoppingBag = faShoppingBag;
-  @Input() order: OrderItem[];
+  order: OrderItem[];
   // list
-  constructor(private dialog: MatDialog, public orderService: OrderService) {
+  constructor(public orderService: OrderService,
+              private modal: ModalService) {
   }
 
   ngOnInit(): void {
@@ -28,19 +30,10 @@ export class MainLayoutComponent implements OnInit {
 
 
   openCartDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = false;
-    dialogConfig.hasBackdrop = true;
-    dialogConfig.width = '750px';
-    const dialogRef = this.dialog.open(CartComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe( data => {
-      if (data === true) {
+    this.modal.openCartComponent().subscribe(res => {
+      if (res === true) {
         this.order = [];
       }
     });
   }
-
 }

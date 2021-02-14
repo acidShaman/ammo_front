@@ -35,9 +35,7 @@
   margin-bottom: 20px !important;
 }
 .self-center{
-  margin-top: 30px;
-
-  text-align: center;
+  margin: 30px auto;
 }
 .price {
   font-size: 16px;

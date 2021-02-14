@@ -32,6 +32,7 @@ mat-card-actions {
 }
 #register-btn {
  color: var(--text-primary);
+  padding: 0 1rem;
 }
 .social:hover {
   transition: ease var(--transition-speed);

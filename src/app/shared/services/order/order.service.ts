@@ -8,7 +8,6 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  URL = 'http://localhost:8000/';
   public orderListUpdated: EventEmitter<OrderItem[]> = new EventEmitter<OrderItem[]>();
   public orderList: OrderItem[] = [];
   public orderListTemplate: OrderItem[] = [{id: 1, name: 'extra_adds', price: 10, quantity: 0, image: null}];
@@ -125,7 +124,7 @@ export class OrderService {
       }
     }
 
-    return this.httpClient.post<any>(`${this.URL}order/`, formData);
+    return this.httpClient.post<any>(`/order/`, formData);
   }
 
   public computePrice(): void {

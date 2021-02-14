@@ -86,3 +86,12 @@ snack-bar-container {
 .card__one:hover::after, .card__one:focus::after {
   opacity: 1;
 }
+
+
+.self-center{
+  margin-top: 50px;
+  text-align: center;
+}
+.font-big{
+  font-size: 24px;
+}

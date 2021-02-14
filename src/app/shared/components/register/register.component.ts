@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     {name: 'Жіноча', value: 'female'},
   ];
   maxDate: Moment;
-  minDate = moment([1990, 1, 1]);
+  minDate = moment([1900, 1, 1]);
 
   constructor(private userService: UserService, private datePipe: DatePipe, private dialogRef: MatDialogRef<RegisterComponent>,
               private snackbarService: SnackbarService) {
@@ -54,14 +54,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
       username: new FormControl('', [Validators.required, Validators.email, Validators.minLength(4)]),
       passwords: new FormGroup({
         password: new FormControl('',
-          [Validators.required, Validators.pattern(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/)]),
+          [Validators.required, Validators.minLength(6)]),
         repeat_password: new FormControl('', [Validators.required])
       }, this.passwordValidator),
       first_name: new FormControl('', [Validators.required, Validators.pattern(/^([a-zA-Zа-яА-ЯЇїєЄІіЁё]{1,30})$/)]),
       last_name: new FormControl('', [Validators.required, Validators.pattern(/^([a-zA-Zа-яА-ЯЇїєЄІіЁё]{1,30})$/)]),
       phone: new FormControl('', [Validators.required, Validators.pattern(/^([+])(\d{1,12})$/)]),
-      sex: new FormControl(''),
-      birthday: new FormControl(moment().format('YYYY-MM-DD'))
+      sex: new FormControl(null),
+      birthday: new FormControl(null)
     });
   }
 
@@ -78,9 +78,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
       first_name: this.registerForm.value.first_name,
       last_name: this.registerForm.value.last_name,
       phone: this.registerForm.value.phone,
-      sex: this.registerForm.value.sex,
-      birthday: this.registerForm.value.birthday
+      sex: this.registerForm.value.sex === null ? 'not given' : this.registerForm.value.sex,
+      birthday: this.registerForm.value.birthday === null ? null : moment(this.registerForm.value.birthday).format('YYYY-MM-DD')
     };
+    console.log(data);
     this.registerUser(data);
     console.log('Candidate created!!!');
   }

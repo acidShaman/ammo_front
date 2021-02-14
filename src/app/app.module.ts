@@ -50,6 +50,8 @@ import {CountdownModule} from 'ngx-countdown';
 import {MatSnackBarContainer, MatSnackBarModule} from '@angular/material/snack-bar';
 import { AboutDishComponent } from './shared/components/menu/dish/about-dish/about-dish.component';
 import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
+import {MatMenuModule} from '@angular/material/menu';
+import {ApiPrefixInterceptor} from './shared/classes/api-prefix.interceptor';
 
 
 
@@ -106,7 +108,8 @@ import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
     MatTableModule,
     MatSortModule,
     MatSnackBarModule,
-    NgxUsefulSwiperModule
+    NgxUsefulSwiperModule,
+    MatMenuModule
   ],
   providers: [
     MatSnackBarContainer,
@@ -117,6 +120,11 @@ import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: TokenInterceptor
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: ApiPrefixInterceptor
     },
     {
       provide: 'SocialAuthServiceConfig',
