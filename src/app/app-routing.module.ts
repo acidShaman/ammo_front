@@ -16,12 +16,22 @@ import {FavoritesComponent} from './shared/components/account/favorites/favorite
 import {OrderHistoryComponent} from './shared/components/account/order-history/order-history.component';
 import {ResetPasswordComponent} from './shared/components/reset-password/reset-password.component';
 import {MainPageResolverService} from './shared/services/menu/main-page-resolver.service';
+import {AdminComponent} from './shared/components/admin/admin.component';
+import {AdminGuard} from './shared/classes/admin.guard';
+import {AdminPositionsComponent} from './shared/components/admin/admin-positions/admin-positions.component';
+import {AdminCategoriesComponent} from './shared/components/admin/admin-categories/admin-categories.component';
 
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: '', component: MainPageComponent, resolve: {categories: MainPageResolverService, user: UserResolverService}},
+      {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
+          {path: '', redirectTo: 'categories', pathMatch: 'full'},
+          {path: 'categories', component: AdminCategoriesComponent},
+          {path: 'positions', component: AdminPositionsComponent},
+        ]
+      },
       {
         path: 'account', component: AccountComponent, canActivate: [AuthGuard], children: [
           {path: '', redirectTo: 'profile', pathMatch: 'full'},

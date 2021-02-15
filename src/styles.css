@@ -129,3 +129,8 @@ mat-form-field.mat-focused .mat-form-field-ripple {
 .mat-form-field-appearance-legacy .mat-form-field-underline {
   background: var(--text-primary);
 }
+
+
+.mat-ink-bar {
+  background-color: var(--accent-orange) !important;
+}

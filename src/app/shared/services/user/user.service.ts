@@ -29,6 +29,10 @@ export class UserService {
     return this.httpClient.get(`/profile/${userId}/favorites/${dishId}`);
   }
 
+  isAdmin(): boolean {
+    return this.currentUser.value.user.is_staff;
+  }
+
 
   // authUser(user: Partial<IUser>): Observable<ITokens> {
   //   return this.httpClient.post<ITokens>(`${this.URL}token/`, {username: user.username, password: user.password});

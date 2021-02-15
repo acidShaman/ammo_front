@@ -21,6 +21,7 @@ export interface IUserData {
     username: string;
     first_name: string;
     last_name: string;
+    is_staff: boolean;
   };
   fav_dishes?: Array<IDishData>;
   order_history?: Array<any>;

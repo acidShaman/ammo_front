@@ -53,6 +53,9 @@ import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 import {MatMenuModule} from '@angular/material/menu';
 import {ApiPrefixInterceptor} from './shared/classes/api-prefix.interceptor';
 import { CitySelectComponent } from './shared/components/city-select/city-select.component';
+import { AdminComponent } from './shared/components/admin/admin.component';
+import { AdminCategoriesComponent } from './shared/components/admin/admin-categories/admin-categories.component';
+import { AdminPositionsComponent } from './shared/components/admin/admin-positions/admin-positions.component';
 
 
 
@@ -81,6 +84,9 @@ import { CitySelectComponent } from './shared/components/city-select/city-select
     ResetPasswordComponent,
     AboutDishComponent,
     CitySelectComponent,
+    AdminComponent,
+    AdminCategoriesComponent,
+    AdminPositionsComponent,
   ],
   imports: [
     CountdownModule,
