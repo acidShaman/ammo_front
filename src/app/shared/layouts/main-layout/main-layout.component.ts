@@ -33,6 +33,7 @@ export class MainLayoutComponent implements OnInit {
     this.modal.openCartComponent().subscribe(res => {
       if (res === true) {
         this.order = [];
+        this.orderService.orderListUpdated.emit(this.order);
       }
     });
   }
