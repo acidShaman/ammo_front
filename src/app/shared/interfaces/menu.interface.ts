@@ -2,6 +2,7 @@ export interface ICategoryData{
   category: string;
   name: string;
   image: string;
+  isShown: boolean;
   dishes?: IDishArray;
 }
 

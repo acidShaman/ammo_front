@@ -28,7 +28,7 @@ const routes: Routes = [
       {path: '', component: MainPageComponent, resolve: {categories: MainPageResolverService, user: UserResolverService}},
       {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
           {path: '', redirectTo: 'categories', pathMatch: 'full'},
-          {path: 'categories', component: AdminCategoriesComponent},
+          {path: 'categories', component: AdminCategoriesComponent, resolve: {categories: CategoriesResolverService}},
           {path: 'positions', component: AdminPositionsComponent},
         ]
       },

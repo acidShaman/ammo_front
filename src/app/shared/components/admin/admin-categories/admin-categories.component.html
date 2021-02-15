@@ -1,0 +1,59 @@
+<nav class="admin-nav">
+  <span class="nav-header">Список категорій</span>
+
+  <button mat-button class="action-btn">
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>Створити нову</span></button>
+</nav>
+
+<ng-container>
+  <mat-card class="table-container">
+  <mat-table [dataSource]="categories">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        {{category.id}}
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef>Картинка</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        <img src="{{URL}}{{category.image}}" alt="{{category.name}} картинка">
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Назва</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        {{category.name}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Значення</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        {{category.category}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isShown">
+      <mat-header-cell *matHeaderCellDef>Видимість</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        <mat-icon *ngIf="category.isShown; else notShown">check</mat-icon>
+        <ng-template #notShown>
+          <ng-container>
+            <mat-icon>do_disturb</mat-icon>
+          </ng-container>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns"></mat-row>
+  </mat-table>
+  </mat-card>
+</ng-container>

@@ -27,7 +27,6 @@ class MyErrorStateMatcher implements ErrorStateMatcher {
   providers: [UserService, DatePipe]
 })
 export class ProfileComponent implements OnInit {
-  URL = 'http://localhost:8000';
   matcher = new MyErrorStateMatcher();
   genders: any[] = [
     {name: 'Не вказувати', value: 'not given'},

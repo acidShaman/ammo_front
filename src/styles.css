@@ -134,3 +134,31 @@ mat-form-field.mat-focused .mat-form-field-ripple {
 .mat-ink-bar {
   background-color: var(--accent-orange) !important;
 }
+
+.action-btn {
+  padding: 0 1rem;
+  background: var(--accent-orange);
+  color: white;
+}
+.action-btn span{
+  margin-top: 3px;
+}
+.action-btn mat-icon{
+ margin-right: 1rem;
+}
+.admin-nav {
+  padding: 20px 0;
+}
+.nav-header {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 100px 0 20px;
+}
+
+.table-container {
+  margin: 20px;
+  min-width: 610px;
+  width: 60%;
+  border: 2px;
+}
