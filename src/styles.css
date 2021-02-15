@@ -95,3 +95,37 @@ snack-bar-container {
 .font-big{
   font-size: 24px;
 }
+
+
+.select-city {
+  margin-top: 8px;
+}
+
+.select-city .mat-select-value{
+  color: var(--text-primary);
+  font-weight: 300;
+}
+.select-city-panel.mat-select-panel{
+  border-radius: 4px;
+  margin-left: 16px;
+  margin-top: 39px;
+  width: 6rem;
+  color: var(--text-primary);
+}
+.select-city-field {
+  width: 7rem;
+}
+.select-city-panel .mat-option-text .svg-container{
+  display: inline-block;
+  width: 14px;
+  height: 12px;
+  margin-right: 1rem;
+}
+
+mat-form-field.mat-focused .mat-form-field-ripple {
+  background: black !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background: var(--text-primary);
+}

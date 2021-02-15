@@ -229,3 +229,8 @@ textarea {
   margin: 0 auto;
   align-self: center;
 }
+
+::ng-deep .promo-field {
+  display: block;
+  margin: 20px auto 0 auto !important;
+}

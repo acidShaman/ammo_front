@@ -1,0 +1,4 @@
+<h3>Будь-ласка, оберіть місто</h3>
+<mat-radio-group aria-label="Select an option" class="city-select-group">
+  <mat-radio-button *ngFor="let city of data" value="{{city.value}}" (click)="setCity(city)">{{city.name}}</mat-radio-button>
+</mat-radio-group>

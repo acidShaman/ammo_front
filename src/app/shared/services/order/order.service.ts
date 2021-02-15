@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 export class OrderService {
   public orderListUpdated: EventEmitter<OrderItem[]> = new EventEmitter<OrderItem[]>();
   public orderList: OrderItem[] = [];
-  public orderListTemplate: OrderItem[] = [{id: 1, name: 'extra_adds', price: 10, quantity: 0, image: null}];
+  public orderListTemplate: OrderItem[] = [{id: 2, name: 'extra_adds', price: 10, quantity: 0, image: null}];
   public price = 0;
 
   constructor(private httpClient: HttpClient) {
@@ -123,7 +123,6 @@ export class OrderService {
         formData.append('orderItems', JSON.stringify(block));
       }
     }
-
     return this.httpClient.post<any>(`/order/`, formData);
   }
 

@@ -1,0 +1,13 @@
+::ng-deep .mat-radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+::ng-deep .city-select-group .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: var(--accent-orange) !important;
+}
+
+::ng-deep .city-select-group .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle {
+  background-color: var(--accent-orange) !important;
+}

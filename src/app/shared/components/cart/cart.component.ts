@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {UserService} from '../../services/user/user.service';
 import {IUserData} from '../../interfaces/user.interface';
 import {IDishData} from '../../interfaces/menu.interface';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
   selector: 'app-cart',
@@ -21,6 +22,8 @@ export class CartComponent implements OnInit {
   public addressForm: FormGroup;
   public paymentForm: FormGroup;
   public commentaryForm: FormGroup;
+  public currentCity: string;
+  public availableCities = [{name: 'Львів', value: 'Lviv'}, {name: 'Нетішин', value: 'Netishyn'}];
   URL = 'http://localhost:8000';
 
   constructor(public orderService: OrderService,
@@ -32,6 +35,7 @@ export class CartComponent implements OnInit {
     this.userService.currentUser.subscribe(value => {
       this.currentUser = value;
     });
+    this.currentCity = this.getCityFromLocalStorage()?.replace(/"/g, '');
     this.orderList = this.orderService.getOrderList();
     console.log(this.orderList);
     this.computePrice();
@@ -64,6 +68,7 @@ export class CartComponent implements OnInit {
   initAddressForm(): void {
     if (this.currentUser === null || this.currentUser.address[0] === undefined) {
       this.addressForm = new FormGroup({
+        currentCity: new FormControl(this.availableCities.find( city => city.value === this.currentCity).value, [Validators.required]),
         street: new FormControl('', [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё,. -'ʼ"]{3,50})$/)]),
         number: new FormControl('', [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я,. -'ʼ"]{1,6})$/)]),
         entrance: new FormControl('', [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,10})$/)]),
@@ -73,6 +78,7 @@ export class CartComponent implements OnInit {
       });
     } else {
       this.addressForm = new FormGroup({
+        currentCity: new FormControl(this.availableCities.find( city => city.value === this.currentCity).value, [Validators.required]),
         street: new FormControl(this.currentUser.address[0].street, [Validators.required, Validators.pattern(/^([0-9a-zA-Zа-яА-ЯЇїєЄІіЁё,. -'ʼ"]{3,50})$/)]),
         number: new FormControl(this.currentUser.address[0].number, [Validators.required, Validators.pattern(/^([0-9a-zA-ZА-Яа-я,. -'ʼ"]{1,6})$/)]),
         entrance: new FormControl(this.currentUser.address[0].entrance, [Validators.pattern(/^([0-9a-zA-ZА-Яа-я -]{0,10})$/)]),
@@ -157,7 +163,7 @@ export class CartComponent implements OnInit {
   }
 
   isExtras(object): boolean {
-    return object.id === 1;
+    return object.id === 2;
   }
 
   submitOrder(orderInfo): void {
@@ -181,6 +187,23 @@ export class CartComponent implements OnInit {
     return position.name.includes('Акція:');
   }
 
+
+  changeCity($event: MatSelectChange): void {
+    this.currentCity = $event.value;
+    localStorage.setItem('currentCity', JSON.stringify(this.currentCity));
+  }
+
+  saveCityToLocalStorage(): void {
+    localStorage.setItem('currentCity', JSON.stringify(this.currentCity));
+  }
+
+  getCityFromLocalStorage(): string  {
+    return localStorage.getItem('currentCity');
+  }
+
+  deleteCityFromLocalStorage(): void {
+    localStorage.removeItem('currentCity');
+  }
 
   isOnlyPromoInCart(): boolean {
     return !!(this.orderList.length <= 2 &&

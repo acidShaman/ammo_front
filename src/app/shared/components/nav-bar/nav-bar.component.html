@@ -63,30 +63,21 @@
       <li><a class="nav-btn" mat-button>Соц Мережі</a></li>
       <li>
         <mat-form-field appearance="legacy" class="select-city-field">
-          <mat-select class="select-city" panelClass="select-city-panel">
-            <mat-option value="Active">
-              <div class="svg-container">
-                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.25 1L4.5 11L0.75 7.25" stroke="#7BB62D" stroke-width="1.2" stroke-linecap="round"
-                        stroke-linejoin="round"/>
-                </svg>
-              </div>
-              Львів
-            </mat-option>
-            <mat-option value="Archived">
-              <div class="svg-container">
-                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.25 1L4.5 11L0.75 7.25" stroke="#7BB62D" stroke-width="1.2" stroke-linecap="round"
-                        stroke-linejoin="round"/>
-                </svg>
-              </div>
-              Нетішин
-            </mat-option>
+          <mat-select class="select-city" panelClass="select-city-panel" (selectionChange)="changeCity($event)" [(value)]="currentCity">
+            <ng-container *ngFor="let city of availableCities">
+              <mat-option value="{{city.value}}">
+                <div class="svg-container">
+                  <svg  *ngIf="currentCity === city.value" width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.25 1L4.5 11L0.75 7.25" stroke="#7BB62D" stroke-width="1.2" stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                {{city.name}}
+              </mat-option>
+            </ng-container>
           </mat-select>
         </mat-form-field>
       </li>
-
-
     </ul>
   </div>
 </div>

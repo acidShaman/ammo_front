@@ -52,6 +52,7 @@ import { AboutDishComponent } from './shared/components/menu/dish/about-dish/abo
 import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 import {MatMenuModule} from '@angular/material/menu';
 import {ApiPrefixInterceptor} from './shared/classes/api-prefix.interceptor';
+import { CitySelectComponent } from './shared/components/city-select/city-select.component';
 
 
 
@@ -79,6 +80,7 @@ import {ApiPrefixInterceptor} from './shared/classes/api-prefix.interceptor';
     RecoveryPasswordComponent,
     ResetPasswordComponent,
     AboutDishComponent,
+    CitySelectComponent,
   ],
   imports: [
     CountdownModule,
