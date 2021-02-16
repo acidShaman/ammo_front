@@ -1,6 +1,6 @@
 <div class="flex row wrap evenly fit-content">
   <ng-container *ngFor="let category of categories">
-    <mat-card *ngIf="category.category !== 'additionals'" class="card card__one flex column" routerLink='/menu/{{category.category}}'>
+    <mat-card  *ngIf="category.isShown" class="card card__one flex column" routerLink='/menu/{{category.category}}'>
       <mat-card-header class="flex column-reverse">
         <img mat-card-lg-image src="{{URL}}{{category.image}}">
         <mat-card-title class="self-center">{{category.name}}</mat-card-title>

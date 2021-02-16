@@ -1,9 +1,9 @@
 <nav class="admin-nav">
   <span class="nav-header">Список категорій</span>
 
-  <button mat-button class="action-btn">
+  <button mat-button class="action-btn" routerLink="create">
     <mat-icon>add_circle_outline</mat-icon>
-    <span>Створити нову</span></button>
+    <span>Створити</span></button>
 </nav>
 
 <ng-container>
@@ -51,9 +51,21 @@
     </ng-container>
 
 
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Дія</mat-header-cell>
+      <mat-cell *matCellDef="let category">
+        <button mat-button class="action-btn" routerLink="{{category.id}}/edit">
+          <mat-icon>edit</mat-icon>
+          <span>Змінити</span>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+
 
     <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columns"></mat-row>
   </mat-table>
   </mat-card>
 </ng-container>
+<router-outlet></router-outlet>

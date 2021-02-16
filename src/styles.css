@@ -158,7 +158,40 @@ mat-form-field.mat-focused .mat-form-field-ripple {
 
 .table-container {
   margin: 20px;
-  min-width: 610px;
-  width: 60%;
   border: 2px;
 }
+
+.update-card {
+  width: fit-content;
+  height: fit-content;
+  padding-left: 2rem;
+  margin: 1rem 3rem;
+  border: 1px solid var(--bg-light) !important;
+  background: var(--bg-light);
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+}
+.update-card mat-card-content .mat-form-field {
+  width: 48%;
+}
+.update-card mat-card-content .mat-form-field:first-child {
+  margin-right: 1rem;
+}
+.update-card mat-card-content .input-file {
+  margin-bottom: 1rem;
+}
+
+.update-card mat-card-content .checkbox-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.update-card mat-card-content .checkbox-container span{
+  margin-left: 0.5rem;
+}
+
+.update-card mat-card-content .checkbox-container .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background: var(--accent-orange);
+}
+
+

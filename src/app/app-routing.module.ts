@@ -20,6 +20,8 @@ import {AdminComponent} from './shared/components/admin/admin.component';
 import {AdminGuard} from './shared/classes/admin.guard';
 import {AdminPositionsComponent} from './shared/components/admin/admin-positions/admin-positions.component';
 import {AdminCategoriesComponent} from './shared/components/admin/admin-categories/admin-categories.component';
+import {EditCategoryComponent} from './shared/components/admin/admin-categories/edit-category/edit-category.component';
+import {CreateCategoryComponent} from './shared/components/admin/admin-categories/create-category/create-category.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
       {path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children: [
           {path: '', redirectTo: 'categories', pathMatch: 'full'},
           {path: 'categories', component: AdminCategoriesComponent, resolve: {categories: CategoriesResolverService}},
+          {path: 'categories/:id/edit', component: EditCategoryComponent},
+          {path: 'categories/create', component: CreateCategoryComponent},
           {path: 'positions', component: AdminPositionsComponent},
         ]
       },

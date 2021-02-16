@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./admin-categories.component.css']
 })
 export class AdminCategoriesComponent implements OnInit {
-  public columns = ['id', 'image', 'name', 'category', 'isShown'];
+  public columns = ['id', 'image', 'name', 'category', 'isShown', 'edit'];
   public categories: ICategoryData[];
   URL = 'http://localhost:8000';
 

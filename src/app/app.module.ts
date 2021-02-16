@@ -56,6 +56,9 @@ import { CitySelectComponent } from './shared/components/city-select/city-select
 import { AdminComponent } from './shared/components/admin/admin.component';
 import { AdminCategoriesComponent } from './shared/components/admin/admin-categories/admin-categories.component';
 import { AdminPositionsComponent } from './shared/components/admin/admin-positions/admin-positions.component';
+import { CreateCategoryComponent } from './shared/components/admin/admin-categories/create-category/create-category.component';
+import { EditCategoryComponent } from './shared/components/admin/admin-categories/edit-category/edit-category.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -87,6 +90,8 @@ import { AdminPositionsComponent } from './shared/components/admin/admin-positio
     AdminComponent,
     AdminCategoriesComponent,
     AdminPositionsComponent,
+    CreateCategoryComponent,
+    EditCategoryComponent,
   ],
   imports: [
     CountdownModule,
@@ -99,9 +104,11 @@ import { AdminPositionsComponent } from './shared/components/admin/admin-positio
     MatSelectModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     RouterModule,
     MatCardModule,
+    MatCheckboxModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,

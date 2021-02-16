@@ -166,16 +166,8 @@ mat-form-field {
 }
 
 
-.update-card {
-  width: fit-content;
-  height: fit-content;
-  padding-left: 2rem;
-  margin: 1rem 3rem;
-  border: 1px solid var(--bg-light) !important;
-  background: var(--bg-light);
-  border-radius: 8px;
-  transition: all var(--transition-speed);
-}
+
+
 .mat-card-content {
   padding-right: 20px;
   padding-top: 15px;

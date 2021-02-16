@@ -2,7 +2,7 @@
   flex: 0 0 50px;
 }
 .mat-column-name, .mat-column-category {
-  flex: 0 0 30%;
+  flex: 0 0 20%;
 }
 .mat-column-isShown {
   flex: 0 0 150px;
@@ -10,8 +10,15 @@
 .mat-column-image {
   flex: 0 0 90px
 }
+.mat-column-edit{
+  flex: 0 0 120px;
+}
 .table-container img{
   width: 50px;
   height: 50px;
   margin: 10px 0;
+}
+.table-container {
+  min-width: 710px;
+  width: 60%;
 }

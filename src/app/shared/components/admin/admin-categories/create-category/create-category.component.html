@@ -1,0 +1,33 @@
+<mat-card class="update-card">
+  <mat-card-title>
+    <nav class="admin-nav">
+      <span class="nav-header">Створення нової категорії</span>
+
+      <button mat-button class="action-btn">
+        <mat-icon>save</mat-icon>
+        <span>Зберегти</span></button>
+    </nav>
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="createForm">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Назва</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Гарячі роли">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Значення</mat-label>
+          <input matInput type="text" formControlName="value" placeholder="hot-rolls">
+        </mat-form-field>
+      </div>
+
+      <input class="input-file" type="file" formControlName="image">
+
+      <div class="checkbox-container">
+      <mat-checkbox formControlName="isShown">Видимість для клієнтів</mat-checkbox>
+<!--      <span></span>-->
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
