@@ -66,7 +66,7 @@ snack-bar-container {
 /*  }*/
 /*}*/
 .card__one {
-  transition: transform 0.5s;
+  transition: var(--transition-speed);
 }
 .card__one::after {
   position: absolute;
@@ -139,6 +139,11 @@ mat-form-field.mat-focused .mat-form-field-ripple {
   padding: 0 1rem;
   background: var(--accent-orange);
   color: white;
+  transition: var(--transition-speed);
+}
+.action-btn:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 .action-btn span{
   margin-top: 3px;

@@ -2,16 +2,20 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ICategories, ICategoryData} from '../../interfaces/menu.interface';
+import {Form} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
-  URL = 'http://localhost:8000/';
   constructor(private httpClient: HttpClient) { }
 
   getCategories(): Observable<ICategories> {
     return this.httpClient.get<ICategories>(`/menu/`);
+  }
+
+  createCategory(categoryData: FormData): Observable<any> {
+    return this.httpClient.post<ICategoryData>('/menu/category/new/', categoryData);
   }
 
   // tslint:disable-next-line:ban-types

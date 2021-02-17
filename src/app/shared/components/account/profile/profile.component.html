@@ -9,7 +9,7 @@
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="username">
           <mat-error
-            *ngIf="updateForm.get('username').hasError('email') &&  !updateForm.get('username').hasError('required')">
+            *ngIf="updateForm.get('username').hasError('required') &&  updateForm.get('username').touched">
             Будь-ласка, введіть дійсну Email адресу
           </mat-error>
           <mat-error
