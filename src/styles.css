@@ -4,6 +4,7 @@ html, body {
   height: 100%;
 }
 
+
 app-main-layout {
   margin-bottom: 300px;
 }
@@ -197,6 +198,25 @@ mat-form-field.mat-focused .mat-form-field-ripple {
 
 .update-card mat-card-content .checkbox-container .mat-checkbox-checked.mat-accent .mat-checkbox-background {
   background: var(--accent-orange);
+}
+
+.flex {
+  display: flex;
+}
+.column {
+  flex-direction: column;
+}
+.column-reverse {
+  flex-direction: column-reverse !important;
+}
+.mat-card-lg-image {
+  width: 370px !important;
+  height: 370px !important;
+  align-self: center;
+}
+.self-center{
+  margin-top: 30px;
+  text-align: center;
 }
 
 

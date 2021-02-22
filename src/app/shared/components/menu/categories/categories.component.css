@@ -1,23 +1,15 @@
-.flex {
-  display: flex;
-}
+
+
 .row {
   flex-direction: row;
 }
 .fit-content {
   height: fit-content;
 }
-.column {
-  flex-direction: column;
-}
-.column-reverse {
-  flex-direction: column-reverse;
-}
-.mat-card-lg-image {
-  width: 370px;
-  height: 370px;
-  align-self: center;
-}
+
+
+
+
 .wrap {
   flex-wrap: wrap;
 }
@@ -37,11 +29,8 @@
   margin-top: auto;
   margin-bottom: 20px !important;
 }
-.self-center{
-  margin-top: 30px;
 
-  text-align: center;
-}
+
 .price {
   font-size: 16px;
   font-weight: 400;

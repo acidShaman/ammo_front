@@ -1,1 +1,71 @@
-<p>edit-category works!</p>
+<div class="flex-container">
+  <mat-card class="update-card">
+    <mat-card-title>
+      <nav class="admin-nav">
+        <span class="nav-header">Створення нової категорії</span>
+
+
+      </nav>
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="editForm" enctype="multipart/form-data">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Назва</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Гарячі роли">
+            <mat-error
+              *ngIf="editForm.get('name').hasError('pattern') &&  !editForm.get('name').hasError('required')">
+              Це поле не є валідним!
+            </mat-error>
+            <mat-error
+              *ngIf="editForm.get('name').hasError('exists')">
+              Категорія з такою назвою вже існує!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Значення</mat-label>
+            <input matInput type="text" formControlName="category" placeholder="hot-rolls">
+            <mat-error
+              *ngIf="editForm.get('category').hasError('pattern') &&  !editForm.get('category').hasError('required')">
+              Це поле не є валідним!
+            </mat-error>
+            <mat-error
+              *ngIf="editForm.get('category').hasError('exists')">
+              Категорія з таким значенням вже існує!
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <input class="input-file" type="file" (change)="onFileChanged($event)">
+          <button mat-button class="action-btn" (click)="resetImage()">Reset</button>
+          <mat-error>
+            Це поле є обов'язковим!
+          </mat-error>
+        </div>
+        <br>
+        <div class="checkbox-container">
+          <mat-checkbox formControlName="isShown" (change)="setIsShown($event)">Видимість для клієнтів</mat-checkbox>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button class="action-btn" [disabled]="!editForm.valid || !editForm.dirty" (click)="editCategory()">
+        <mat-icon>save</mat-icon>
+        <span>Зберегти</span></button>
+    </mat-card-actions>
+  </mat-card>
+
+  <ng-container *ngIf="editForm?.controls">
+    <mat-card class="card card__one flex column">
+      <mat-card-header class="flex column-reverse">
+        <img *ngIf="newImageUrl && newImageUrl !== null; else previousImage" src="{{newImageUrl}}" mat-card-lg-image>
+        <ng-template #previousImage>
+          <ng-container>
+            <img mat-card-lg-image src="{{URL}}{{category.image}}">
+          </ng-container>
+        </ng-template>
+        <mat-card-title class="self-center">{{editForm.get('name').value}}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </ng-container>
+</div>

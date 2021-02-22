@@ -24,7 +24,7 @@ export class CreateCategoryComponent implements OnInit {
 
   private initCreateForm(): void {
     this.createForm = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.pattern(/^([a-zA-ZА-Яа-яЇїєЄёЁіІ`'-.,0-9 ]{2,30})$/)]),
+      name: new FormControl(null, [Validators.required, Validators.pattern(/^([a-zA-ZА-Яа-яЇїєЄёЁіІ`'-.,0-9 ]{1,30})$/)]),
       category: new FormControl(null, [Validators.required, Validators.pattern(/^([a-zA-Z-'0-9 ]{1,30})$/)]),
       image: new FormControl(null, [Validators.required]),
       isShown: new FormControl(false)

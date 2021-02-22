@@ -54,7 +54,7 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef>Дія</mat-header-cell>
       <mat-cell *matCellDef="let category">
-        <button mat-button class="action-btn" routerLink="{{category.id}}/edit">
+        <button mat-button class="action-btn" routerLink="{{category.id}}/edit" [state]="category">
           <mat-icon>edit</mat-icon>
           <span>Змінити</span>
         </button>

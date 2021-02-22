@@ -30,7 +30,7 @@ export class UserService {
   }
 
   isAdmin(): boolean {
-    return this.currentUser.value.user.is_staff;
+    return this.currentUser?.value?.user?.is_staff;
   }
 
 

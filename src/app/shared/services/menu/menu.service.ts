@@ -18,6 +18,12 @@ export class MenuService {
     return this.httpClient.post<ICategoryData>('/menu/category/new/', categoryData);
   }
 
+
+  editCategory(categoryData: FormData, id): Observable<any> {
+    return this.httpClient.patch<ICategoryData>(`/menu/category/${id}/edit/`, categoryData);
+  }
+
+
   // tslint:disable-next-line:ban-types
   getCategory(category: String): Observable<ICategoryData> {
     return this.httpClient.get<ICategoryData>(`/menu/${category}`);

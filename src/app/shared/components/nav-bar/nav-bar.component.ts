@@ -20,7 +20,8 @@ export class NavBarComponent implements OnInit {
   constructor(public authService: AuthService,
               private router: Router,
               private snackbarService: SnackbarService,
-              private modal: ModalService) {
+              private modal: ModalService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -80,5 +81,7 @@ export class NavBarComponent implements OnInit {
   }
 
 
-
+  isAdmin(): boolean {
+    return this.userService?.isAdmin() || false;
+  }
 }
