@@ -59,6 +59,8 @@ import { AdminPositionsComponent } from './shared/components/admin/admin-positio
 import { CreateCategoryComponent } from './shared/components/admin/admin-categories/create-category/create-category.component';
 import { EditCategoryComponent } from './shared/components/admin/admin-categories/edit-category/edit-category.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { CreatePositionComponent } from './shared/components/admin/admin-positions/create-position/create-position.component';
+import { EditPositionComponent } from './shared/components/admin/admin-positions/edit-position/edit-position.component';
 
 
 
@@ -92,6 +94,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AdminPositionsComponent,
     CreateCategoryComponent,
     EditCategoryComponent,
+    CreatePositionComponent,
+    EditPositionComponent,
   ],
   imports: [
     CountdownModule,

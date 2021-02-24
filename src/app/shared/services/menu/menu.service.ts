@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ICategories, ICategoryData} from '../../interfaces/menu.interface';
+import {ICategories, ICategoryData, IDishData} from '../../interfaces/menu.interface';
 import {Form} from '@angular/forms';
 
 @Injectable({
@@ -30,31 +30,10 @@ export class MenuService {
   }
 
   getFewDishesFromCategories(): Observable<ICategoryData[]> {
-    return this.httpClient.get<ICategoryData[]>(`/menu/all/`);
+    return this.httpClient.get<ICategoryData[]>(`/menu/few/`);
   }
 
-  getRolls(): Observable<ICategoryData> {
-    return this.getCategory('rolls');
-  }
-  getHotRolls(): Observable<ICategoryData> {
-    return this.getCategory('hot-rolls');
-  }
-  getBowls(): Observable<ICategoryData> {
-    return this.getCategory('bowls');
-  }
-  getSalads(): Observable<ICategoryData> {
-    return this.getCategory('salads');
-  }
-  getSets(): Observable<ICategoryData> {
-    return this.getCategory('sets');
-  }
-  getBreakfasts(): Observable<ICategoryData> {
-    return this.getCategory('breakfasts');
-  }
-  getDrinks(): Observable<ICategoryData> {
-    return this.getCategory('drinks');
-  }
-  getAdditionals(): Observable<ICategoryData> {
-    return this.getCategory('additionals');
+  getAllPositions(): Observable<IDishData[]> {
+    return this.httpClient.get<IDishData[]>('/menu/all/');
   }
 }

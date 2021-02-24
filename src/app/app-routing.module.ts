@@ -22,6 +22,9 @@ import {AdminPositionsComponent} from './shared/components/admin/admin-positions
 import {AdminCategoriesComponent} from './shared/components/admin/admin-categories/admin-categories.component';
 import {EditCategoryComponent} from './shared/components/admin/admin-categories/edit-category/edit-category.component';
 import {CreateCategoryComponent} from './shared/components/admin/admin-categories/create-category/create-category.component';
+import {NestedPositionsResolverService} from './shared/services/menu/nested-positions-resolver.service';
+import {EditPositionComponent} from './shared/components/admin/admin-positions/edit-position/edit-position.component';
+import {CreatePositionComponent} from './shared/components/admin/admin-positions/create-position/create-position.component';
 
 
 const routes: Routes = [
@@ -33,7 +36,9 @@ const routes: Routes = [
           {path: 'categories', component: AdminCategoriesComponent, resolve: {categories: CategoriesResolverService}},
           {path: 'categories/:id/edit', component: EditCategoryComponent},
           {path: 'categories/create', component: CreateCategoryComponent},
-          {path: 'positions', component: AdminPositionsComponent},
+          {path: 'positions', component: AdminPositionsComponent, resolve: {categories: NestedPositionsResolverService}},
+          {path: 'positions/:id/edit', component: EditPositionComponent},
+          {path: 'positions/create', component: CreatePositionComponent},
         ]
       },
       {

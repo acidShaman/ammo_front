@@ -43,6 +43,7 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.menu = this.activatedRoute.snapshot.data.categories;
+    console.log(this.menu);
     this.menu.forEach(category => {
       if (category.category === 'special-offer') {
         category.dishes.forEach(dish => {

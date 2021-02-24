@@ -15,6 +15,7 @@ export interface IDishData{
   price: number;
   image?: string;
   favorite?: boolean;
+  category_name?: string;
 }
 
 export interface IDishArray extends Array<IDishData> {}

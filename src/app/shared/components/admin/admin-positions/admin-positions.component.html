@@ -1,1 +1,96 @@
-<p>admin-positions works!</p>
+<nav class="admin-nav">
+  <span class="nav-header">Список позицій</span>
+
+  <button mat-button class="action-btn" routerLink="create">
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>Створити</span></button>
+
+
+  <mat-form-field appearance="outline" class="category-select">
+    <mat-label>Позиції в категоріях</mat-label>
+    <mat-select [formControl]="selectedCategories" multiple>
+      <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</nav>
+
+<ng-container>
+  <mat-card class="table-container">
+    <mat-table [dataSource]="positionsFromSelectedCategories()">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          {{position.id}}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="category_name">
+        <mat-header-cell *matHeaderCellDef>Категорія</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          {{position.category_name}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Назва</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          {{position.name}}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Ціна</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          {{position.price}} грн.
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef>Картинка</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          <img *ngIf="position.image" src="{{URL}}{{position.image}}" alt="{{position.name}} картинка">
+        </mat-cell>
+      </ng-container>
+
+
+
+
+      <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef>Вага</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          {{position.weight}} г.
+        </mat-cell>
+      </ng-container>
+
+<!--      <ng-container matColumnDef="isShown">-->
+<!--        <mat-header-cell *matHeaderCellDef>Видимість</mat-header-cell>-->
+<!--        <mat-cell *matCellDef="let category">-->
+<!--          <mat-icon *ngIf="category.isShown; else notShown">check</mat-icon>-->
+<!--          <ng-template #notShown>-->
+<!--            <ng-container>-->
+<!--              <mat-icon>do_disturb</mat-icon>-->
+<!--            </ng-container>-->
+<!--          </ng-template>-->
+<!--        </mat-cell>-->
+<!--      </ng-container>-->
+
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>Дія</mat-header-cell>
+        <mat-cell *matCellDef="let position">
+          <button mat-button class="action-btn" routerLink="{{position.id}}/edit" [state]="position">
+            <mat-icon>edit</mat-icon>
+            <span>Змінити</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+
+
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columns"></mat-row>
+    </mat-table>
+  </mat-card>
+</ng-container>
+<router-outlet></router-outlet>

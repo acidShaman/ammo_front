@@ -13,7 +13,7 @@
 </div>
 <div class="content">
   <div *ngFor="let category of menu" class="category">
-    <div *ngIf="category.category !== 'additionals' && category.category !== 'special-offer'">
+    <div *ngIf="category.isShown && category.dishes.length >= 1">
       <mat-card-title class="category-header">{{category.name}}</mat-card-title>
       <swiper [config]="swiperConfig">
         <div class="swiper-wrapper">
