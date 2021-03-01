@@ -15,6 +15,7 @@ export interface IDishData{
   price: number;
   image?: string;
   favorite?: boolean;
+  weight: number;
   category_name?: string;
 }
 

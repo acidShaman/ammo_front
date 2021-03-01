@@ -1,0 +1,112 @@
+<mat-card class="update-card">
+  <mat-card-title>
+    <nav class="admin-nav">
+      <span class="nav-header">Створення нової позиції</span>
+
+
+
+    </nav>
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="editForm">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Назва</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Гарячі роли">
+          <mat-error
+            *ngIf="editForm.get('name').hasError('required') &&  editForm.get('name').touched">
+            Це поле є обов'язковим!
+          </mat-error>
+          <mat-error
+            *ngIf="editForm.get('name').hasError('pattern') &&  !editForm.get('name').hasError('required')">
+            Це поле не є валідним!
+          </mat-error>
+          <mat-error
+            *ngIf="editForm.get('name').hasError('exists')">
+            Позиція з такою назвою вже існує!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Категорія</mat-label>
+          <mat-select formControlName="category">
+            <mat-option [value]="null"></mat-option>
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="editForm.get('category').hasError('required') &&  editForm.get('name').touched">
+            Це поле є обов'язковим!
+          </mat-error>
+        </mat-form-field>
+
+
+        <div>
+          <input class="input-file" type="file" (change)="onFileChanged($event)">
+          <button mat-button class="action-btn" (click)="resetImage()">Reset</button>
+          <mat-error>
+            Це поле є обов'язковим!
+          </mat-error>
+        </div>
+
+
+        <mat-form-field appearance="outline" class="mar-r-1rem">
+          <mat-label>Ціна</mat-label>
+          <input matInput type="number" formControlName="price" placeholder="hot-rolls">
+          <mat-error
+            *ngIf="editForm.get('price').hasError('pattern') &&  !editForm.get('price').hasError('required')">
+            Це поле не є валідним!
+          </mat-error>
+          <mat-error
+            *ngIf="editForm.get('price').hasError('required') &&  editForm.get('price').touched">
+            Це поле може містити лише цифри!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Вага, г.</mat-label>
+          <input matInput type="number" formControlName="weight" placeholder="hot-rolls">
+          <mat-error
+            *ngIf="editForm.get('weight').hasError('required') &&  editForm.get('weight').touched">
+            Це поле є обов'язковим!
+          </mat-error>
+          <mat-error
+            *ngIf="editForm.get('weight').hasError('pattern') &&  !editForm.get('weight').hasError('required')">
+            Це поле може містити лише цифри!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="text-area">
+          <mat-label>Інгрeдієнти</mat-label>
+          <textarea matInput formControlName="ingredients"></textarea>
+          <mat-error
+            *ngIf="editForm.get('ingredients').hasError('required') &&  editForm.get('ingredients').touched">
+            Це поле є обов'язковим!
+          </mat-error>
+          <mat-error
+            *ngIf="editForm.get('ingredients').hasError('pattern') &&  !editForm.get('ingredients').hasError('required')">
+            Це поле може містити лише літери і цифри, а також `'-.,!()?
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="text-area">
+          <mat-label>Про страву</mat-label>
+          <textarea matInput formControlName="about_dish"></textarea>
+          <mat-error
+            *ngIf="editForm.get('about_dish').hasError('required') &&  editForm.get('about_dish').touched">
+            Це поле є обов'язковим!
+          </mat-error>
+          <mat-error
+            *ngIf="editForm.get('about_dish').hasError('pattern') &&  !editForm.get('about_dish').hasError('required')">
+            Це поле може містити лише літери і цифри, а також `'-.,!()?
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button class="action-btn" [disabled]="!editForm.valid" (click)="editPosition()">
+      <mat-icon>save</mat-icon>
+      <span>Зберегти</span>
+    </button>
+  </mat-card-actions>
+</mat-card>

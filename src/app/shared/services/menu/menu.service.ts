@@ -14,6 +14,16 @@ export class MenuService {
     return this.httpClient.get<ICategories>(`/menu/`);
   }
 
+
+  createPosition(positionData: FormData): Observable<any> {
+    return this.httpClient.post<IDishData>('/menu/position/new/', positionData);
+  }
+
+
+  editPosition(positionData: FormData, id): Observable<any> {
+    return this.httpClient.patch<IDishData>(`/menu/position/${id}/edit/`, positionData);
+  }
+
   createCategory(categoryData: FormData): Observable<any> {
     return this.httpClient.post<ICategoryData>('/menu/category/new/', categoryData);
   }

@@ -37,8 +37,8 @@ const routes: Routes = [
           {path: 'categories/:id/edit', component: EditCategoryComponent},
           {path: 'categories/create', component: CreateCategoryComponent},
           {path: 'positions', component: AdminPositionsComponent, resolve: {categories: NestedPositionsResolverService}},
-          {path: 'positions/:id/edit', component: EditPositionComponent},
-          {path: 'positions/create', component: CreatePositionComponent},
+          {path: 'positions/:id/edit', component: EditPositionComponent, resolve: {categories: NestedPositionsResolverService}},
+          {path: 'positions/create', component: CreatePositionComponent, resolve: {categories: NestedPositionsResolverService}},
         ]
       },
       {

@@ -18,7 +18,7 @@ export class AdminPositionsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.categories = this.activatedRoute.snapshot.data.categories.filter( value => value !== null);
+    this.categories = this.activatedRoute.snapshot.data.categories.filter( category => category.dishes.length >= 1);
     this.categories.forEach( category => {
       category.dishes.forEach( dish => {
         const candidate = dish;
@@ -27,15 +27,6 @@ export class AdminPositionsComponent implements OnInit {
       });
     });
     this.selectedCategories = new FormControl(null);
-    this.selectedCategories.valueChanges.subscribe( categories => {
-
-      console.log(categories);
-    });
-
-
-
-    console.log(this.categories);
-    console.log(this.positions);
   }
 
 
